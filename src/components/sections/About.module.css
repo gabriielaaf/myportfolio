@@ -117,10 +117,6 @@
   font-weight: 400;
   line-height: 1.4;
   letter-spacing: -0.025em;
-
-  animation: descriptionReveal 900ms
-    cubic-bezier(0.22, 1, 0.36, 1)
-    450ms both;
 }
 
 .introduction strong {
@@ -138,7 +134,10 @@
   line-height: 1.8;
 
   color: var(--muted);
+}
 
+.introduction,
+.description {
   animation: descriptionReveal 900ms
     cubic-bezier(0.22, 1, 0.36, 1)
     450ms both;
@@ -154,18 +153,45 @@
   padding-inline: var(--page-padding);
 }
 
+/* CV header */
+
 .cvHeader {
+  position: relative;
   padding-bottom: 1rem;
-  border-bottom: 1px solid var(--border);
 }
 
 .cvHeader span {
+  display: inline-block;
+
   font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.12em;
 
   color: var(--muted);
+}
+
+.cvHeader::after {
+  content: "";
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+  height: 1px;
+
+  background-color: var(--border);
+
+  transform: scaleX(0);
+  transform-origin: left;
+
+  transition:
+    transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cvVisible .cvHeader::after {
+  transform: scaleX(1);
 }
 
 /* CV layout */
@@ -187,7 +213,7 @@
   max-width: 30rem;
 }
 
-/* CV title */
+/* CV content */
 
 .cvTitle {
   font-family: var(--font-heading);
@@ -230,6 +256,8 @@
   color: var(--foreground);
 
   transition:
+    opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1),
     color 300ms ease,
     border-color 300ms ease;
 }
@@ -255,6 +283,48 @@
 .cvLink:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 4px;
+}
+
+/* CV scroll animations */
+
+.cvHeader span,
+.cvTitle,
+.cvDescription,
+.cvLink {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.cvHeader span,
+.cvTitle,
+.cvDescription {
+  transition:
+    opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cvVisible .cvHeader span,
+.cvVisible .cvTitle,
+.cvVisible .cvDescription,
+.cvVisible .cvLink {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cvVisible .cvHeader span {
+  transition-delay: 100ms;
+}
+
+.cvVisible .cvTitle {
+  transition-delay: 200ms;
+}
+
+.cvVisible .cvDescription {
+  transition-delay: 300ms;
+}
+
+.cvVisible .cvLink {
+  transition-delay: 400ms, 400ms, 0ms, 0ms;
 }
 
 /* Animations */
@@ -374,7 +444,20 @@
     display: none;
   }
 
-  .cvLink,
+  .cvHeader span,
+  .cvTitle,
+  .cvDescription,
+  .cvLink {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .cvHeader::after {
+    transform: scaleX(1);
+    transition: none;
+  }
+
   .cvArrow {
     transition: none;
   }
