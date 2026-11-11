@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router";
 import Header from "./components/layout/Header";
 import Hero from "./components/sections/Hero";
 import About from "./components/sections/About";
+import WorkPage from "./pages/WorkPage";
 
 import styles from "./App.module.css";
 
@@ -29,6 +30,12 @@ function App() {
             </main>
           }
         />
+
+        <Route 
+          path="/work" 
+          element={<WorkPage />} 
+        />
+        
       </Routes>
     </div>
   );
