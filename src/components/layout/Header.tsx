@@ -1,17 +1,14 @@
 import ThemeToggle from "../ui/ThemeToggle";
+import styles from "./Header.module.css";
 
 function Header() {
   return (
-    <header className="w-full px-8 py-8 md:px-16">
-      <div className="flex items-center justify-between">
+    <header className={styles.header}>
+      <span className={styles.logo}>
+        gabrielaaf
+      </span>
 
-        <span className="font-display text-xl font-medium tracking-tight">
-          gabrielaaf
-        </span>
-
-        <ThemeToggle />
-
-      </div>
+      <ThemeToggle />
     </header>
   );
 }

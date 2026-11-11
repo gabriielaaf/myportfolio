@@ -1,4 +1,5 @@
 import { useTheme } from "../../hooks/useTheme";
+import styles from "./ThemeToggle.module.css";
 
 function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
@@ -10,17 +11,11 @@ function ThemeToggle() {
       type="button"
       onClick={toggleTheme}
       aria-label={isDark ? "Activate light mode" : "Activate dark mode"}
-      className="flex h-10 w-10 items-center justify-center
-                 rounded-full border border-[var(--border)]
-                 text-[var(--foreground)]
-                 transition-colors duration-300
-                 hover:bg-[var(--surface)]"
+      className={styles.toggle}
     >
       {isDark ? (
-        // Sun icon
         <svg
-          width="20"
-          height="20"
+          className={styles.icon}
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -31,10 +26,8 @@ function ThemeToggle() {
           <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
         </svg>
       ) : (
-        // Moon icon
         <svg
-          width="20"
-          height="20"
+          className={styles.icon}
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"

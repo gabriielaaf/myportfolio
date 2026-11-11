@@ -1,6 +1,3 @@
-
-/* Hero section */
-
 .hero {
   display: flex;
   flex: 1;
@@ -12,8 +9,6 @@
 .content {
   max-width: 64rem;
 }
-
-/* Typography */
 
 .title {
   font-family: var(--font-heading);
