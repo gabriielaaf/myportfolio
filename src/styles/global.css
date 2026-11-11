@@ -1,5 +1,7 @@
 @import "./variables.css";
 
+/* Reset */
+
 *,
 *::before,
 *::after {
@@ -13,7 +15,7 @@ html {
 body {
   margin: 0;
   min-width: 320px;
-  
+
   font-family: var(--font-body);
   background-color: var(--background);
   color: var(--foreground);
@@ -28,4 +30,12 @@ p {
 
 button {
   font: inherit;
+}
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }

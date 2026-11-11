@@ -1,50 +1,20 @@
+/* Theme toggle */
+
 .toggle {
+  composes: iconButton from "../../styles/shared.module.css";
   position: relative;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 2.5rem;
-  height: 2.5rem;
-
-  padding: 0;
-
-  border: 1px solid var(--border);
-  border-radius: 50%;
-
-  background-color: transparent;
-  color: var(--foreground);
-
-  cursor: pointer;
-
-  transition:
-    background-color 300ms ease,
-    border-color 300ms ease,
-    color 300ms ease;
-}
-
-.toggle:hover {
-  background-color: var(--surface);
-}
-
-.toggle:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
 }
 
 .icon {
   position: absolute;
-
   width: 1.25rem;
   height: 1.25rem;
-
   transition:
     transform 550ms cubic-bezier(0.4, 0, 0.2, 1),
     opacity 400ms ease;
 }
 
-/* Dark mode - Moon visible */
+/* Dark mode */
 
 .moon {
   opacity: 1;
@@ -56,7 +26,7 @@
   transform: rotate(-90deg) scale(0.5);
 }
 
-/* Light mode - Sun visible */
+/* Light mode */
 
 .light .moon {
   opacity: 0;
@@ -68,9 +38,10 @@
   transform: rotate(0deg) scale(1);
 }
 
+/* Reduced motion */
+
 @media (prefers-reduced-motion: reduce) {
-  .icon,
-  .toggle {
+  .icon {
     transition: none;
   }
 }

@@ -1,28 +1,28 @@
-/* About */
-
-.about {
-  width: 100%;
-  padding-block: 7rem;
-
-  background-color: var(--background);
-  color: var(--foreground);
-
-  transition:
-    background-color 300ms ease,
-    color 300ms ease;
-}
+/* About layout */
 
 .container {
+  composes: container from "../../styles/shared.module.css";
+
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
   gap: clamp(3rem, 6vw, 6rem);
+}/* About */
 
+.about {
   width: 100%;
-  max-width: var(--content-max-width);
+  padding-block: 7rem;
+  background-color: var(--background);
+  color: var(--foreground);
+  transition: background-color 300ms ease, color 300ms ease;
+}
 
-  margin-inline: auto;
-  padding-inline: var(--page-padding);
+.container {
+  composes: container from "../../styles/shared.module.css";
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(3rem, 6vw, 6rem);
 }
 
 /* Left column */
@@ -34,71 +34,48 @@
 }
 
 .label {
+  composes: label appearUp from "../../styles/shared.module.css";
+  --appear-duration: 800ms;
+  --appear-delay: 100ms;
+  --appear-distance: 60px;
   margin-bottom: 2rem;
-
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-
-  color: var(--accent);
-
-  animation: titleReveal 800ms
-    cubic-bezier(0.22, 1, 0.36, 1)
-    100ms both;
 }
 
 .title {
-  font-family: var(--font-heading);
+  composes: heading appearUp from "../../styles/shared.module.css";
+  --appear-distance: 60px;
   font-size: clamp(2.2rem, 3.5vw, 3.7rem);
-  font-weight: 600;
-  line-height: 1.05;
-  letter-spacing: -0.045em;
-
-  animation: titleReveal 900ms
-    cubic-bezier(0.22, 1, 0.36, 1)
-    both;
 }
 
 .accent {
-  color: var(--accent);
+  composes: accent from "../../styles/shared.module.css";
 }
 
 /* Portrait */
 
 .portrait {
   position: relative;
-
   width: min(100%, 320px);
   margin-top: 2.5rem;
-
   overflow: hidden;
 }
 
 .portrait img {
   display: block;
-
   width: 100%;
   aspect-ratio: 4 / 5;
-
   object-fit: cover;
   object-position: center 35%;
-
   animation: imageReveal 1.2s ease-out 100ms both;
 }
 
 .portrait::after {
   content: "";
-
   position: absolute;
   inset: 0;
   z-index: 1;
-
   background-color: var(--accent);
-
-  animation: burgundyReveal 1s
-    cubic-bezier(0.76, 0, 0.24, 1)
-    100ms both;
+  animation: burgundyReveal 1s cubic-bezier(0.76, 0, 0.24, 1) 100ms both;
 }
 
 /* Right column */
@@ -107,11 +84,12 @@
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
-
   min-width: 0;
 }
 
 .introduction {
+  composes: appearUp from "../../styles/shared.module.css";
+  --appear-delay: 450ms;
   font-family: var(--font-body);
   font-size: clamp(1.5rem, 2.4vw, 2rem);
   font-weight: 400;
@@ -124,36 +102,20 @@
 }
 
 .description {
+  composes: copy appearUp from "../../styles/shared.module.css";
+  --appear-delay: 450ms;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-
-  font-family: var(--font-body);
   font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.8;
-
-  color: var(--muted);
-}
-
-.introduction,
-.description {
-  animation: descriptionReveal 900ms
-    cubic-bezier(0.22, 1, 0.36, 1)
-    450ms both;
 }
 
 /* CV section */
 
 .cvSection {
-  width: 100%;
-  max-width: var(--content-max-width);
-
-  margin: 7rem auto 0;
-  padding-inline: var(--page-padding);
+  composes: container from "../../styles/shared.module.css";
+  margin-top: 7rem;
 }
-
-/* CV header */
 
 .cvHeader {
   position: relative;
@@ -162,46 +124,37 @@
 
 .cvHeader span {
   display: inline-block;
-
   font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.12em;
-
   color: var(--muted);
 }
 
 .cvHeader::after {
   content: "";
-
   position: absolute;
   bottom: 0;
   left: 0;
-
   width: 100%;
   height: 1px;
-
   background-color: var(--border);
-
   transform: scaleX(0);
   transform-origin: left;
-
-  transition:
-    transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .cvVisible .cvHeader::after {
   transform: scaleX(1);
 }
 
-/* CV layout */
+/* CV content */
 
 .cvRow {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 3rem;
-
   padding-block: 2rem;
 }
 
@@ -209,11 +162,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
   max-width: 30rem;
 }
-
-/* CV content */
 
 .cvTitle {
   font-family: var(--font-heading);
@@ -221,19 +171,13 @@
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: -0.01em;
-
   color: var(--foreground);
 }
 
 .cvDescription {
+  composes: copy from "../../styles/shared.module.css";
   margin-top: 0.5rem;
-
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  font-weight: 400;
   line-height: 1.7;
-
-  color: var(--muted);
 }
 
 /* CV download */
@@ -243,18 +187,13 @@
   align-items: center;
   gap: 0.75rem;
   flex-shrink: 0;
-
   padding: 0.25rem 0 0.5rem;
-
   border-bottom: 1px solid var(--border);
-
   font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 500;
   text-decoration: none;
-
   color: var(--foreground);
-
   transition:
     opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
     transform 700ms cubic-bezier(0.22, 1, 0.36, 1),
@@ -264,10 +203,8 @@
 
 .cvArrow {
   display: inline-block;
-
   font-size: 1rem;
   color: var(--accent);
-
   transition: transform 300ms ease;
 }
 
@@ -311,138 +248,45 @@
   transform: translateY(0);
 }
 
-.cvVisible .cvHeader span {
-  transition-delay: 100ms;
-}
+.cvVisible .cvHeader span { transition-delay: 100ms; }
+.cvVisible .cvTitle { transition-delay: 200ms; }
+.cvVisible .cvDescription { transition-delay: 300ms; }
+.cvVisible .cvLink { transition-delay: 400ms, 400ms, 0ms, 0ms; }
 
-.cvVisible .cvTitle {
-  transition-delay: 200ms;
-}
-
-.cvVisible .cvDescription {
-  transition-delay: 300ms;
-}
-
-.cvVisible .cvLink {
-  transition-delay: 400ms, 400ms, 0ms, 0ms;
-}
-
-/* Animations */
-
-@keyframes titleReveal {
-  from {
-    opacity: 0;
-    transform: translateY(60px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+/* Image animations */
 
 @keyframes imageReveal {
-  from {
-    transform: scale(1.08);
-  }
-
-  to {
-    transform: scale(1);
-  }
+  from { transform: scale(1.08); }
+  to { transform: scale(1); }
 }
 
 @keyframes burgundyReveal {
-  from {
-    transform: translateY(0);
-  }
-
-  to {
-    transform: translateY(-101%);
-  }
-}
-
-@keyframes descriptionReveal {
-  from {
-    opacity: 0;
-    transform: translateY(35px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { transform: translateY(0); }
+  to { transform: translateY(-101%); }
 }
 
 /* Responsive */
 
 @media (max-width: 767px) {
-  .about {
-    padding-block: 4rem;
-  }
-
-  .container {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-
-  .title {
-    font-size: clamp(2.2rem, 7vw, 3.5rem);
-  }
-
-  .portrait {
-    width: min(100%, 280px);
-  }
-
-  .right {
-    gap: 1.75rem;
-  }
-
-  .introduction {
-    font-size: 1.5rem;
-  }
-
-  .description {
-    font-size: 0.95rem;
-  }
-
-  .cvSection {
-    margin-top: 4rem;
-  }
-
-  .cvRow {
-    flex-direction: column;
-    gap: 2rem;
-
-    padding-block: 1.75rem;
-  }
-
-  .cvContent {
-    max-width: 100%;
-  }
-
-  .cvTitle {
-    font-size: 1.6rem;
-  }
-
-  .cvDescription {
-    font-size: 0.9rem;
-  }
+  .about { padding-block: 4rem; }
+  .container { grid-template-columns: 1fr; gap: 3rem; }
+  .title { font-size: clamp(2.2rem, 7vw, 3.5rem); }
+  .portrait { width: min(100%, 280px); }
+  .right { gap: 1.75rem; }
+  .introduction { font-size: 1.5rem; }
+  .description { font-size: 0.95rem; }
+  .cvSection { margin-top: 4rem; }
+  .cvRow { flex-direction: column; gap: 2rem; padding-block: 1.75rem; }
+  .cvContent { max-width: 100%; }
+  .cvTitle { font-size: 1.6rem; }
+  .cvDescription { font-size: 0.9rem; }
 }
 
 /* Reduced motion */
 
 @media (prefers-reduced-motion: reduce) {
-  .label,
-  .title,
-  .portrait img,
-  .introduction,
-  .description {
-    animation: none;
-  }
-
-  .portrait::after {
-    display: none;
-  }
+  .portrait img { animation: none; }
+  .portrait::after { display: none; }
 
   .cvHeader span,
   .cvTitle,
@@ -453,12 +297,6 @@
     transition: none;
   }
 
-  .cvHeader::after {
-    transform: scaleX(1);
-    transition: none;
-  }
-
-  .cvArrow {
-    transition: none;
-  }
+  .cvHeader::after { transform: scaleX(1); transition: none; }
+  .cvArrow { transition: none; }
 }
