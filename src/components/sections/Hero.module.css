@@ -20,6 +20,8 @@
   font-weight: 600;
   line-height: 0.95;
   letter-spacing: -0.045em;
+
+  color: var(--foreground);
 }
 
 .description {
@@ -31,7 +33,6 @@
   line-height: 1.625;
 
   color: var(--muted);
-  transition: color 300ms;
 }
 
 .location {
@@ -42,10 +43,41 @@
   font-weight: 500;
 
   color: var(--accent);
-  transition: color 300ms;
 }
 
-/* Responsive */
+/* Animation appearance */
+
+.title,
+.description,
+.location {
+  animation: slideInLeft 700ms ease-out both;
+}
+
+.title {
+  animation-delay: 100ms;
+}
+
+.description {
+  animation-delay: 450ms;
+}
+
+.location {
+  animation-delay: 800ms;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive */ 
 
 @media (max-width: 765px) {
   .hero {
@@ -60,6 +92,8 @@
 
   .description {
     margin-top: 1.5rem;
+    max-width: 35ch;
+
     font-size: 1rem;
     line-height: 1.5;
   }
@@ -68,12 +102,12 @@
     margin-top: 0.75rem;
     font-size: 0.875rem;
   }
+}
 
-  .description {
-    margin-top: 1.5rem;
-    max-width: 35ch;
-    font-size: 1rem;
-    line-height: 1.5;
+@media (prefers-reduced-motion: reduce) {
+  .title,
+  .description,
+  .location {
+    animation: none;
   }
-
 }
