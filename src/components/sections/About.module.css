@@ -41,6 +41,10 @@
   letter-spacing: 0.15em;
 
   color: var(--accent);
+
+  animation: titleReveal 800ms
+    cubic-bezier(0.22, 1, 0.36, 1)
+    100ms both;
 }
 
 .title {
@@ -49,6 +53,8 @@
   font-weight: 600;
   line-height: 1.05;
   letter-spacing: -0.045em;
+  
+  animation: titleReveal 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .accent {
@@ -58,10 +64,10 @@
 /* Portrait */
 
 .portrait {
+  position: relative;
   width: min(100%, 320px);
   margin-top: 2.5rem;
   overflow: hidden;
-  border-radius: 4px;
 }
 
 .portrait img {
@@ -70,6 +76,21 @@
   aspect-ratio: 4 / 5;
   object-fit: cover;
   object-position: center 35%;
+
+  animation: imageReveal 1.2s ease-out 100ms both;
+}
+
+/* Burgundy overlay */
+
+.portrait::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  background-color: var(--accent);
+
+  animation: burgundyReveal 1s cubic-bezier(0.76, 0, 0.24, 1) 100ms both;
 }
 
 .right {
@@ -105,9 +126,18 @@
   color: var(--muted);
 }
 
+/* Description animation */
+
+.introduction,
+.description {
+  animation: descriptionReveal 900ms
+    cubic-bezier(0.22, 1, 0.36, 1)
+    450ms both;
+}
+
 /* Responsive */
 
-@media (max-width: 767px) {
+@media (max-width: 765px) {
   .about {
     padding-block: 4rem;
   }
@@ -135,5 +165,72 @@
 
   .description {
     font-size: 0.95rem;
+  }
+}
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .label,
+  .title,
+  .portrait img,
+  .introduction,
+  .description {
+    animation: none;
+  }
+
+  .portrait::after {
+    display: none;
+  }
+}
+
+/* Title animation */
+
+@keyframes titleReveal {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Image animation */
+
+@keyframes imageReveal {
+  from {
+    transform: scale(1.08);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Burgundy animation */
+
+@keyframes burgundyReveal {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-101%);
+  }
+}
+
+@keyframes descriptionReveal {
+  from {
+    opacity: 0;
+    transform: translateY(35px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
