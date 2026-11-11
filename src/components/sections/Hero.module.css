@@ -47,12 +47,25 @@
 
 /* Responsive */
 
-@media (min-width: 768px) {
+@media (max-width: 765px) {
   .hero {
-    padding-top: 6rem;
+    padding-top: 1.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .title {
+    font-size: clamp(2.85rem, 12vw, 4.25rem);
+    line-height: 0.98;
   }
 
   .description {
-    font-size: 1.25rem;
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .location {
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
   }
 }

@@ -23,8 +23,12 @@
 
 /* Responsive */
 
-@media (min-width: 768px) {
+@media (max-width: 765px) {
   .header {
-    padding: 2rem 4rem;
+    padding-block: 1.5rem;
+  }
+
+  .logo {
+    font-size: 1.125rem;
   }
 }
