@@ -5,7 +5,7 @@ function Header() {
     <header className="w-full px-8 py-8 md:px-16">
       <div className="flex items-center justify-between">
 
-        <span className="text-2xl font-semibold tracking-tight">
+        <span className="font-display text-xl font-medium tracking-tight">
           gabrielaaf
         </span>
 
