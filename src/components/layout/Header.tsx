@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 import ThemeToggle from "../ui/ThemeToggle";
 import NavigationMenu from "../navigation/NavigationMenu";
 import styles from "./Header.module.css";
@@ -5,9 +7,9 @@ import styles from "./Header.module.css";
 function Header() {
   return (
     <header className={styles.header}>
-      <span className={styles.logo}>
+      <Link to="/" className={styles.logo}>
         gabrielaaf
-      </span>
+      </Link>
 
       <div className={styles.actions}>
         <ThemeToggle />

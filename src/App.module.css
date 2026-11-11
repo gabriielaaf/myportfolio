@@ -1,4 +1,4 @@
-/* Main application layout */
+/* Application Layout */
 
 .app {
   display: flex;
@@ -11,6 +11,14 @@
   color: var(--foreground);
 
   transition:
-    background-color 300ms,
-    color 300ms;
+    background-color 300ms ease,
+    color 300ms ease;
+}
+
+/* Homepage */
+
+.home {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 }

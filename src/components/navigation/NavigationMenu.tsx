@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router";
 import styles from "./NavigationMenu.module.css";
 
 const navigationLinks = [
-  { label: "About", href: "#about" },
+  { label: "About", href: "/about" },
   { label: "Work", href: "#work" },
   { label: "Experience", href: "#experience" },
   { label: "Beyond the Code", href: "#beyond-the-code" },
@@ -99,9 +100,8 @@ function NavigationMenu() {
 
       {/* Background overlay */}
       <div
-        className={`${styles.backdrop} ${
-          isOpen ? styles.backdropOpen : ""
-        }`}
+        className={`${styles.backdrop} ${isOpen ? styles.backdropOpen : ""
+          }`}
         onClick={closeMenu}
         aria-hidden="true"
       />
@@ -110,9 +110,8 @@ function NavigationMenu() {
       <aside
         ref={panelRef}
         id="navigation-panel"
-        className={`${styles.panel} ${
-          isOpen ? styles.panelOpen : ""
-        }`}
+        className={`${styles.panel} ${isOpen ? styles.panelOpen : ""
+          }`}
         aria-hidden={!isOpen}
         inert={!isOpen}
       >
@@ -120,9 +119,9 @@ function NavigationMenu() {
           <ul className={styles.links}>
             {navigationLinks.map((link) => (
               <li key={link.href}>
-                <a href={link.href} onClick={closeMenu}>
+                <Link to={link.href} onClick={closeMenu}>
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
