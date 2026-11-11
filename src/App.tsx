@@ -3,7 +3,12 @@ import Hero from "./components/sections/Hero";
 
 function App() {
   return (
-    <div className="flex min-h-screen flex-col bg-[#101010] text-[#F5F5F5]">
+    <div
+      className="flex min-h-screen flex-col
+                 bg-[var(--background)]
+                 text-[var(--foreground)]
+                 transition-colors duration-300"
+    >
       <Header />
       <Hero />
     </div>

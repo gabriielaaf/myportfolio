@@ -8,11 +8,11 @@ function Hero() {
                     Felgueiras
                 </h1>
 
-                <p className="mt-6 font-sans text-base font-normal leading-relaxed text-[#999999] md:text-lg">
+                <p className="mt-6 font-sans text-base font-normal leading-relaxed text-[var(--muted)] md:text-lg">
                     Informatics and Computing Engineering Student @ FEUP
                 </p>
 
-                <p className="mt-4 font-sans text-sm font-medium tracking-wide text-[#A64D62] md:text-base">
+                <p className="mt-4 font-sans text-sm font-medium tracking-wide text-[var(--accent)] md:text-base">
                     Porto, Portugal
                 </p>
             </div>
