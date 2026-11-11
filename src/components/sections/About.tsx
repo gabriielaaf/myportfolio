@@ -44,6 +44,35 @@ function About() {
         </div>
 
       </div>
+
+      {/* CV */}
+
+      <div className={styles.cvSection}>
+        <div className={styles.cvHeader}>
+          <span>CURRICULUM VITAE</span>
+        </div>
+
+        <div className={styles.cvRow}>
+          <div className={styles.cvContent}>
+            <h3 className={styles.cvTitle}>
+              Curriculum Vitae
+            </h3>
+
+            <p className={styles.cvDescription}>
+              A closer look at my education, experience and projects.
+            </p>
+          </div>
+
+          <a
+            href={`${import.meta.env.BASE_URL}Gabriela_Felgueiras_CV.pdf`}
+            download="Gabriela_Felgueiras_CV.pdf"
+            className={styles.cvLink}
+          >
+            Download CV
+            <span className={styles.cvArrow} aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
     </section>
   );
 }
