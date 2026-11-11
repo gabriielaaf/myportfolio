@@ -8,7 +8,10 @@ function Header() {
   const { pathname } = useLocation();
 
   return (
-    <header className={styles.header}>
+    <header
+      className={`${styles.header} ${pathname === "/" ? styles.homeHeader : ""
+        }`}
+    >
       <Link to="/" className={styles.logo}>
         gabrielaaf
       </Link>

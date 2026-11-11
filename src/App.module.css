@@ -19,14 +19,14 @@
 
 .home {
   display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
   align-items: center;
-  gap: clamp(2rem, 5vw, 5rem);
+  gap: 4rem;
 
   flex: 1;
 
   width: 100%;
-  max-width: var(--content-max-width);
+  max-width: 1350px;
 
   margin-inline: auto;
   padding: 3rem var(--page-padding);

@@ -23,6 +23,13 @@
   gap: 0.75rem;
 }
 
+/* Homepage header */
+
+.homeHeader {
+  max-width: 1350px;
+  padding-inline: var(--page-padding);
+}
+
 /* Responsive */
 
 @media (max-width: 767px) {
