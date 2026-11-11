@@ -4,7 +4,10 @@
   justify-content: space-between;
 
   width: 100%;
-  padding: 2rem;
+  max-width: var(--content-max-width);
+
+  margin-inline: auto;
+  padding: 2rem var(--page-padding);
 }
 
 /* Branding */

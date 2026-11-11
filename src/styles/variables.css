@@ -1,10 +1,11 @@
 :root {
   --font-heading: "Clash Display", sans-serif;
   --font-body: "Archivo", sans-serif;
-}
 
-/* Dark Theme */
-:root {
+  --content-max-width: 1200px;
+  --page-padding: clamp(1.5rem, 5vw, 4rem);
+
+  /* Dark Theme */
   color-scheme: dark;
 
   --background: #101010;

@@ -1,14 +1,11 @@
 import Header from "./components/layout/Header";
 import Hero from "./components/sections/Hero";
 
+import styles from "./App.module.css";
+
 function App() {
   return (
-    <div
-      className="flex min-h-screen flex-col
-                 bg-[var(--background)]
-                 text-[var(--foreground)]
-                 transition-colors duration-300"
-    >
+    <div className={styles.app}>
       <Header />
       <Hero />
     </div>

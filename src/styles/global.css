@@ -1,16 +1,31 @@
-@import "tailwindcss";
 @import "./variables.css";
 
-@theme inline {
-  --font-display: var(--font-heading);
-  --font-sans: var(--font-body);
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
-
+  min-width: 320px;
+  
   font-family: var(--font-body);
-
   background-color: var(--background);
   color: var(--foreground);
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+button {
+  font: inherit;
 }
