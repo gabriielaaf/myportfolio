@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router";
 import Header from "./components/layout/Header";
 import Hero from "./components/sections/Hero";
 import About from "./components/sections/About";
+import HomeNavigation from "./components/home/HomeNavigation";
 import WorkPage from "./pages/WorkPage";
 
 import styles from "./App.module.css";
@@ -18,24 +19,13 @@ function App() {
           element={
             <main className={styles.home}>
               <Hero />
+              <HomeNavigation />
             </main>
           }
         />
 
-        <Route
-          path="/about"
-          element={
-            <main>
-              <About />
-            </main>
-          }
-        />
-
-        <Route 
-          path="/work" 
-          element={<WorkPage />} 
-        />
-        
+        <Route path="/about" element={<About />} />
+        <Route path="/work" element={<WorkPage />} />
       </Routes>
     </div>
   );
