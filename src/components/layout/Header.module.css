@@ -21,6 +21,12 @@
   color: var(--foreground);
 }
 
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
 /* Responsive */
 
 @media (max-width: 765px) {

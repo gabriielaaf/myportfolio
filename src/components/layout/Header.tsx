@@ -1,4 +1,5 @@
 import ThemeToggle from "../ui/ThemeToggle";
+import NavigationMenu from "../navigation/NavigationMenu";
 import styles from "./Header.module.css";
 
 function Header() {
@@ -8,7 +9,10 @@ function Header() {
         gabrielaaf
       </span>
 
-      <ThemeToggle />
+      <div className={styles.actions}>
+        <ThemeToggle />
+        <NavigationMenu />
+      </div>
     </header>
   );
 }
