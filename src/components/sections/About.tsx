@@ -1,5 +1,5 @@
 import styles from "./About.module.css";
-import portrait from "../../assets/hero.png";
+import portrait from "../../assets/gabrielaportfolio.jpeg";
 
 function About() {
   return (
@@ -11,13 +11,9 @@ function About() {
           <span className={styles.label}>ABOUT ME</span>
 
           <h2 className={styles.title}>
-            Software,
+            A little more
             <br />
-            problem-solving
-            <br />
-            and a bit of
-            <br />
-            creativity<span className={styles.accent}>.</span>
+            about me<span className={styles.accent}>.</span>
           </h2>
 
           <div className={styles.portrait}>
@@ -38,17 +34,11 @@ function About() {
 
           <div className={styles.description}>
             <p>
-              What draws me to frontend development is
-              the opportunity to turn complex problems
-              into simple, meaningful experiences.
+              Frontend development is where I get to explore my creative side, combining technology and design to turn ideas into intuitive, meaningful digital experiences.
             </p>
 
             <p>
-              My interests also extend to databases,
-              data analysis and software development.
-              I enjoy exploring these areas through
-              academic projects, hackathons and
-              collaborative challenges.
+              Beyond the academics, I enjoy stepping outside my comfort zone through hackathons and collaborative projects, where I can explore new ideas, tackle challenges and learn from others.
             </p>
           </div>
         </div>
