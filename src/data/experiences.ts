@@ -38,7 +38,7 @@ export const experiences: Experience[] = [
     title: "EBEC Porto '26",
     organization: "BEST Porto",
     category: "Hackathon",
-    period: "2026",
+    period: "March 2026",
     achievement: "2nd Place",
     description:
       "Achieved second place in a 24-hour Machine Learning and Data Science challenge, tackling weather-related problems through data analysis, predictive models and an interactive interface.",
