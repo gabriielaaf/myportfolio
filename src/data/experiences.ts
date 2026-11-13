@@ -25,7 +25,7 @@ export const experiences: Experience[] = [
     period: "October 2026",
     achievement: "3rd Place",
     description:
-      "Developed SmartCampus during a 7-hour hackathon, building an IoT-based platform for real-time monitoring and automated control of lighting, air conditioning and door access.",
+      "Designed and developed SmartCampus, a smart building management platform that combines real-time IoT monitoring with automated control of lighting, air conditioning and door access, transforming sensor data into intelligent, energy-efficient actions.",
     technologies: [
       "Python",
       "Streamlit",
@@ -41,7 +41,7 @@ export const experiences: Experience[] = [
     period: "March 2026",
     achievement: "2nd Place",
     description:
-      "Achieved second place in a 24-hour Machine Learning and Data Science challenge, tackling weather-related problems through data analysis, predictive models and an interactive interface.",
+      "Applied machine learning and data analysis to solve a series of complex, real-world challenges under a 24-hour deadline, developing predictive models and an interactive dashboard to turn raw data into meaningful insights.",
     technologies: [
       "Python",
       "Machine Learning",

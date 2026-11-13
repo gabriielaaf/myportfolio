@@ -71,9 +71,11 @@
 .timeline {
     margin: 0;
     padding: 0;
-
     list-style: none;
+
     border-top: 1px solid var(--border);
+
+    animation: revealTimeline 800ms ease-out 0.7s both;
 }
 
 .experienceItem {
@@ -176,29 +178,29 @@
 /* Achievement */
 
 .achievement {
-  display: flex;
-  align-items: baseline;
-  gap: 0.35rem;
-  flex-shrink: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    flex-shrink: 0;
 }
 
 .achievementPosition {
-  font-family: var(--font-heading);
-  font-size: 1.65rem;
-  font-weight: 600;
-  line-height: 1;
+    font-family: var(--font-heading);
+    font-size: 1.65rem;
+    font-weight: 600;
+    line-height: 1;
 
-  color: var(--accent);
+    color: var(--accent);
 }
 
 .achievementLabel {
-  font-family: var(--font-body);
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
 
-  color: var(--muted);
+    color: var(--muted);
 }
 
 /* Description */
@@ -235,6 +237,18 @@
 }
 
 /* Animations */
+
+@keyframes revealTimeline {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 @keyframes revealUp {
     from {
@@ -340,5 +354,9 @@
     .experienceTitle,
     .achievement {
         transition: none;
+    }
+
+    .timeline {
+        animation: none;
     }
 }
