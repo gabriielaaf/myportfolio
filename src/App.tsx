@@ -5,6 +5,7 @@ import Hero from "./components/sections/Hero";
 import About from "./components/sections/About";
 import HomeNavigation from "./components/home/HomeNavigation";
 import WorkPage from "./pages/WorkPage";
+import ExperiencePage from "./pages/ExperiencePage";
 
 import styles from "./App.module.css";
 
@@ -26,6 +27,7 @@ function App() {
 
         <Route path="/about" element={<About />} />
         <Route path="/work" element={<WorkPage />} />
+        <Route path="/experience" element={<ExperiencePage />} />
       </Routes>
     </div>
   );
