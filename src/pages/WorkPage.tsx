@@ -41,19 +41,17 @@ function WorkPage() {
         {/* Introduction */}
 
         <header className={styles.header}>
-          <span className={styles.label}>WORK</span>
+          <span className={styles.label}>PROJECTS</span>
 
           <h1 className={styles.title}>
-            Selected work
-            <span className={styles.accent}>.</span>
+            What I've built<span className={styles.accent}>.</span>
           </h1>
 
           <p className={styles.subtitle}>
-            A selection of projects I've worked on,
-            exploring different technologies and ideas.
+            From web applications to IoT dashboards, a selection
+            of projects that reflect the different areas I've explored.
           </p>
         </header>
-
         <div className={styles.content}>
 
           {/* Project list */}
@@ -76,10 +74,9 @@ function WorkPage() {
                     aria-pressed={selectedIndex === index}
                     className={`
                       ${styles.projectButton}
-                      ${
-                        selectedIndex === index
-                          ? styles.projectActive
-                          : ""
+                      ${selectedIndex === index
+                        ? styles.projectActive
+                        : ""
                       }
                     `}
                   >
@@ -118,9 +115,8 @@ function WorkPage() {
                 <img
                   key={currentImage}
                   src={currentImage}
-                  alt={`${selectedProject.name} screenshot ${
-                    imageIndex + 1
-                  }`}
+                  alt={`${selectedProject.name} screenshot ${imageIndex + 1
+                    }`}
                   className={styles.carouselImage}
                 />
               ) : (
@@ -138,8 +134,8 @@ function WorkPage() {
               <span className={styles.imageCounter}>
                 {imageCount > 0
                   ? `${String(imageIndex + 1).padStart(2, "0")} / ${String(
-                      imageCount
-                    ).padStart(2, "0")}`
+                    imageCount
+                  ).padStart(2, "0")}`
                   : "00 / 00"}
               </span>
 
