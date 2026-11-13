@@ -16,12 +16,6 @@
   composes: container from "../styles/shared.module.css";
 }
 
-/* Project list */
-
-.projectList {
-  margin-left: -2rem;
-}
-
 /* Header */
 
 .header {
@@ -38,6 +32,8 @@
   letter-spacing: 0.15em;
 
   color: var(--accent);
+
+  animation: revealUp 700ms ease-out 100ms both;
 }
 
 .title {
@@ -48,6 +44,8 @@
   letter-spacing: -0.035em;
 
   color: var(--foreground);
+
+  animation: revealUp 800ms ease-out 200ms both;
 }
 
 .subtitle {
@@ -60,6 +58,8 @@
   line-height: 1.9;
 
   color: var(--muted);
+
+  animation: revealUp 800ms ease-out 350ms both;
 }
 
 .accent {
@@ -78,17 +78,26 @@
 
 /* Project list */
 
+.projectList {
+  margin-left: -2rem;
+}
+
 .listHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   padding-bottom: 1rem;
   border-bottom: 1px solid var(--border);
+
   font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.12em;
+
   color: var(--muted);
+
+  animation: revealUp 700ms ease-out 450ms both;
 }
 
 .projects {
@@ -97,42 +106,87 @@
   list-style: none;
 }
 
+.projects li {
+  animation: revealUp 700ms ease-out both;
+}
+
+.projects li:nth-child(1) {
+  animation-delay: 500ms;
+}
+
+.projects li:nth-child(2) {
+  animation-delay: 600ms;
+}
+
+.projects li:nth-child(3) {
+  animation-delay: 700ms;
+}
+
+.projects li:nth-child(4) {
+  animation-delay: 800ms;
+}
+
+.projects li:nth-child(n + 5) {
+  animation-delay: 900ms;
+}
+
+/* Project buttons */
+
 .projectButton {
   display: flex;
   align-items: center;
   gap: 1rem;
+
   width: 100%;
   padding: 1.75rem 0;
+
   border: none;
   border-bottom: 1px solid var(--border);
+
   background: transparent;
   color: var(--foreground);
+
   text-align: left;
   cursor: pointer;
-  transition: color 300ms ease;
+
+  transition:
+    color 350ms ease,
+    background-color 350ms ease;
 }
 
 .projectNumber {
   font-family: var(--font-body);
   font-size: 0.75rem;
+
   color: var(--muted);
+
+  transition: color 350ms ease;
 }
 
 .projectName {
   flex: 1;
+
   font-family: var(--font-heading);
   font-size: clamp(1.3rem, 2vw, 1.8rem);
   font-weight: 500;
   letter-spacing: -0.03em;
-  transition: transform 300ms ease;
+
+  transition: transform 350ms ease;
 }
 
 .projectArrow {
+  display: inline-block;
+
   font-size: 1.15rem;
   opacity: 0;
   transform: translate(-5px, 5px);
-  transition: opacity 300ms ease, transform 300ms ease;
+
+  transition:
+    opacity 350ms ease,
+    transform 350ms ease;
 }
+
+/* Project interactions */
 
 .projectButton:hover,
 .projectActive {
@@ -158,38 +212,54 @@
 
 .details {
   composes: appearUp from "../styles/shared.module.css";
+
   --appear-duration: 650ms;
   --appear-distance: 20px;
+
   min-width: 0;
+}
+
+.detailsInitial {
+  animation: revealUp 700ms ease-out 500ms both;
 }
 
 /* Carousel */
 
 .carousel {
   position: relative;
+
   width: 100%;
   aspect-ratio: 16 / 10;
+
   background-color: var(--surface);
   overflow: hidden;
 }
 
 .carouselImage {
   display: block;
+
   width: 100%;
   height: 100%;
+
   object-fit: contain;
-  animation: imageReveal 500ms ease both;
+
+  animation: imageReveal 600ms ease-out both;
 }
+
+/* Image placeholder */
 
 .imagePlaceholder {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   gap: 0.75rem;
+
   width: 100%;
   height: 100%;
   padding: 2rem;
+
   text-align: center;
 }
 
@@ -197,6 +267,7 @@
   font-family: var(--font-body);
   font-size: 0.7rem;
   letter-spacing: 0.12em;
+
   color: var(--muted);
 }
 
@@ -205,6 +276,7 @@
   font-size: clamp(1.5rem, 3vw, 2.5rem);
   font-weight: 500;
   letter-spacing: -0.03em;
+
   color: var(--foreground);
 }
 
@@ -214,12 +286,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   padding-block: 1rem;
 }
 
 .imageCounter {
   font-family: var(--font-body);
   font-size: 0.8rem;
+
   color: var(--muted);
 }
 
@@ -233,15 +307,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
   width: 2rem;
   height: 2rem;
   padding: 0;
+
   border: none;
   background: transparent;
+
   color: var(--foreground);
   font-size: 1.5rem;
+
   cursor: pointer;
-  transition: color 300ms ease, transform 300ms ease;
+
+  transition:
+    color 300ms ease,
+    transform 300ms ease;
 }
 
 .carouselButtons button:hover:not(:disabled) {
@@ -269,10 +350,13 @@
   display: flex;
   justify-content: space-between;
   gap: 1rem;
+
   margin-bottom: 1rem;
+
   font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 500;
+
   color: var(--accent);
 }
 
@@ -286,6 +370,7 @@
 
 .detailsDescription {
   composes: copy from "../styles/shared.module.css";
+
   max-width: 35rem;
   margin-top: 1rem;
 }
@@ -295,6 +380,7 @@
 .technologies {
   display: flex;
   flex-wrap: wrap;
+
   gap: 0.75rem;
   margin-top: 1.75rem;
 }
@@ -302,47 +388,118 @@
 .technologies span {
   font-family: var(--font-body);
   font-size: 0.75rem;
+
   color: var(--muted);
 }
 
 .technologies span:not(:last-child)::after {
   content: "·";
   margin-left: 0.75rem;
+
   color: var(--accent);
 }
 
-/* Image animation */
+/* Entrance animations */
+
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Image animations */
 
 @keyframes imageReveal {
-  from { opacity: 0; transform: scale(1.03); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(1.03);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* Responsive */
 
 @media (max-width: 900px) {
-  .content { grid-template-columns: 1fr; gap: 3rem; }
-  .header { margin-bottom: 3rem; }
-  .projectButton { padding-block: 1.3rem; }
-  .projectList { margin-left: 0; }
+  .content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .header {
+    margin-bottom: 3rem;
+  }
+
+  .projectButton {
+    padding-block: 1.3rem;
+  }
+
+  .projectList {
+    margin-left: 0;
+  }
 }
 
 @media (max-width: 765px) {
-  .work { padding-block: 4rem; }
-  .title { font-size: clamp(2.5rem, 8vw, 3.5rem); }
-  .subtitle { font-size: 0.95rem; }
-  .detailsTitle { font-size: 1.8rem; }
+  .work {
+    padding-block: 4rem;
+  }
+
+  .title {
+    font-size: clamp(2.5rem, 8vw, 3.5rem);
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+  }
+
+  .detailsTitle {
+    font-size: 1.8rem;
+  }
 }
 
 /* Reduced motion */
 
 @media (prefers-reduced-motion: reduce) {
-  .carouselImage { animation: none; }
+  .label,
+  .title,
+  .subtitle,
+  .listHeader,
+  .projects li,
+  .carouselImage {
+    animation: none;
+  }
+
+  .details {
+    animation: none;
+  }
 
   .projectButton,
+  .projectNumber,
   .projectName,
   .projectArrow,
   .carouselButtons button {
     transition: none;
+  }
+
+  .projectButton:hover .projectName {
+    transform: none;
+  }
+
+  .projectButton:hover .projectArrow,
+  .projectActive .projectArrow {
+    transform: none;
+  }
+
+  .detailsInitial {
+    animation: none;
   }
 }

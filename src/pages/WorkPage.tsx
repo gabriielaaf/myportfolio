@@ -5,6 +5,7 @@ import styles from "./WorkPage.module.css";
 function WorkPage() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [imageIndex, setImageIndex] = useState(0);
+  const [hasChangedProject, setHasChangedProject] = useState(false);
 
   const selectedProject = projects[selectedIndex];
 
@@ -16,6 +17,7 @@ function WorkPage() {
 
     setSelectedIndex(index);
     setImageIndex(0);
+    setHasChangedProject(true);
   }
 
   function previousImage() {
@@ -52,6 +54,7 @@ function WorkPage() {
             of projects that reflect the different areas I've explored.
           </p>
         </header>
+
         <div className={styles.content}>
 
           {/* Project list */}
@@ -74,9 +77,10 @@ function WorkPage() {
                     aria-pressed={selectedIndex === index}
                     className={`
                       ${styles.projectButton}
-                      ${selectedIndex === index
-                        ? styles.projectActive
-                        : ""
+                      ${
+                        selectedIndex === index
+                          ? styles.projectActive
+                          : ""
                       }
                     `}
                   >
@@ -104,7 +108,9 @@ function WorkPage() {
 
           <section
             key={selectedProject.id}
-            className={styles.details}
+            className={`${styles.details} ${
+              !hasChangedProject ? styles.detailsInitial : ""
+            }`}
             aria-label={`${selectedProject.name} details`}
           >
 
@@ -115,8 +121,9 @@ function WorkPage() {
                 <img
                   key={currentImage}
                   src={currentImage}
-                  alt={`${selectedProject.name} screenshot ${imageIndex + 1
-                    }`}
+                  alt={`${selectedProject.name} screenshot ${
+                    imageIndex + 1
+                  }`}
                   className={styles.carouselImage}
                 />
               ) : (
@@ -134,8 +141,8 @@ function WorkPage() {
               <span className={styles.imageCounter}>
                 {imageCount > 0
                   ? `${String(imageIndex + 1).padStart(2, "0")} / ${String(
-                    imageCount
-                  ).padStart(2, "0")}`
+                      imageCount
+                    ).padStart(2, "0")}`
                   : "00 / 00"}
               </span>
 
@@ -178,7 +185,9 @@ function WorkPage() {
 
               <div className={styles.technologies}>
                 {selectedProject.technologies.map((technology) => (
-                  <span key={technology}>{technology}</span>
+                  <span key={technology}>
+                    {technology}
+                  </span>
                 ))}
               </div>
             </div>
