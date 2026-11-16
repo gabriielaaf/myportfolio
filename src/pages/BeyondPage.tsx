@@ -1,230 +1,299 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router";
 
 import {
-  beyondQuestions,
-  openingMessage,
-  type BeyondQuestion,
+    beyondQuestions,
+    openingMessage,
+    type BeyondQuestion,
 } from "../data/beyond";
 
 import styles from "./BeyondPage.module.css";
 
 interface Message {
-  id: string;
-  sender: "visitor" | "gabi";
-  text: string;
+    id: string;
+    sender: "visitor" | "gabi";
+    text: string;
+    followUp?: boolean;
 }
 
 function BeyondPage() {
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [askedIds, setAskedIds] = useState<string[]>([]);
-  const [isTyping, setIsTyping] = useState(false);
+    const [messages, setMessages] = useState<Message[]>([]);
+    const [askedIds, setAskedIds] = useState<string[]>([]);
+    const [isTyping, setIsTyping] = useState(false);
 
-  const conversationRef = useRef<HTMLDivElement>(null);
-  const timeoutRef = useRef<number | null>(null);
+    const conversationRef = useRef<HTMLDivElement>(null);
+    const timeoutRef = useRef<number | null>(null);
 
-  const remainingQuestions = beyondQuestions.filter(
-    (question) => !askedIds.includes(question.id)
-  );
+    const remainingQuestions = beyondQuestions.filter(
+        (question) => !askedIds.includes(question.id)
+    );
 
-  useEffect(() => {
-    const conversation = conversationRef.current;
+    /* Conversation scroll */
 
-    if (!conversation) return;
+    useEffect(() => {
+        const conversation = conversationRef.current;
 
-    const reducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+        if (!conversation) return;
 
-    conversation.scrollTo({
-      top: conversation.scrollHeight,
-      behavior: reducedMotion ? "instant" : "smooth",
-    });
-  }, [messages, isTyping]);
+        const reducedMotion = window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
 
-  useEffect(() => {
-    return () => {
-      if (timeoutRef.current !== null) {
-        window.clearTimeout(timeoutRef.current);
-      }
-    };
-  }, []);
+        conversation.scrollTo({
+            top: conversation.scrollHeight,
+            behavior: reducedMotion ? "auto" : "smooth",
+        });
+    }, [messages, isTyping]);
 
-  function askQuestion(question: BeyondQuestion) {
-    if (isTyping || askedIds.includes(question.id)) return;
+    /* Cleanup */
 
-    setAskedIds((previous) => [...previous, question.id]);
+    useEffect(() => {
+        return () => {
+            if (timeoutRef.current !== null) {
+                window.clearTimeout(timeoutRef.current);
+            }
+        };
+    }, []);
 
-    setMessages((previous) => [
-      ...previous,
-      {
-        id: `question-${question.id}`,
-        sender: "visitor",
-        text: question.question,
-      },
-    ]);
+    /* Ask question */
 
-    setIsTyping(true);
+    function askQuestion(question: BeyondQuestion) {
+        if (isTyping || askedIds.includes(question.id)) return;
 
-    timeoutRef.current = window.setTimeout(() => {
-      setMessages((previous) => [
-        ...previous,
-        {
-          id: `answer-${question.id}`,
-          sender: "gabi",
-          text: question.answer,
-        },
-      ]);
+        setAskedIds((previous) => [...previous, question.id]);
 
-      setIsTyping(false);
-      timeoutRef.current = null;
-    }, 650);
-  }
+        setMessages((previous) => [
+            ...previous,
+            {
+                id: `question-${question.id}`,
+                sender: "visitor",
+                text: question.question,
+            },
+        ]);
 
-  function restartConversation() {
-    if (timeoutRef.current !== null) {
-      window.clearTimeout(timeoutRef.current);
-      timeoutRef.current = null;
+        setIsTyping(true);
+
+        timeoutRef.current = window.setTimeout(() => {
+            setMessages((previous) => [
+                ...previous,
+                {
+                    id: `answer-${question.id}-1`,
+                    sender: "gabi",
+                    text: question.answers[0],
+                },
+            ]);
+
+            timeoutRef.current = window.setTimeout(() => {
+                setMessages((previous) => [
+                    ...previous,
+                    {
+                        id: `answer-${question.id}-2`,
+                        sender: "gabi",
+                        text: question.answers[1],
+                        followUp: true,
+                    },
+                ]);
+
+                setIsTyping(false);
+                timeoutRef.current = null;
+            }, 1200);
+        }, 700);
     }
 
-    setMessages([]);
-    setAskedIds([]);
-    setIsTyping(false);
-  }
+    /* Restart conversation */
 
-  return (
-    <main className={styles.beyond}>
-      <div className={styles.container}>
-        <div className={styles.layout}>
+    function restartConversation() {
+        if (timeoutRef.current !== null) {
+            window.clearTimeout(timeoutRef.current);
+            timeoutRef.current = null;
+        }
 
-          {/* Introduction */}
+        setMessages([]);
+        setAskedIds([]);
+        setIsTyping(false);
+    }
 
-          <header className={styles.intro}>
-            <span className={styles.label}>
-              BEYOND THE CODE
-            </span>
+    return (
+        <main className={styles.beyond}>
+            <div className={styles.container}>
+                <div className={styles.layout}>
 
-            <h1 className={styles.title}>
-              Let's chat
-              <span className={styles.accent}>.</span>
-            </h1>
+                    {/* Introduction */}
 
-            <p className={styles.subtitle}>
-              A few things you won't find on my CV.
-              Pick a question and get to know me a little better.
-            </p>
-          </header>
+                    <header className={styles.intro}>
+                        <span className={styles.label}>
+                            BEYOND THE CODE
+                        </span>
 
-          {/* Conversation */}
+                        <h1 className={styles.title}>
+                            Let's chat
+                            <span className={styles.accent}>.</span>
+                        </h1>
 
-          <section
-            className={styles.chat}
-            aria-label="Get to know me"
-          >
-            <div
-              ref={conversationRef}
-              className={styles.conversation}
-              role="log"
-              aria-live="polite"
-              aria-relevant="additions"
-              aria-label="Conversation"
-            >
-              <div
-                className={`${styles.message} ${styles.gabiMessage}`}
-              >
-                <span className={styles.sender}>GABI</span>
+                        <p className={styles.subtitle}>
+                            There's more to a person than what they do.
+                            Pick a question and get to know me a little better.
+                        </p>
 
-                <p className={styles.messageText}>
-                  {openingMessage}
-                </p>
-              </div>
+                        <div className={styles.introDetail}>
+                            <span className={styles.detailLine} />
 
-              {messages.map((message) => (
-                <div
-                  key={message.id}
-                  className={`${styles.message} ${
-                    message.sender === "gabi"
-                      ? styles.gabiMessage
-                      : styles.visitorMessage
-                  }`}
-                >
-                  <span className={styles.sender}>
-                    {message.sender === "gabi" ? "GABI" : "YOU"}
-                  </span>
+                            <span>
+                                A LITTLE CONVERSATION WITH GABI
+                            </span>
+                        </div>
+                    </header>
 
-                  <p className={styles.messageText}>
-                    {message.text}
-                  </p>
-                </div>
-              ))}
+                    {/* Conversation */}
 
-              {isTyping && (
-                <div
-                  className={`${styles.message} ${styles.gabiMessage}`}
-                >
-                  <span className={styles.sender}>GABI</span>
-
-                  <div
-                    className={styles.typing}
-                    aria-label="Gabi is replying"
-                  >
-                    <span />
-                    <span />
-                    <span />
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Questions */}
-
-            <div className={styles.questions}>
-              <div className={styles.questionsHeader}>
-                <span>YOUR TURN</span>
-
-                {askedIds.length > 0 && (
-                  <button
-                    type="button"
-                    className={styles.restart}
-                    onClick={restartConversation}
-                  >
-                    Start again ↺
-                  </button>
-                )}
-              </div>
-
-              {remainingQuestions.length > 0 ? (
-                <div className={styles.questionList}>
-                  {remainingQuestions.map((question) => (
-                    <button
-                      key={question.id}
-                      type="button"
-                      className={styles.questionButton}
-                      onClick={() => askQuestion(question)}
-                      disabled={isTyping}
+                    <section
+                        className={styles.chat}
+                        aria-label="Get to know me"
                     >
-                      <span>{question.question}</span>
+                        <div className={styles.chatHeader}>
+                            <span>THE CONVERSATION</span>
 
-                      <span
-                        className={styles.arrow}
-                        aria-hidden="true"
-                      >
-                        ↗
-                      </span>
-                    </button>
-                  ))}
+                            <span className={styles.chatNumber}>
+                                01 — 04
+                            </span>
+                        </div>
+
+                        <div
+                            ref={conversationRef}
+                            className={styles.conversation}
+                            role="log"
+                            aria-live="polite"
+                            aria-relevant="additions"
+                            aria-label="Conversation"
+                        >
+
+                            {/* Opening message */}
+
+                            <div
+                                className={`${styles.message} ${styles.gabiMessage}`}
+                            >
+                                <span className={styles.sender}>
+                                    GABI
+                                </span>
+
+                                <p className={styles.messageText}>
+                                    {openingMessage}
+                                </p>
+                            </div>
+
+                            {/* Messages */}
+
+                            {messages.map((message) => (
+                                <div
+                                    key={message.id}
+                                    className={`${styles.message} ${message.sender === "gabi"
+                                            ? styles.gabiMessage
+                                            : styles.visitorMessage
+                                        } ${message.followUp ? styles.followUp : ""}`}
+                                >
+                                    <span className={styles.sender}>
+                                        {message.sender === "gabi" ? "GABI" : "YOU"}
+                                    </span>
+
+                                    <p className={styles.messageText}>
+                                        {message.text}
+                                    </p>
+                                </div>
+                            ))}
+
+                            {/* Typing */}
+
+                            {isTyping && (
+                                <div
+                                    className={`${styles.message} ${styles.gabiMessage}`}
+                                >
+                                    <span className={styles.sender}>
+                                        GABI
+                                    </span>
+
+                                    <div
+                                        className={styles.typing}
+                                        role="status"
+                                        aria-label="Gabi is replying"
+                                    >
+                                        <span />
+                                        <span />
+                                        <span />
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Questions */}
+
+                        <div className={styles.questions}>
+                            <div className={styles.questionsHeader}>
+                                <span>
+                                    WHAT WOULD YOU LIKE TO KNOW?
+                                </span>
+
+                                {askedIds.length > 0 && (
+                                    <button
+                                        type="button"
+                                        className={styles.restart}
+                                        onClick={restartConversation}
+                                    >
+                                        Start again ↺
+                                    </button>
+                                )}
+                            </div>
+
+                            {remainingQuestions.length > 0 ? (
+                                <div className={styles.questionList}>
+                                    {remainingQuestions.map((question, index) => (
+                                        <button
+                                            key={question.id}
+                                            type="button"
+                                            className={styles.questionButton}
+                                            onClick={() => askQuestion(question)}
+                                            disabled={isTyping}
+                                        >
+                                            <span className={styles.questionNumber}>
+                                                {String(index + 1).padStart(2, "0")}
+                                            </span>
+
+                                            <span className={styles.questionText}>
+                                                {question.question}
+                                            </span>
+
+                                            <span
+                                                className={styles.questionArrow}
+                                                aria-hidden="true"
+                                            >
+                                                ↗
+                                            </span>
+                                        </button>
+                                    ))}
+                                </div>
+                            ) : (
+                                !isTyping && (
+                                    <div className={styles.conversationEnd}>
+                                        <p>
+                                            Well, now you know a little more about me!
+                                            Maybe we'll get to chat for real someday.
+                                        </p>
+
+                                        <Link
+                                            to="/contact"
+                                            className={styles.contactLink}
+                                        >
+                                            Say hello
+                                            <span aria-hidden="true">↗</span>
+                                        </Link>
+                                    </div>
+                                )
+                            )}
+                        </div>
+                    </section>
                 </div>
-              ) : (
-                <p className={styles.endMessage}>
-                  That's a little more about me.
-                  Thanks for stopping by!
-                </p>
-              )}
             </div>
-          </section>
-        </div>
-      </div>
-    </main>
-  );
+        </main>
+    );
 }
 
 export default BeyondPage;
