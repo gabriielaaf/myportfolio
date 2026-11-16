@@ -8,6 +8,7 @@ import HomeNavigation from "./components/home/HomeNavigation";
 import WorkPage from "./pages/WorkPage";
 import ExperiencePage from "./pages/ExperiencePage";
 import ContactPage from "./pages/ContactPage";
+import BeyondPage from "./pages/BeyondPage";
 
 import styles from "./App.module.css";
 
@@ -31,7 +32,8 @@ function App() {
         <Route path="/work" element={<WorkPage />} />
         <Route path="/experience" element={<ExperiencePage />} />
         <Route path="/contact" element={<ContactPage />} />
-        
+        <Route path="/beyond-the-code" element={<BeyondPage />} />
+
       </Routes>
     </div>
   );

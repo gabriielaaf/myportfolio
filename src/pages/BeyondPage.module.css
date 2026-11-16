@@ -1,0 +1,424 @@
+/* Beyond */
+
+.beyond {
+  --content-max-width: 1400px;
+  --page-padding: clamp(1.5rem, 4vw, 3.5rem);
+
+  width: 100%;
+  min-height: 100vh;
+  padding-block: 7rem;
+
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+.container {
+  composes: container from "../styles/shared.module.css";
+}
+
+/* Layout */
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  align-items: start;
+
+  gap: clamp(3rem, 8vw, 9rem);
+}
+
+/* Introduction */
+
+.intro {
+  max-width: 32rem;
+}
+
+.label {
+  display: inline-block;
+  margin-bottom: 2.25rem;
+
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+
+  color: var(--accent);
+
+  animation: revealUp 700ms ease-out 100ms both;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: clamp(3rem, 5vw, 5rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+
+  color: var(--foreground);
+
+  animation: revealUp 800ms ease-out 200ms both;
+}
+
+.accent {
+  composes: accent from "../styles/shared.module.css";
+}
+
+.subtitle {
+  max-width: 28rem;
+  margin-top: 2.25rem;
+
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.9;
+
+  color: var(--muted);
+
+  animation: revealUp 800ms ease-out 350ms both;
+}
+
+/* Chat */
+
+.chat {
+  min-width: 0;
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+
+  animation: revealUp 800ms ease-out 550ms both;
+}
+
+/* Conversation */
+
+.conversation {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+
+  height: clamp(300px, 42vh, 440px);
+  padding: 2rem;
+
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* Messages */
+
+.message {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 0.6rem;
+  max-width: 85%;
+
+  animation: messageEnter 500ms
+    cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.sender {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+
+  color: var(--muted);
+}
+
+.messageText {
+  margin: 0;
+  padding: 1rem 1.25rem;
+
+  border-radius: 4px 16px 16px 16px;
+
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  line-height: 1.8;
+
+  background-color: var(--surface);
+  color: var(--foreground);
+}
+
+.visitorMessage {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+.visitorMessage .messageText {
+  border-radius: 16px 4px 16px 16px;
+
+  background-color: var(--accent);
+  color: #ffffff;
+}
+
+/* Typing */
+
+.typing {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+
+  padding: 1.1rem 1.25rem;
+  border-radius: 4px 16px 16px 16px;
+
+  background-color: var(--surface);
+}
+
+.typing span {
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+  background-color: var(--accent);
+
+  animation: typingDot 900ms ease-in-out infinite;
+}
+
+.typing span:nth-child(2) {
+  animation-delay: 150ms;
+}
+
+.typing span:nth-child(3) {
+  animation-delay: 300ms;
+}
+
+/* Questions */
+
+.questions {
+  padding: 1.5rem 2rem 2rem;
+
+  border-top: 1px solid var(--border);
+}
+
+.questionsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+
+  color: var(--muted);
+}
+
+/* Question list */
+
+.questionList {
+  display: flex;
+  flex-direction: column;
+}
+
+.questionButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  gap: 1rem;
+  padding: 0.95rem 0;
+
+  border: 0;
+  border-bottom: 1px solid var(--border);
+
+  background: transparent;
+  color: var(--foreground);
+
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    color 250ms ease,
+    padding-left 250ms ease;
+}
+
+.questionButton:last-child {
+  border-bottom: 0;
+}
+
+.questionButton:hover:not(:disabled) {
+  padding-left: 0.4rem;
+  color: var(--accent);
+}
+
+.questionButton:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+/* Arrow */
+
+.arrow {
+  flex-shrink: 0;
+
+  font-size: 1.2rem;
+  color: var(--accent);
+
+  transition: transform 250ms ease;
+}
+
+.questionButton:hover:not(:disabled) .arrow {
+  transform: translate(3px, -3px);
+}
+
+/* Restart */
+
+.restart {
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: normal;
+
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.restart:hover {
+  text-decoration: underline;
+}
+
+/* End message */
+
+.endMessage {
+  margin: 0;
+
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  line-height: 1.8;
+
+  color: var(--muted);
+}
+
+/* Focus */
+
+.questionButton:focus-visible,
+.restart:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* Animations */
+
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes messageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes typingDot {
+  0%,
+  60%,
+  100% {
+    opacity: 0.35;
+    transform: translateY(0);
+  }
+
+  30% {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
+}
+
+/* Responsive */
+
+@media (max-width: 1000px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+
+  .intro {
+    max-width: 38rem;
+  }
+
+  .chat {
+    max-width: 750px;
+  }
+}
+
+@media (max-width: 600px) {
+  .beyond {
+    padding-block: 4rem;
+  }
+
+  .layout {
+    gap: 3rem;
+  }
+
+  .title {
+    font-size: clamp(2.75rem, 10vw, 3.5rem);
+  }
+
+  .subtitle {
+    margin-top: 1.75rem;
+    font-size: 0.95rem;
+  }
+
+  .conversation {
+    height: 350px;
+    padding: 1.25rem;
+  }
+
+  .questions {
+    padding: 1.25rem;
+  }
+
+  .message {
+    max-width: 95%;
+  }
+
+  .messageText {
+    font-size: 0.85rem;
+  }
+
+  .questionButton {
+    font-size: 0.85rem;
+  }
+}
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .label,
+  .title,
+  .subtitle,
+  .chat,
+  .message,
+  .typing span {
+    animation: none;
+  }
+
+  .questionButton,
+  .arrow {
+    transition: none;
+  }
+}
