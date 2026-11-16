@@ -77,10 +77,9 @@ function WorkPage() {
                     aria-pressed={selectedIndex === index}
                     className={`
                       ${styles.projectButton}
-                      ${
-                        selectedIndex === index
-                          ? styles.projectActive
-                          : ""
+                      ${selectedIndex === index
+                        ? styles.projectActive
+                        : ""
                       }
                     `}
                   >
@@ -108,9 +107,8 @@ function WorkPage() {
 
           <section
             key={selectedProject.id}
-            className={`${styles.details} ${
-              !hasChangedProject ? styles.detailsInitial : ""
-            }`}
+            className={`${styles.details} ${!hasChangedProject ? styles.detailsInitial : ""
+              }`}
             aria-label={`${selectedProject.name} details`}
           >
 
@@ -121,9 +119,8 @@ function WorkPage() {
                 <img
                   key={currentImage}
                   src={currentImage}
-                  alt={`${selectedProject.name} screenshot ${
-                    imageIndex + 1
-                  }`}
+                  alt={`${selectedProject.name} screenshot ${imageIndex + 1
+                    }`}
                   className={styles.carouselImage}
                 />
               ) : (
@@ -141,8 +138,8 @@ function WorkPage() {
               <span className={styles.imageCounter}>
                 {imageCount > 0
                   ? `${String(imageIndex + 1).padStart(2, "0")} / ${String(
-                      imageCount
-                    ).padStart(2, "0")}`
+                    imageCount
+                  ).padStart(2, "0")}`
                   : "00 / 00"}
               </span>
 
@@ -194,6 +191,33 @@ function WorkPage() {
           </section>
 
         </div>
+        {/* GitHub */}
+
+        <section className={styles.githubSection}>
+          <div className={styles.githubContent}>
+            <h2 className={styles.githubHeading}>
+              There's more to explore
+              <span className={styles.accent}>.</span>
+            </h2>
+
+            <p className={styles.githubDescription}>
+              Beyond the projects featured here, you can discover
+              more of my work and ideas on GitHub.
+            </p>
+          </div>
+
+          <a
+            href="https://github.com/gabriielaaf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.githubLink}
+          >
+            Explore my GitHub
+            <span className={styles.githubArrow} aria-hidden="true">
+              ↗
+            </span>
+          </a>
+        </section>
       </div>
     </main>
   );
