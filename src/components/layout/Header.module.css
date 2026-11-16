@@ -30,6 +30,15 @@
   padding-inline: var(--page-padding);
 }
 
+.logo {
+  color: var(--foreground);
+  transition: color 300ms ease;
+}
+
+.logo:hover {
+  color: var(--accent);
+}
+
 /* Responsive */
 
 @media (max-width: 767px) {
