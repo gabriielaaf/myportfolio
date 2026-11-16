@@ -3,5 +3,5 @@ export const navigationLinks = [
   { label: "Work", href: "/work" },
   { label: "Experience", href: "/experience" },
   { label: "Beyond the Code", href: "#beyond-the-code" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "/contact" },
 ];
