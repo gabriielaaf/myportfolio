@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 
 import { experiences } from "../data/experiences";
 import styles from "./ExperiencePage.module.css";
+import teamPhoto from "../assets/team.jpg";
 
 function ExperiencePage() {
     const timelineRef = useRef<HTMLOListElement>(null);
@@ -133,6 +134,36 @@ function ExperiencePage() {
                         </li>
                     ))}
                 </ol>
+
+                {/* Team */}
+
+                <section className={styles.teamSection}>
+                    <div className={styles.teamImage}>
+                        <img
+                            src={teamPhoto}
+                            alt="My hackathon team"
+                            loading="lazy"
+                        />
+                    </div>
+
+                    <div className={styles.teamContent}>
+                        <span className={styles.teamLabel}>
+                            THE PEOPLE BEHIND THE ACHIEVEMENTS
+                        </span>
+
+                        <h2 className={styles.teamTitle}>
+                            Better together
+                            <span className={styles.accent}>.</span>
+                        </h2>
+
+                        <p className={styles.teamDescription}>
+                            Two competitions, two podium finishes, and the same
+                            amazing team by my side. Proud of what we've achieved
+                            together, and always looking forward to new challenges,
+                            experiences and adventures.
+                        </p>
+                    </div>
+                </section>
             </div>
         </main>
     );
