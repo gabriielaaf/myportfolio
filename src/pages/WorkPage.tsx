@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import { projects } from "../data/projects";
 import styles from "./WorkPage.module.css";
 
@@ -43,15 +44,19 @@ function WorkPage() {
         {/* Introduction */}
 
         <header className={styles.header}>
-          <span className={styles.label}>PROJECTS</span>
+          <span className={styles.label}>
+            PROJECTS
+          </span>
 
           <h1 className={styles.title}>
-            What I've built<span className={styles.accent}>.</span>
+            What I've built
+            <span className={styles.accent}>.</span>
           </h1>
 
           <p className={styles.subtitle}>
-            From web applications to IoT dashboards, a selection
-            of projects that reflect the different areas I've explored.
+            From web applications to IoT dashboards and games,
+            a selection of projects that reflect the different
+            areas I've explored.
           </p>
         </header>
 
@@ -65,7 +70,10 @@ function WorkPage() {
           >
             <div className={styles.listHeader}>
               <span>PROJECTS</span>
-              <span>{String(projects.length).padStart(2, "0")}</span>
+
+              <span>
+                {String(projects.length).padStart(2, "0")}
+              </span>
             </div>
 
             <ul className={styles.projects}>
@@ -77,9 +85,10 @@ function WorkPage() {
                     aria-pressed={selectedIndex === index}
                     className={`
                       ${styles.projectButton}
-                      ${selectedIndex === index
-                        ? styles.projectActive
-                        : ""
+                      ${
+                        selectedIndex === index
+                          ? styles.projectActive
+                          : ""
                       }
                     `}
                   >
@@ -107,8 +116,11 @@ function WorkPage() {
 
           <section
             key={selectedProject.id}
-            className={`${styles.details} ${!hasChangedProject ? styles.detailsInitial : ""
-              }`}
+            className={`${styles.details} ${
+              !hasChangedProject
+                ? styles.detailsInitial
+                : ""
+            }`}
             aria-label={`${selectedProject.name} details`}
           >
 
@@ -119,14 +131,19 @@ function WorkPage() {
                 <img
                   key={currentImage}
                   src={currentImage}
-                  alt={`${selectedProject.name} screenshot ${imageIndex + 1
-                    }`}
+                  alt={`${selectedProject.name} screenshot ${
+                    imageIndex + 1
+                  }`}
                   className={styles.carouselImage}
                 />
               ) : (
                 <div className={styles.imagePlaceholder}>
                   <span>PROJECT PREVIEW</span>
-                  <strong>{selectedProject.name}</strong>
+
+                  <strong>
+                    {selectedProject.name}
+                  </strong>
+
                   <span>Images coming soon</span>
                 </div>
               )}
@@ -137,9 +154,10 @@ function WorkPage() {
             <div className={styles.carouselControls}>
               <span className={styles.imageCounter}>
                 {imageCount > 0
-                  ? `${String(imageIndex + 1).padStart(2, "0")} / ${String(
-                    imageCount
-                  ).padStart(2, "0")}`
+                  ? `${String(imageIndex + 1).padStart(
+                      2,
+                      "0"
+                    )} / ${String(imageCount).padStart(2, "0")}`
                   : "00 / 00"}
               </span>
 
@@ -172,8 +190,29 @@ function WorkPage() {
                 <span>{selectedProject.year}</span>
               </div>
 
+              {/* Project title and repository */}
+
               <h2 className={styles.detailsTitle}>
-                {selectedProject.name}
+                {selectedProject.repository ? (
+                  <a
+                    href={selectedProject.repository}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.repositoryLink}
+                    aria-label={`View ${selectedProject.name} repository on GitHub`}
+                  >
+                    <span>{selectedProject.name}</span>
+
+                    <span
+                      className={styles.repositoryArrow}
+                      aria-hidden="true"
+                    >
+                      ↗
+                    </span>
+                  </a>
+                ) : (
+                  selectedProject.name
+                )}
               </h2>
 
               <p className={styles.detailsDescription}>
@@ -181,16 +220,18 @@ function WorkPage() {
               </p>
 
               <div className={styles.technologies}>
-                {selectedProject.technologies.map((technology) => (
-                  <span key={technology}>
-                    {technology}
-                  </span>
-                ))}
+                {selectedProject.technologies.map(
+                  (technology) => (
+                    <span key={technology}>
+                      {technology}
+                    </span>
+                  )
+                )}
               </div>
             </div>
           </section>
-
         </div>
+
         {/* GitHub */}
 
         <section className={styles.githubSection}>
@@ -201,8 +242,8 @@ function WorkPage() {
             </h2>
 
             <p className={styles.githubDescription}>
-              Beyond the projects featured here, you can discover
-              more of my work and ideas on GitHub.
+              Beyond the projects featured here, you can
+              discover more of my work and ideas on GitHub.
             </p>
           </div>
 
@@ -213,7 +254,11 @@ function WorkPage() {
             className={styles.githubLink}
           >
             Explore my GitHub
-            <span className={styles.githubArrow} aria-hidden="true">
+
+            <span
+              className={styles.githubArrow}
+              aria-hidden="true"
+            >
               ↗
             </span>
           </a>

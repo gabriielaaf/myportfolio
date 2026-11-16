@@ -126,8 +126,16 @@
   animation-delay: 800ms;
 }
 
-.projects li:nth-child(n + 5) {
+.projects li:nth-child(5) {
   animation-delay: 900ms;
+}
+
+.projects li:nth-child(6) {
+  animation-delay: 1000ms;
+}
+
+.projects li:nth-child(n + 7) {
+  animation-delay: 1100ms;
 }
 
 /* Project buttons */
@@ -479,6 +487,52 @@
 .githubLink:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 6px;
+}
+
+/* Project repository */
+
+.repositoryLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  color: inherit;
+  text-decoration: none;
+
+  transition: color 300ms ease;
+}
+
+.repositoryArrow {
+  display: inline-block;
+
+  color: var(--muted);
+
+  font-family: var(--font-body);
+  font-size: 1.4rem;
+  font-weight: 400;
+
+  transition:
+    color 300ms ease,
+    transform 300ms ease;
+}
+
+.repositoryLink:hover {
+  color: var(--accent);
+}
+
+.repositoryLink:hover .repositoryArrow {
+  color: var(--accent);
+  transform: translate(3px, -3px);
+}
+
+.repositoryLink:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 5px;
+}
+
+.repositoryLink:focus-visible .repositoryArrow {
+  color: var(--accent);
+  transform: translate(3px, -3px);
 }
 
 /* Entrance animations */
