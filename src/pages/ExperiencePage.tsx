@@ -132,8 +132,24 @@ function ExperiencePage() {
                       {experience.category}
                     </span>
 
+                    {/* Title and repository link */}
                     <h2 className={styles.experienceTitle}>
-                      {experience.title}
+                      {experience.repository ? (
+                        <a
+                          href={experience.repository}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={styles.repositoryLink}
+                          aria-label={`View ${experience.title} repository on GitHub`}
+                        >
+                          <span>{experience.title}</span>
+                          <span className={styles.repositoryArrow} aria-hidden="true">
+                            ↗
+                          </span>
+                        </a>
+                      ) : (
+                        experience.title
+                      )}
                     </h2>
 
                     <p className={styles.organization}>

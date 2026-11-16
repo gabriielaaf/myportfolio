@@ -13,12 +13,14 @@ export interface Experience {
   description: string;
   achievement?: string;
   technologies?: string[];
+  repository?: string;
 }
 
 export const experiences: Experience[] = [
 
   {
     id: "scitech-2026",
+    repository: "https://github.com/gabriielaaf/SmartCampus_SciTeCh.git",
     title: "SciTeCh Porto '26",
     organization: "BEST Porto · Coreflux",
     category: "Hackathon",
@@ -35,6 +37,7 @@ export const experiences: Experience[] = [
   },
   {
     id: "ebec-2026",
+    repository: "https://github.com/gabriielaaf/WeatherPrevision_EBEC.git",
     title: "EBEC Porto '26",
     organization: "BEST Porto",
     category: "Hackathon",
