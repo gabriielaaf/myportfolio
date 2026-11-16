@@ -1,299 +1,387 @@
-import { useEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type KeyboardEvent,
+  type TouchEvent,
+} from "react";
 import { Link } from "react-router";
 
-import {
-    beyondQuestions,
-    openingMessage,
-    type BeyondQuestion,
-} from "../data/beyond";
-
+import { conversation } from "../data/beyond";
 import styles from "./BeyondPage.module.css";
 
-interface Message {
-    id: string;
-    sender: "visitor" | "gabi";
-    text: string;
-    followUp?: boolean;
+type WheelMode = "idle" | "history" | "revealed";
+
+interface WheelGesture {
+  mode: WheelMode;
+  amount: number;
+  timer: number | null;
+}
+
+interface TouchGesture {
+  startY: number;
+  wasAtBottom: boolean;
+}
+
+function isAtBottom(element: HTMLElement) {
+  return (
+    element.scrollHeight -
+      element.scrollTop -
+      element.clientHeight <=
+    4
+  );
 }
 
 function BeyondPage() {
-    const [messages, setMessages] = useState<Message[]>([]);
-    const [askedIds, setAskedIds] = useState<string[]>([]);
-    const [isTyping, setIsTyping] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(1);
 
-    const conversationRef = useRef<HTMLDivElement>(null);
-    const timeoutRef = useRef<number | null>(null);
+  const chatRef = useRef<HTMLElement>(null);
+  const conversationRef = useRef<HTMLDivElement>(null);
 
-    const remainingQuestions = beyondQuestions.filter(
-        (question) => !askedIds.includes(question.id)
-    );
+  const countRef = useRef(1);
 
-    /* Conversation scroll */
+  const wheelRef = useRef<WheelGesture>({
+    mode: "idle",
+    amount: 0,
+    timer: null,
+  });
 
-    useEffect(() => {
-        const conversation = conversationRef.current;
+  const touchRef = useRef<TouchGesture | null>(null);
 
-        if (!conversation) return;
+  const isFinished = visibleCount === conversation.length;
 
-        const reducedMotion = window.matchMedia(
-            "(prefers-reduced-motion: reduce)"
-        ).matches;
+  /* Reveal next message */
 
-        conversation.scrollTo({
-            top: conversation.scrollHeight,
-            behavior: reducedMotion ? "auto" : "smooth",
-        });
-    }, [messages, isTyping]);
+  const revealNext = useCallback(() => {
+    if (countRef.current >= conversation.length) return;
 
-    /* Cleanup */
+    countRef.current += 1;
+    setVisibleCount(countRef.current);
+  }, []);
 
-    useEffect(() => {
-        return () => {
-            if (timeoutRef.current !== null) {
-                window.clearTimeout(timeoutRef.current);
-            }
-        };
-    }, []);
+  /* Wheel navigation */
 
-    /* Ask question */
+  useEffect(() => {
+    const chat = chatRef.current;
+    const container = conversationRef.current;
 
-    function askQuestion(question: BeyondQuestion) {
-        if (isTyping || askedIds.includes(question.id)) return;
+    if (!chat || !container) return;
 
-        setAskedIds((previous) => [...previous, question.id]);
+    const gesture = wheelRef.current;
 
-        setMessages((previous) => [
-            ...previous,
-            {
-                id: `question-${question.id}`,
-                sender: "visitor",
-                text: question.question,
-            },
-        ]);
+    function handleWheel(event: WheelEvent) {
+      if (!container || event.ctrlKey || event.metaKey) {
+        return;
+      }
 
-        setIsTyping(true);
+      const delta =
+        event.deltaMode === 1
+          ? event.deltaY * 16
+          : event.deltaMode === 2
+            ? event.deltaY * container.clientHeight
+            : event.deltaY;
 
-        timeoutRef.current = window.setTimeout(() => {
-            setMessages((previous) => [
-                ...previous,
-                {
-                    id: `answer-${question.id}-1`,
-                    sender: "gabi",
-                    text: question.answers[0],
-                },
-            ]);
+      if (delta === 0) return;
 
-            timeoutRef.current = window.setTimeout(() => {
-                setMessages((previous) => [
-                    ...previous,
-                    {
-                        id: `answer-${question.id}-2`,
-                        sender: "gabi",
-                        text: question.answers[1],
-                        followUp: true,
-                    },
-                ]);
+      const atBottom = isAtBottom(container);
 
-                setIsTyping(false);
-                timeoutRef.current = null;
-            }, 1200);
-        }, 700);
+      // Allow normal page scrolling after the conversation ends.
+      if (
+        delta > 0 &&
+        atBottom &&
+        countRef.current >= conversation.length
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+
+      if (gesture.timer !== null) {
+        window.clearTimeout(gesture.timer);
+      }
+
+      gesture.timer = window.setTimeout(() => {
+        gesture.mode = "idle";
+        gesture.amount = 0;
+        gesture.timer = null;
+      }, 300);
+
+      // Scroll upwards through previously revealed messages.
+      if (delta < 0) {
+        gesture.mode = "history";
+        gesture.amount = 0;
+        container.scrollTop += delta;
+        return;
+      }
+
+      // Continue scrolling through the conversation history.
+      if (gesture.mode === "history") {
+        container.scrollTop += delta;
+        return;
+      }
+
+      // A single gesture should only reveal one new message.
+      if (gesture.mode === "revealed") {
+        return;
+      }
+
+      if (!atBottom) {
+        gesture.mode = "history";
+        container.scrollTop += delta;
+        return;
+      }
+
+      gesture.amount += delta;
+
+      if (gesture.amount >= 24) {
+        gesture.mode = "revealed";
+        gesture.amount = 0;
+
+        revealNext();
+      }
     }
 
-    /* Restart conversation */
+    chat.addEventListener("wheel", handleWheel, {
+      passive: false,
+    });
 
-    function restartConversation() {
-        if (timeoutRef.current !== null) {
-            window.clearTimeout(timeoutRef.current);
-            timeoutRef.current = null;
-        }
+    return () => {
+      chat.removeEventListener("wheel", handleWheel);
 
-        setMessages([]);
-        setAskedIds([]);
-        setIsTyping(false);
+      if (gesture.timer !== null) {
+        window.clearTimeout(gesture.timer);
+      }
+
+      gesture.mode = "idle";
+      gesture.amount = 0;
+      gesture.timer = null;
+    };
+  }, [revealNext]);
+
+  /* Mobile gestures */
+
+  function handleTouchStart(
+    event: TouchEvent<HTMLDivElement>
+  ) {
+    const container = conversationRef.current;
+    const touch = event.touches[0];
+
+    if (!container || !touch) return;
+
+    touchRef.current = {
+      startY: touch.clientY,
+      wasAtBottom: isAtBottom(container),
+    };
+  }
+
+  function handleTouchEnd(
+    event: TouchEvent<HTMLDivElement>
+  ) {
+    const gesture = touchRef.current;
+    const touch = event.changedTouches[0];
+
+    touchRef.current = null;
+
+    if (!gesture || !touch) return;
+
+    const distance = gesture.startY - touch.clientY;
+
+    if (gesture.wasAtBottom && distance > 45) {
+      revealNext();
+    }
+  }
+
+  /* Keyboard navigation */
+
+  function handleKeyDown(
+    event: KeyboardEvent<HTMLDivElement>
+  ) {
+    if (
+      event.key !== "ArrowDown" &&
+      event.key !== "PageDown" &&
+      event.key !== " "
+    ) {
+      return;
     }
 
-    return (
-        <main className={styles.beyond}>
-            <div className={styles.container}>
-                <div className={styles.layout}>
+    if (
+      isAtBottom(event.currentTarget) &&
+      countRef.current < conversation.length
+    ) {
+      event.preventDefault();
+      revealNext();
+    }
+  }
 
-                    {/* Introduction */}
+  /* Scroll to newest message */
 
-                    <header className={styles.intro}>
-                        <span className={styles.label}>
-                            BEYOND THE CODE
-                        </span>
+  useEffect(() => {
+    const container = conversationRef.current;
 
-                        <h1 className={styles.title}>
-                            Let's chat
-                            <span className={styles.accent}>.</span>
-                        </h1>
+    if (!container) return;
 
-                        <p className={styles.subtitle}>
-                            There's more to a person than what they do.
-                            Pick a question and get to know me a little better.
-                        </p>
+    const frame = window.requestAnimationFrame(() => {
+      container.scrollTo({
+        top: container.scrollHeight,
+        behavior: "smooth",
+      });
+    });
 
-                        <div className={styles.introDetail}>
-                            <span className={styles.detailLine} />
+    return () => window.cancelAnimationFrame(frame);
+  }, [visibleCount]);
 
-                            <span>
-                                A LITTLE CONVERSATION WITH GABI
-                            </span>
-                        </div>
-                    </header>
+  return (
+    <main className={styles.beyond}>
+      <div className={styles.container}>
+        <div className={styles.layout}>
 
-                    {/* Conversation */}
+          {/* Introduction */}
 
-                    <section
-                        className={styles.chat}
-                        aria-label="Get to know me"
-                    >
-                        <div className={styles.chatHeader}>
-                            <span>THE CONVERSATION</span>
+          <header className={styles.intro}>
+            <span className={styles.label}>
+              BEYOND THE CODE
+            </span>
 
-                            <span className={styles.chatNumber}>
-                                01 — 04
-                            </span>
-                        </div>
+            <h1 className={styles.title}>
+              Let's chat
+              <span className={styles.accent}>.</span>
+            </h1>
 
-                        <div
-                            ref={conversationRef}
-                            className={styles.conversation}
-                            role="log"
-                            aria-live="polite"
-                            aria-relevant="additions"
-                            aria-label="Conversation"
-                        >
+            <p className={styles.subtitle}>
+              A little less about what I do,
+              and a little more about who I am.
+            </p>
 
-                            {/* Opening message */}
+            <span className={styles.introNote}>
+              GET TO KNOW ME, ONE MESSAGE AT A TIME.
+            </span>
+          </header>
 
-                            <div
-                                className={`${styles.message} ${styles.gabiMessage}`}
-                            >
-                                <span className={styles.sender}>
-                                    GABI
-                                </span>
+          {/* Chat */}
 
-                                <p className={styles.messageText}>
-                                    {openingMessage}
-                                </p>
-                            </div>
+          <section
+            ref={chatRef}
+            className={styles.chat}
+            aria-label="A conversation with Gabi"
+          >
 
-                            {/* Messages */}
+            {/* Chat header */}
 
-                            {messages.map((message) => (
-                                <div
-                                    key={message.id}
-                                    className={`${styles.message} ${message.sender === "gabi"
-                                            ? styles.gabiMessage
-                                            : styles.visitorMessage
-                                        } ${message.followUp ? styles.followUp : ""}`}
-                                >
-                                    <span className={styles.sender}>
-                                        {message.sender === "gabi" ? "GABI" : "YOU"}
-                                    </span>
+            <div className={styles.chatHeader}>
+              <div className={styles.profileAvatar}>
+                g.
+              </div>
 
-                                    <p className={styles.messageText}>
-                                        {message.text}
-                                    </p>
-                                </div>
-                            ))}
+              <div className={styles.profileInfo}>
+                <span className={styles.profileName}>
+                  Gabriela Felgueiras
+                </span>
 
-                            {/* Typing */}
-
-                            {isTyping && (
-                                <div
-                                    className={`${styles.message} ${styles.gabiMessage}`}
-                                >
-                                    <span className={styles.sender}>
-                                        GABI
-                                    </span>
-
-                                    <div
-                                        className={styles.typing}
-                                        role="status"
-                                        aria-label="Gabi is replying"
-                                    >
-                                        <span />
-                                        <span />
-                                        <span />
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-
-                        {/* Questions */}
-
-                        <div className={styles.questions}>
-                            <div className={styles.questionsHeader}>
-                                <span>
-                                    WHAT WOULD YOU LIKE TO KNOW?
-                                </span>
-
-                                {askedIds.length > 0 && (
-                                    <button
-                                        type="button"
-                                        className={styles.restart}
-                                        onClick={restartConversation}
-                                    >
-                                        Start again ↺
-                                    </button>
-                                )}
-                            </div>
-
-                            {remainingQuestions.length > 0 ? (
-                                <div className={styles.questionList}>
-                                    {remainingQuestions.map((question, index) => (
-                                        <button
-                                            key={question.id}
-                                            type="button"
-                                            className={styles.questionButton}
-                                            onClick={() => askQuestion(question)}
-                                            disabled={isTyping}
-                                        >
-                                            <span className={styles.questionNumber}>
-                                                {String(index + 1).padStart(2, "0")}
-                                            </span>
-
-                                            <span className={styles.questionText}>
-                                                {question.question}
-                                            </span>
-
-                                            <span
-                                                className={styles.questionArrow}
-                                                aria-hidden="true"
-                                            >
-                                                ↗
-                                            </span>
-                                        </button>
-                                    ))}
-                                </div>
-                            ) : (
-                                !isTyping && (
-                                    <div className={styles.conversationEnd}>
-                                        <p>
-                                            Well, now you know a little more about me!
-                                            Maybe we'll get to chat for real someday.
-                                        </p>
-
-                                        <Link
-                                            to="/contact"
-                                            className={styles.contactLink}
-                                        >
-                                            Say hello
-                                            <span aria-hidden="true">↗</span>
-                                        </Link>
-                                    </div>
-                                )
-                            )}
-                        </div>
-                    </section>
-                </div>
+                <span className={styles.profileDescription}>
+                  A little conversation beyond the code
+                </span>
+              </div>
             </div>
-        </main>
-    );
+
+            {/* Messages */}
+
+            <div
+              ref={conversationRef}
+              className={styles.conversation}
+              role="log"
+              aria-label="Conversation messages"
+              aria-live="polite"
+              aria-relevant="additions"
+              tabIndex={0}
+              onKeyDown={handleKeyDown}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+            >
+              <ol className={styles.messages}>
+                {conversation
+                  .slice(0, visibleCount)
+                  .map((message) => {
+                    const isGabi =
+                      message.speaker === "gabi";
+
+                    return (
+                      <li
+                        key={message.id}
+                        className={[
+                          styles.message,
+                          isGabi
+                            ? styles.gabiMessage
+                            : styles.visitorMessage,
+                          message.followUp
+                            ? styles.followUp
+                            : "",
+                        ]
+                          .filter(Boolean)
+                          .join(" ")}
+                        aria-label={`${
+                          isGabi ? "Gabi" : "You"
+                        }: ${message.text}`}
+                      >
+                        {isGabi && (
+                          <span
+                            className={`${styles.messageAvatar} ${
+                              message.followUp
+                                ? styles.hiddenAvatar
+                                : ""
+                            }`}
+                            aria-hidden="true"
+                          >
+                            g.
+                          </span>
+                        )}
+
+                        <p className={styles.bubble}>
+                          {message.text}
+                        </p>
+                      </li>
+                    );
+                  })}
+
+                {/* Final message */}
+
+                {isFinished && (
+                  <li className={styles.ending}>
+                    <Link
+                      to="/contact"
+                      className={styles.contactLink}
+                    >
+                      Continue the conversation
+                      <span aria-hidden="true">↗</span>
+                    </Link>
+                  </li>
+                )}
+              </ol>
+            </div>
+
+            {/* Chat footer */}
+
+            <div className={styles.chatFooter}>
+              {isFinished ? (
+                <span className={styles.finishedText}>
+                  THAT'S ALL FOR NOW
+                </span>
+              ) : (
+                <button
+                  type="button"
+                  className={styles.nextButton}
+                  onClick={revealNext}
+                >
+                  <span>SCROLL TO CONTINUE</span>
+                  <span aria-hidden="true">↓</span>
+                </button>
+              )}
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  );
 }
 
 export default BeyondPage;

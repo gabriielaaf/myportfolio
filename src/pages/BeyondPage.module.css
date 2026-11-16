@@ -5,8 +5,8 @@
   --page-padding: clamp(1.5rem, 4vw, 3.5rem);
 
   width: 100%;
-  min-height: 100vh;
-  padding-block: 7rem;
+  min-height: 100svh;
+  padding-block: clamp(6rem, 10vh, 8rem);
 
   background-color: var(--background);
   color: var(--foreground);
@@ -21,7 +21,7 @@
 .layout {
   display: grid;
   grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-  align-items: start;
+  align-items: center;
 
   gap: clamp(4rem, 8vw, 9rem);
 }
@@ -29,9 +29,6 @@
 /* Introduction */
 
 .intro {
-  position: sticky;
-  top: 8rem;
-
   max-width: 32rem;
 }
 
@@ -71,7 +68,6 @@
 
   font-family: var(--font-body);
   font-size: 1rem;
-  font-weight: 400;
   line-height: 1.9;
 
   color: var(--muted);
@@ -79,10 +75,8 @@
   animation: revealUp 800ms ease-out 350ms both;
 }
 
-/* Introduction detail */
-
-.introDetail {
-  display: flex;
+.introNote {
+  display: inline-flex;
   align-items: center;
   gap: 1rem;
 
@@ -98,7 +92,9 @@
   animation: revealUp 800ms ease-out 450ms both;
 }
 
-.detailLine {
+.introNote::before {
+  content: "";
+
   width: 2rem;
   height: 1px;
 
@@ -108,10 +104,23 @@
 /* Chat */
 
 .chat {
-  width: 100%;
-  min-width: 0;
+  display: flex;
+  flex-direction: column;
 
-  animation: revealUp 800ms ease-out 550ms both;
+  width: 100%;
+  height: min(72svh, 650px);
+  min-height: 470px;
+
+  overflow: hidden;
+
+  border: 1px solid var(--border);
+  border-radius: 24px;
+
+  background-color: var(--background);
+
+  box-shadow: 0 20px 60px rgb(0 0 0 / 5%);
+
+  animation: revealUp 850ms ease-out 500ms both;
 }
 
 /* Chat header */
@@ -119,291 +128,194 @@
 .chatHeader {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-
   gap: 1rem;
-  padding-bottom: 1.25rem;
+
+  padding: 1.25rem 1.75rem;
 
   border-bottom: 1px solid var(--border);
 
-  font-family: var(--font-body);
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-
-  color: var(--muted);
+  background-color: var(--surface);
 }
 
-.chatNumber {
-  color: var(--accent);
+.profileAvatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  width: 43px;
+  height: 43px;
+
+  border-radius: 50%;
+
+  background-color: var(--accent);
+  color: #ffffff;
+
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.profileName {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+
+  color: var(--foreground);
+}
+
+.profileDescription {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+
+  color: var(--muted);
 }
 
 /* Conversation */
 
 .conversation {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  flex: 1;
+  min-height: 0;
 
-  min-height: 200px;
-  max-height: 460px;
-
-  padding: 2.5rem 0;
+  padding: 2.25rem 1.75rem;
 
   overflow-y: auto;
   overscroll-behavior: contain;
+  touch-action: pan-y;
 
   scrollbar-width: thin;
   scrollbar-color: var(--border) transparent;
 }
 
+.conversation:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -5px;
+}
+
 /* Messages */
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
 
 .message {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-end;
+  gap: 0.7rem;
 
-  gap: 0.75rem;
-  max-width: 88%;
+  width: fit-content;
+  max-width: 80%;
 
-  animation: messageEnter 500ms
+  animation: messageEnter 550ms
     cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.sender {
-  font-family: var(--font-body);
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.15em;
+/* Message avatar */
 
-  color: var(--muted);
+.messageAvatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  width: 29px;
+  height: 29px;
+
+  border-radius: 50%;
+
+  background-color: var(--surface);
+  color: var(--accent);
+
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
 }
 
-.messageText {
+.hiddenAvatar {
+  visibility: hidden;
+}
+
+/* Bubbles */
+
+.bubble {
   margin: 0;
+  padding: 0.95rem 1.25rem;
 
   font-family: var(--font-body);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 400;
-  line-height: 1.9;
+  line-height: 1.75;
 
-  color: var(--foreground);
+  overflow-wrap: anywhere;
 }
 
 /* Gabi messages */
 
 .gabiMessage {
-  padding-left: 1.5rem;
-
-  border-left: 2px solid var(--accent);
+  align-self: flex-start;
 }
 
-.gabiMessage .sender {
-  color: var(--accent);
+.gabiMessage .bubble {
+  border: 1px solid var(--border);
+  border-radius: 18px 18px 18px 5px;
+
+  background-color: var(--surface);
+  color: var(--foreground);
 }
 
 /* Visitor messages */
 
 .visitorMessage {
   align-self: flex-end;
-  align-items: flex-end;
-
-  max-width: 80%;
 }
 
-.visitorMessage .messageText {
-  padding: 1rem 1.4rem;
-
-  border-radius: 12px 12px 4px 12px;
-
-  background-color: var(--surface);
-  color: var(--foreground);
-}
-
-/* Typing */
-
-.typing {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-
-  min-height: 1.5rem;
-}
-
-.typing span {
-  width: 5px;
-  height: 5px;
-
-  border-radius: 50%;
+.visitorMessage .bubble {
+  border-radius: 18px 18px 5px 18px;
 
   background-color: var(--accent);
-
-  animation: typingDot 900ms ease-in-out infinite;
+  color: #ffffff;
 }
 
-.typing span:nth-child(2) {
-  animation-delay: 150ms;
+/* Consecutive messages */
+
+.followUp {
+  margin-top: -0.9rem;
 }
 
-.typing span:nth-child(3) {
-  animation-delay: 300ms;
-}
+/* Ending */
 
-/* Questions */
+.ending {
+  align-self: flex-start;
 
-.questions {
-  padding-top: 2rem;
+  margin-top: 0.5rem;
+  margin-left: 2.5rem;
 
-  border-top: 1px solid var(--border);
-}
-
-.questionsHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 1rem;
-  margin-bottom: 1.75rem;
-
-  font-family: var(--font-body);
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-
-  color: var(--muted);
-}
-
-/* Question list */
-
-.questionList {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-
-  column-gap: 2rem;
-}
-
-.questionButton {
-  display: flex;
-  align-items: flex-start;
-
-  width: 100%;
-  gap: 0.9rem;
-  padding: 1.25rem 0;
-
-  border: 0;
-  border-top: 1px solid var(--border);
-
-  background: transparent;
-  color: var(--foreground);
-
-  font-family: var(--font-body);
-  text-align: left;
-
-  cursor: pointer;
-
-  transition:
-    color 300ms ease,
-    border-color 300ms ease;
-}
-
-.questionNumber {
-  flex-shrink: 0;
-
-  font-size: 0.7rem;
-  line-height: 1.7;
-
-  color: var(--accent);
-}
-
-.questionText {
-  flex: 1;
-
-  font-size: 0.85rem;
-  font-weight: 500;
-  line-height: 1.6;
-}
-
-.questionArrow {
-  flex-shrink: 0;
-
-  font-size: 1rem;
-  color: var(--muted);
-
-  transition:
-    color 300ms ease,
-    transform 300ms ease;
-}
-
-/* Question hover */
-
-.questionButton:hover:not(:disabled) {
-  color: var(--accent);
-  border-color: var(--accent);
-}
-
-.questionButton:hover:not(:disabled) .questionArrow {
-  color: var(--accent);
-  transform: translate(3px, -3px);
-}
-
-.questionButton:disabled {
-  opacity: 0.45;
-  cursor: wait;
-}
-
-/* Restart */
-
-.restart {
-  padding: 0;
-  border: 0;
-
-  background: transparent;
-
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 400;
-  letter-spacing: normal;
-
-  color: var(--accent);
-
-  cursor: pointer;
-}
-
-.restart:hover {
-  text-decoration: underline;
-}
-
-/* Conversation ending */
-
-.conversationEnd {
-  padding: 0.5rem 0 1rem;
-
-  animation: messageEnter 650ms ease-out both;
-}
-
-.conversationEnd p {
-  max-width: 26rem;
-
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  line-height: 1.9;
-
-  color: var(--muted);
+  animation: messageEnter 600ms ease-out both;
 }
 
 .contactLink {
   display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.7rem;
 
-  margin-top: 1.75rem;
-  padding-bottom: 0.4rem;
-
+  padding-bottom: 0.3rem;
   border-bottom: 1px solid var(--accent);
 
   font-family: var(--font-body);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 600;
 
   color: var(--accent);
@@ -413,26 +325,81 @@
 }
 
 .contactLink:hover {
-  gap: 1.1rem;
+  gap: 1rem;
 }
 
-/* Focus */
-
-.questionButton:focus-visible,
-.restart:focus-visible,
 .contactLink:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 5px;
 }
 
-/* Follow-up messages */
+/* Chat footer */
 
-.followUp {
-  margin-top: -1.3rem;
+.chatFooter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  min-height: 65px;
+  padding: 0.9rem 1.75rem;
+
+  border-top: 1px solid var(--border);
+
+  background-color: var(--surface);
 }
 
-.followUp .sender {
-  display: none;
+.nextButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+
+  min-height: 40px;
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+  color: var(--muted);
+
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+
+  cursor: pointer;
+
+  transition: color 300ms ease;
+}
+
+.nextButton span:last-child {
+  font-size: 1.2rem;
+  font-weight: 400;
+
+  color: var(--accent);
+
+  transition: transform 300ms ease;
+}
+
+.nextButton:hover {
+  color: var(--accent);
+}
+
+.nextButton:hover span:last-child {
+  transform: translateY(4px);
+}
+
+.nextButton:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 5px;
+}
+
+.finishedText {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+
+  color: var(--muted);
 }
 
 /* Animations */
@@ -452,39 +419,24 @@
 @keyframes messageEnter {
   from {
     opacity: 0;
-    transform: translateY(15px);
+    transform: translateY(15px) scale(0.98);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
-@keyframes typingDot {
-  0%,
-  60%,
-  100% {
-    opacity: 0.35;
-    transform: translateY(0);
-  }
-
-  30% {
-    opacity: 1;
-    transform: translateY(-4px);
-  }
-}
-
-/* Responsive */
+/* Tablet */
 
 @media (max-width: 1000px) {
   .layout {
     grid-template-columns: 1fr;
-    gap: 4.5rem;
+    gap: 4rem;
   }
 
   .intro {
-    position: static;
     max-width: 38rem;
   }
 
@@ -492,10 +444,17 @@
     font-size: clamp(3rem, 7vw, 4.5rem);
   }
 
-  .introDetail {
+  .introNote {
     margin-top: 2.5rem;
   }
+
+  .chat {
+    max-width: 760px;
+    height: min(65svh, 600px);
+  }
 }
+
+/* Mobile */
 
 @media (max-width: 600px) {
   .beyond {
@@ -503,7 +462,7 @@
   }
 
   .layout {
-    gap: 3.5rem;
+    gap: 3rem;
   }
 
   .label {
@@ -521,48 +480,74 @@
     line-height: 1.8;
   }
 
-  .introDetail {
+  .introNote {
     margin-top: 2rem;
   }
 
-  .conversation {
-    min-height: 180px;
-    max-height: 380px;
+  .chat {
+    height: min(65svh, 550px);
+    min-height: 370px;
 
-    gap: 1.75rem;
-    padding-block: 2rem;
+    border-radius: 18px;
+  }
+
+  .chatHeader {
+    padding: 1rem 1.25rem;
+  }
+
+  .profileAvatar {
+    width: 38px;
+    height: 38px;
+
+    font-size: 1rem;
+  }
+
+  .profileName {
+    font-size: 0.85rem;
+  }
+
+  .profileDescription {
+    font-size: 0.7rem;
+  }
+
+  .conversation {
+    padding: 1.5rem 1rem;
+  }
+
+  .messages {
+    gap: 1.25rem;
   }
 
   .message {
-    max-width: 95%;
+    max-width: 92%;
+    gap: 0.5rem;
   }
 
-  .messageText {
-    font-size: 0.9rem;
+  .messageAvatar {
+    width: 25px;
+    height: 25px;
+
+    font-size: 0.75rem;
   }
 
-  .gabiMessage {
-    padding-left: 1rem;
+  .bubble {
+    padding: 0.85rem 1rem;
+
+    font-size: 0.85rem;
+    line-height: 1.7;
   }
 
-  .visitorMessage {
-    max-width: 90%;
+  .followUp {
+    margin-top: -0.75rem;
   }
 
-  .questionList {
-    grid-template-columns: 1fr;
+  .chatFooter {
+    min-height: 56px;
+    padding: 0.75rem 1.25rem;
   }
 
-  .questions {
-    padding-top: 1.75rem;
-  }
-
-  .questionsHeader {
-    margin-bottom: 1.5rem;
-  }
-
-  .questionButton {
-    padding-block: 1.1rem;
+  .ending {
+    margin-left: 2rem;
   }
 }
 
@@ -572,16 +557,15 @@
   .label,
   .title,
   .subtitle,
-  .introDetail,
+  .introNote,
   .chat,
   .message,
-  .conversationEnd,
-  .typing span {
+  .ending {
     animation: none;
   }
 
-  .questionButton,
-  .questionArrow,
+  .nextButton,
+  .nextButton span:last-child,
   .contactLink {
     transition: none;
   }

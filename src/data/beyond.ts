@@ -1,43 +1,102 @@
-export interface BeyondQuestion {
+export type ConversationSpeaker = "gabi" | "visitor";
+
+export interface ConversationMessage {
   id: string;
-  question: string;
-  answers: [string, string];
+  speaker: ConversationSpeaker;
+  text: string;
+  followUp?: boolean;
 }
 
-export const openingMessage =
-  "Hey! I'm Gabi. You've seen a little of my work, but there's more to me than that. Want to find out?";
+export const conversation: ConversationMessage[] = [
+  {
+    id: "intro-1",
+    speaker: "gabi",
+    text: "Hey there! I'm Gabi.",
+  },
+  {
+    id: "intro-2",
+    speaker: "gabi",
+    text: "You've already seen a little of what I do. But there's more to me than code!",
+    followUp: true,
+  },
 
-export const beyondQuestions: BeyondQuestion[] = [
   {
-    id: "series",
-    question: "So, what do you like doing in your free time?",
-    answers: [
-      "I absolutely love watching series! Especially crime shows, drama and a little romance.",
-      "Castle and The Mentalist are my all-time favourites. I never get tired of a good mystery!",
-    ],
+    id: "series-question",
+    speaker: "visitor",
+    text: "So, what do you usually do when you're not coding?",
   },
   {
-    id: "side-projects",
-    question: "Do you ever code just for fun?",
-    answers: [
-      "Absolutely! I love coming up with little ideas and turning them into personal projects.",
-      "It's my favourite way to experiment, try new things and put what I've learned into practice.",
-    ],
+    id: "series-answer-1",
+    speaker: "gabi",
+    text: "I'm a huge fan of TV series! Especially crime, drama and romance.",
   },
   {
-    id: "hackathons",
-    question: "What is it about hackathons that you love so much?",
-    answers: [
-      "Oh, where do I even start? The energy, the teamwork, the pressure of bringing an idea to life... I love all of it!",
-      "But what makes it really special is sharing those moments with the right people. That's what makes me want to come back for more.",
-    ],
+    id: "series-answer-2",
+    speaker: "gabi",
+    text: "Castle and The Mentalist are my absolute favourites. Give me a good mystery and I'm hooked!",
+    followUp: true,
+  },
+
+  {
+    id: "projects-question",
+    speaker: "visitor",
+    text: "Do you ever code just for fun?",
   },
   {
-    id: "challenges",
-    question: "Are you someone who likes a challenge?",
-    answers: [
-      "Definitely! I'm really dedicated to the things I do, and I love pushing myself to try something new.",
-      "Stepping outside my comfort zone isn't always easy, but I genuinely believe that's when I grow the most.",
-    ],
+    id: "projects-answer-1",
+    speaker: "gabi",
+    text: "Oh, absolutely! I love coming up with little ideas and turning them into personal projects.",
+  },
+  {
+    id: "projects-answer-2",
+    speaker: "gabi",
+    text: "It's where I get to experiment, try new things and put everything I've learned into practice.",
+    followUp: true,
+  },
+
+  {
+    id: "hackathons-question",
+    speaker: "visitor",
+    text: "I've noticed you really like hackathons. What's so special about them?",
+  },
+  {
+    id: "hackathons-answer-1",
+    speaker: "gabi",
+    text: "Oh, don't even get me started! I love the atmosphere, the challenge and the excitement of building something under pressure.",
+  },
+  {
+    id: "hackathons-answer-2",
+    speaker: "gabi",
+    text: "And the teamwork makes it even better. Sharing that experience with the right people is honestly my favourite part.",
+    followUp: true,
+  },
+
+  {
+    id: "challenges-question",
+    speaker: "visitor",
+    text: "You seem like someone who's always looking for a challenge.",
+  },
+  {
+    id: "challenges-answer-1",
+    speaker: "gabi",
+    text: "That's pretty accurate! I'm really dedicated to what I do, and I love trying things I've never done before.",
+  },
+  {
+    id: "challenges-answer-2",
+    speaker: "gabi",
+    text: "Stepping outside my comfort zone isn't always easy, but I think that's when I grow the most.",
+    followUp: true,
+  },
+
+  {
+    id: "outro-1",
+    speaker: "gabi",
+    text: "Well, that's a little more about me!",
+  },
+  {
+    id: "outro-2",
+    speaker: "gabi",
+    text: "Now I'd love to hear from you. Maybe we can continue this conversation sometime?",
+    followUp: true,
   },
 ];
