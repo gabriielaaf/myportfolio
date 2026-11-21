@@ -257,18 +257,6 @@
   transition-delay: 400ms, 400ms, 0ms, 0ms;
 }
 
-/* Image animations */
-
-@keyframes imageReveal {
-  from {
-    transform: scale(1.08);
-  }
-
-  to {
-    transform: scale(1);
-  }
-}
-
 /* Mobile */
 
 @media (max-width: 765px) {
@@ -327,13 +315,6 @@
 /* Reduced motion */
 
 @media (prefers-reduced-motion: reduce) {
-  .portrait img {
-    animation: none;
-  }
-
-  .portrait::after {
-    display: none;
-  }
 
   .cvHeader span,
   .cvTitle,

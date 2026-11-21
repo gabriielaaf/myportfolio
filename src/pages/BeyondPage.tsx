@@ -228,10 +228,14 @@ function BeyondPage() {
 
     if (!container) return;
 
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
     const frame = window.requestAnimationFrame(() => {
       container.scrollTo({
         top: container.scrollHeight,
-        behavior: "smooth",
+        behavior: reducedMotion ? "auto" : "smooth",
       });
     });
 
@@ -260,7 +264,9 @@ function BeyondPage() {
               and a little more about who I am.
             </p>
 
-            <span className={`${styles.introNote} ${typographyStyles.metaLabel}`}>
+            <span
+              className={`${styles.introNote} ${typographyStyles.metaLabel}`}
+            >
               GET TO KNOW ME, ONE MESSAGE AT A TIME.
             </span>
           </header>
@@ -325,15 +331,17 @@ function BeyondPage() {
                         ]
                           .filter(Boolean)
                           .join(" ")}
-                        aria-label={`${isGabi ? "Gabi" : "You"
-                          }: ${message.text}`}
+                        aria-label={`${
+                          isGabi ? "Gabi" : "You"
+                        }: ${message.text}`}
                       >
                         {isGabi && (
                           <span
-                            className={`${styles.messageAvatar} ${message.followUp
+                            className={`${styles.messageAvatar} ${
+                              message.followUp
                                 ? styles.hiddenAvatar
                                 : ""
-                              }`}
+                            }`}
                             aria-hidden="true"
                           >
                             g.
@@ -367,7 +375,9 @@ function BeyondPage() {
 
             <div className={styles.chatFooter}>
               {isFinished ? (
-                <span className={`${styles.finishedText} ${typographyStyles.metaLabel}`}>
+                <span
+                  className={`${styles.finishedText} ${typographyStyles.metaLabel}`}
+                >
                   THAT'S ALL FOR NOW
                 </span>
               ) : (

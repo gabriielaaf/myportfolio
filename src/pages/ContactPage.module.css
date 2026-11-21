@@ -112,16 +112,6 @@
   min-width: 0;
 }
 
-.contactLabel {
-  font-family: var(--font-body);
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-
-  color: var(--accent);
-}
-
 .contactValue {
   font-size: clamp(1.05rem, 1.65vw, 1.45rem);
   font-weight: 500;
@@ -130,6 +120,7 @@
 
   overflow-wrap: anywhere;
   color: var(--foreground);
+  font-family: var(--font-heading);
 
   transition: color 300ms ease;
 }

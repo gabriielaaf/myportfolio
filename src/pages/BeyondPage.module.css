@@ -271,15 +271,6 @@
   --link-hover-gap: 1.1rem;
 }
 
-.contactLink:hover {
-  gap: 1.1rem;
-}
-
-.contactLink:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 5px;
-}
-
 /* Chat footer */
 
 .chatFooter {
@@ -513,8 +504,7 @@
   }
 
   .nextButton,
-  .nextButton span:last-child,
-  .contactLink {
+  .nextButton span:last-child {
     transition: none;
   }
 }

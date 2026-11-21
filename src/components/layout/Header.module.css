@@ -16,6 +16,7 @@
   letter-spacing: -0.025em;
   text-decoration: none;
   color: var(--foreground);
+  transition: color 300ms ease;
 }
 
 .actions {
@@ -28,12 +29,6 @@
 
 .homeHeader {
   max-width: 1350px;
-  padding-inline: var(--page-padding);
-}
-
-.logo {
-  color: var(--foreground);
-  transition: color 300ms ease;
 }
 
 .logo:hover {

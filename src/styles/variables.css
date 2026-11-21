@@ -9,16 +9,9 @@
   --content-max-width: 1200px;
   --page-padding: clamp(1.5rem, 5vw, 4rem);
 
-  /* Transitions */
-
-  --transition-fast: 200ms ease;
-  --transition-normal: 300ms ease;
-  --transition-slow: 500ms ease;
-
   /* Animation easing */
 
   --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
 
   /* Dark theme */
 

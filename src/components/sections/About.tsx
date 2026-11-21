@@ -54,7 +54,7 @@ function About() {
   }, []);
 
   return (
-    <section className={styles.about}>
+    <main className={styles.about}>
       <div className={styles.container}>
 
         {/* Left column */}
@@ -64,12 +64,12 @@ function About() {
             ABOUT ME
           </span>
 
-          <h2 className={styles.title}>
+          <h1 className={styles.title}>
             A little more
             <br />
             about me
             <span className={typographyStyles.accent}>.</span>
-          </h2>
+          </h1>
 
           <div
             ref={portraitRef}
@@ -85,14 +85,14 @@ function About() {
         {/* Right column */}
 
         <div className={styles.right}>
-          <h3 className={styles.introduction}>
+          <h2 className={styles.introduction}>
             I'm a third-year Informatics and Computing
             Engineering student at{" "}
             <strong>
               FEUP
               <span className={typographyStyles.accent}>.</span>
             </strong>
-          </h3>
+          </h2>
 
           <div className={styles.description}>
             <p>
@@ -117,8 +117,9 @@ function About() {
 
       <div
         ref={cvRef}
-        className={`${styles.cvSection} ${isCvVisible ? styles.cvVisible : ""
-          }`}
+        className={`${styles.cvSection} ${
+          isCvVisible ? styles.cvVisible : ""
+        }`}
       >
         <div className={styles.cvHeader}>
           <span className={typographyStyles.metaLabel}>
@@ -128,9 +129,9 @@ function About() {
 
         <div className={styles.cvRow}>
           <div className={styles.cvContent}>
-            <h3 className={styles.cvTitle}>
+            <h2 className={styles.cvTitle}>
               Curriculum Vitae
-            </h3>
+            </h2>
 
             <p className={styles.cvDescription}>
               A closer look at my education, experience
@@ -154,7 +155,7 @@ function About() {
           </a>
         </div>
       </div>
-    </section>
+    </main>
   );
 }
 
