@@ -1,7 +1,7 @@
 /* Theme toggle */
 
 .toggle {
-  composes: iconButton from "../../styles/shared.module.css";
+  composes: iconButton from "../../styles/buttons.module.css";
   position: relative;
 }
 

@@ -32,7 +32,7 @@
 
 .label {
   composes: label from "../../styles/typography.module.css";
-  composes: appearUp from "../../styles/shared.module.css";
+  composes: appearUp from "../../styles/animations.module.css";
 
   --appear-duration: 800ms;
   --appear-delay: 100ms;
@@ -42,7 +42,7 @@
 
 .title {
   composes: heading from "../../styles/typography.module.css";
-  composes: appearUp from "../../styles/shared.module.css";
+  composes: appearUp from "../../styles/animations.module.css";
 
   --appear-distance: 60px;
   font-size: clamp(2.2rem, 3.5vw, 3.7rem);
@@ -91,7 +91,7 @@
 }
 
 .introduction {
-  composes: appearUp from "../../styles/shared.module.css";
+  composes: appearUp from "../../styles/animations.module.css";
   --appear-delay: 450ms;
   font-family: var(--font-body);
   font-size: clamp(1.5rem, 2.4vw, 2rem);
@@ -106,7 +106,7 @@
 
 .description {
   composes: copy from "../../styles/typography.module.css";
-  composes: appearUp from "../../styles/shared.module.css";
+  composes: appearUp from "../../styles/animations.module.css";
 
   --appear-delay: 450ms;
   display: flex;

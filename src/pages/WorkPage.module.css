@@ -188,7 +188,7 @@
 /* Project details */
 
 .details {
-  composes: appearUp from "../styles/shared.module.css";
+  composes: appearUp from "../styles/animations.module.css";
 
   --appear-duration: 650ms;
   --appear-distance: 20px;
