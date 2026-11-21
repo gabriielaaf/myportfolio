@@ -91,22 +91,20 @@ function ExperiencePage() {
   }, []);
 
   return (
-    <main className={styles.experience}>
+    <main className={`${layoutStyles.standardPage} ${styles.experience}`} >
       <div className={layoutStyles.container}>
 
-        {/* Introduction */}
-
-        <header className={styles.header}>
+        <header className={layoutStyles.standardHeader}>
           <span className={typographyStyles.pageLabel}>
             EXPERIENCE
           </span>
 
-          <h1 className={styles.title}>
+          <h1 className={typographyStyles.pageTitleStandard}>
             My journey
             <span className={typographyStyles.accent}>.</span>
           </h1>
 
-          <p className={styles.subtitle}>
+          <p className={typographyStyles.pageSubtitleStandard}>
             A collection of meaningful experiences, milestones and
             opportunities that have contributed to my personal and
             professional growth.

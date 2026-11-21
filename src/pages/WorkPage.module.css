@@ -1,25 +1,3 @@
-/* Work */
-
-.work {
-  composes: widePage from "../styles/layout.module.css";
-  padding-block: 7rem;
-}
-
-/* Header */
-
-.header {
-  margin-bottom: 6rem;
-}
-
-.title {
-  composes: pageTitle from "../styles/typography.module.css";
-}
-
-.subtitle {
-  composes: pageSubtitle from "../styles/typography.module.css";
-  max-width: 36rem;
-}
-
 /* Layout */
 
 .content {
@@ -426,10 +404,6 @@
     --grid-gap: 3rem;
   }
 
-  .header {
-    margin-bottom: 3rem;
-  }
-
   .projectButton {
     padding-block: 1.3rem;
   }
@@ -442,17 +416,6 @@
 /* Mobile */
 
 @media (max-width: 765px) {
-  .work {
-    padding-block: 4rem;
-  }
-
-  .title {
-    font-size: clamp(2.5rem, 8vw, 3.5rem);
-  }
-
-  .subtitle {
-    font-size: 0.95rem;
-  }
 
   .detailsTitle {
     font-size: 1.8rem;

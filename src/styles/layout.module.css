@@ -11,6 +11,14 @@
   color: var(--foreground);
 }
 
+/* Standard page */
+
+.standardPage {
+  composes: widePage;
+
+  padding-block: 7rem;
+}
+
 /* Container */
 
 .container {
@@ -33,4 +41,30 @@
 
   align-items: var(--grid-align, center);
   gap: var(--grid-gap, clamp(3rem, 5vw, 6rem));
+}
+
+/* Page header */
+
+.standardHeader {
+  margin-bottom: 6rem;
+}
+
+/* Tablet */
+
+@media (max-width: 900px) {
+  .standardHeader {
+    margin-bottom: var(--header-tablet-margin, 3rem);
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 765px) {
+  .standardPage {
+    padding-block: 4rem;
+  }
+
+  .standardHeader {
+    margin-bottom: 3rem;
+  }
 }

@@ -84,22 +84,20 @@ function WorkPage() {
   }, []);
 
   return (
-    <main className={styles.work}>
+    <main className={layoutStyles.standardPage}>
       <div className={layoutStyles.container}>
 
-        {/* Introduction */}
-
-        <header className={styles.header}>
+        <header className={layoutStyles.standardHeader}>
           <span className={typographyStyles.pageLabel}>
             PROJECTS
           </span>
 
-          <h1 className={styles.title}>
+          <h1 className={typographyStyles.pageTitleStandard}>
             What I've built
             <span className={typographyStyles.accent}>.</span>
           </h1>
 
-          <p className={styles.subtitle}>
+          <p className={typographyStyles.pageSubtitleStandard}>
             From web applications to IoT dashboards and games,
             a selection of projects that reflect the different
             areas I've explored.
@@ -127,20 +125,18 @@ function WorkPage() {
                 <li
                   key={project.id}
                   style={{
-                    animationDelay: `${
-                      500 + Math.min(index, 6) * 100
-                    }ms`,
+                    animationDelay: `${500 + Math.min(index, 6) * 100
+                      }ms`,
                   }}
                 >
                   <button
                     type="button"
                     onClick={() => selectProject(index)}
                     aria-pressed={selectedIndex === index}
-                    className={`${styles.projectButton} ${
-                      selectedIndex === index
-                        ? styles.projectActive
-                        : ""
-                    }`}
+                    className={`${styles.projectButton} ${selectedIndex === index
+                      ? styles.projectActive
+                      : ""
+                      }`}
                   >
                     <span className={styles.projectNumber}>
                       {String(index + 1).padStart(2, "0")}
@@ -166,11 +162,10 @@ function WorkPage() {
 
           <section
             key={selectedProject.id}
-            className={`${styles.details} ${
-              !hasChangedProject
-                ? styles.detailsInitial
-                : ""
-            }`}
+            className={`${styles.details} ${!hasChangedProject
+              ? styles.detailsInitial
+              : ""
+              }`}
             aria-label={`${selectedProject.name} details`}
           >
 
@@ -181,9 +176,8 @@ function WorkPage() {
                 <img
                   key={currentImage}
                   src={currentImage}
-                  alt={`${selectedProject.name} screenshot ${
-                    imageIndex + 1
-                  }`}
+                  alt={`${selectedProject.name} screenshot ${imageIndex + 1
+                    }`}
                   className={styles.carouselImage}
                 />
               ) : (
@@ -205,8 +199,8 @@ function WorkPage() {
               <span className={styles.imageCounter}>
                 {imageCount > 0
                   ? `${String(imageIndex + 1).padStart(2, "0")} / ${String(
-                      imageCount
-                    ).padStart(2, "0")}`
+                    imageCount
+                  ).padStart(2, "0")}`
                   : "00 / 00"}
               </span>
 

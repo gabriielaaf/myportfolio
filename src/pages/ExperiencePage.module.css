@@ -1,23 +1,8 @@
 /* Experience */
 
 .experience {
-  composes: widePage from "../styles/layout.module.css";
-  padding-block: 7rem;
-}
-
-/* Header */
-
-.header {
-  margin-bottom: 6rem;
-}
-
-.title {
-  composes: pageTitle from "../styles/typography.module.css";
-}
-
-.subtitle {
-  composes: pageSubtitle from "../styles/typography.module.css";
-  max-width: 36rem;
+  --page-subtitle-mobile-line-height: 1.7;
+  --header-tablet-margin: 4rem;
 }
 
 /* Timeline */
@@ -330,9 +315,6 @@
 /* Tablet */
 
 @media (max-width: 900px) {
-  .header {
-    margin-bottom: 4rem;
-  }
 
   .experienceItem {
     grid-template-columns: 140px minmax(0, 1fr);
@@ -355,20 +337,6 @@
 @media (max-width: 765px) {
   .experience {
     --technologies-margin-top: 1.5rem;
-    padding-block: 4rem;
-  }
-
-  .header {
-    margin-bottom: 3rem;
-  }
-
-  .title {
-    font-size: clamp(2.5rem, 8vw, 3.5rem);
-  }
-
-  .subtitle {
-    font-size: 0.95rem;
-    line-height: 1.7;
   }
 
   .experienceItem {
