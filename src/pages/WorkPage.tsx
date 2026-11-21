@@ -1,9 +1,11 @@
 import { useState } from "react";
-
 import { projects } from "../data/projects";
+
 import styles from "./WorkPage.module.css";
 import linkStyles from "../styles/links.module.css";
 import techStyles from "../styles/technologies.module.css";
+import layoutStyles from "../styles/layout.module.css";
+import typographyStyles from "../styles/typography.module.css";
 
 function WorkPage() {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -41,18 +43,18 @@ function WorkPage() {
 
   return (
     <main className={styles.work}>
-      <div className={styles.container}>
+      <div className={layoutStyles.container}>
 
         {/* Introduction */}
 
         <header className={styles.header}>
-          <span className={styles.label}>
+          <span className={typographyStyles.pageLabel}>
             PROJECTS
           </span>
 
           <h1 className={styles.title}>
             What I've built
-            <span className={styles.accent}>.</span>
+            <span className={typographyStyles.accent}>.</span>
           </h1>
 
           <p className={styles.subtitle}>
@@ -80,18 +82,21 @@ function WorkPage() {
 
             <ul className={styles.projects}>
               {projects.map((project, index) => (
-                <li key={project.id}>
+                <li
+                  key={project.id}
+                  style={{
+                    animationDelay: `${500 + Math.min(index, 6) * 100}ms`,
+                  }}
+                >
                   <button
                     type="button"
                     onClick={() => selectProject(index)}
                     aria-pressed={selectedIndex === index}
-                    className={`
-                      ${styles.projectButton}
-                      ${selectedIndex === index
+                    className={`${styles.projectButton} ${
+                      selectedIndex === index
                         ? styles.projectActive
                         : ""
-                      }
-                    `}
+                    }`}
                   >
                     <span className={styles.projectNumber}>
                       {String(index + 1).padStart(2, "0")}
@@ -117,10 +122,11 @@ function WorkPage() {
 
           <section
             key={selectedProject.id}
-            className={`${styles.details} ${!hasChangedProject
+            className={`${styles.details} ${
+              !hasChangedProject
                 ? styles.detailsInitial
                 : ""
-              }`}
+            }`}
             aria-label={`${selectedProject.name} details`}
           >
 
@@ -131,8 +137,9 @@ function WorkPage() {
                 <img
                   key={currentImage}
                   src={currentImage}
-                  alt={`${selectedProject.name} screenshot ${imageIndex + 1
-                    }`}
+                  alt={`${selectedProject.name} screenshot ${
+                    imageIndex + 1
+                  }`}
                   className={styles.carouselImage}
                 />
               ) : (
@@ -154,8 +161,8 @@ function WorkPage() {
               <span className={styles.imageCounter}>
                 {imageCount > 0
                   ? `${String(imageIndex + 1).padStart(2, "0")} / ${String(
-                    imageCount
-                  ).padStart(2, "0")}`
+                      imageCount
+                    ).padStart(2, "0")}`
                   : "00 / 00"}
               </span>
 
@@ -217,6 +224,8 @@ function WorkPage() {
                 {selectedProject.description}
               </p>
 
+              {/* Technologies */}
+
               <div className={techStyles.technologies}>
                 {selectedProject.technologies.map((technology) => (
                   <span key={technology}>
@@ -234,7 +243,7 @@ function WorkPage() {
           <div className={styles.githubContent}>
             <h2 className={styles.githubHeading}>
               There's more to explore
-              <span className={styles.accent}>.</span>
+              <span className={typographyStyles.accent}>.</span>
             </h2>
 
             <p className={styles.githubDescription}>
