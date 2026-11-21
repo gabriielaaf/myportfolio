@@ -1,9 +1,10 @@
-import { useEffect, useRef } from "react";
-
+import { useEffect, useRef } from "react"
 import { experiences } from "../data/experiences";
+
 import styles from "./ExperiencePage.module.css";
 import linkStyles from "../styles/links.module.css";
 import teamPhoto from "../assets/team.jpg";
+import techStyles from "../styles/technologies.module.css";
 
 function ExperiencePage() {
   const timelineRef = useRef<HTMLOListElement>(null);
@@ -194,7 +195,7 @@ function ExperiencePage() {
 
                 {experience.technologies &&
                   experience.technologies.length > 0 && (
-                    <div className={styles.technologies}>
+                    <div className={techStyles.technologies}>
                       {experience.technologies.map((technology) => (
                         <span key={technology}>
                           {technology}

@@ -326,6 +326,8 @@
 /* Project information */
 
 .projectInfo {
+  --technologies-margin-top: 1.75rem;
+
   margin-top: 1.5rem;
 }
 
@@ -359,30 +361,6 @@
 
   max-width: 35rem;
   margin-top: 1rem;
-}
-
-/* Technologies */
-
-.technologies {
-  display: flex;
-  flex-wrap: wrap;
-
-  gap: 0.75rem;
-  margin-top: 1.75rem;
-}
-
-.technologies span {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-
-  color: var(--muted);
-}
-
-.technologies span:not(:last-child)::after {
-  content: "·";
-  margin-left: 0.75rem;
-
-  color: var(--accent);
 }
 
 /* GitHub */

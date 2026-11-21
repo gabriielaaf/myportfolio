@@ -1,0 +1,21 @@
+/* Technologies */
+
+.technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+
+  margin-top: var(--technologies-margin-top, 2rem);
+}
+
+.technologies span {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.technologies span:not(:last-child)::after {
+  content: "·";
+  margin-left: 0.75rem;
+  color: var(--accent);
+}

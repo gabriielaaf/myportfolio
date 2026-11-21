@@ -185,30 +185,6 @@
     margin-top: 1.75rem;
 }
 
-/* Technologies */
-
-.technologies {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-
-    margin-top: 2rem;
-}
-
-.technologies span {
-    font-family: var(--font-body);
-    font-size: 0.75rem;
-
-    color: var(--muted);
-}
-
-.technologies span:not(:last-child)::after {
-    content: "·";
-    margin-left: 0.75rem;
-
-    color: var(--accent);
-}
-
 /* Team */
 
 .teamSection {
@@ -399,6 +375,8 @@
 
 @media (max-width: 765px) {
     .experience {
+        --technologies-margin-top: 1.5rem;
+        
         padding-block: 4rem;
     }
 
@@ -447,10 +425,6 @@
     }
 
     .description {
-        margin-top: 1.5rem;
-    }
-
-    .technologies {
         margin-top: 1.5rem;
     }
 
