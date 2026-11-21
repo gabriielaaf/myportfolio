@@ -7,7 +7,9 @@
   grid-template-columns: 1fr 1fr;
   align-items: center;
   gap: clamp(3rem, 6vw, 6rem);
-}/* About */
+}
+
+/* About */
 
 .about {
   width: 100%;
@@ -74,7 +76,9 @@
   position: absolute;
   inset: 0;
   z-index: 1;
+
   background-color: var(--accent);
+
   animation: burgundyReveal 1s cubic-bezier(0.76, 0, 0.24, 1) 100ms both;
 }
 
@@ -248,45 +252,109 @@
   transform: translateY(0);
 }
 
-.cvVisible .cvHeader span { transition-delay: 100ms; }
-.cvVisible .cvTitle { transition-delay: 200ms; }
-.cvVisible .cvDescription { transition-delay: 300ms; }
-.cvVisible .cvLink { transition-delay: 400ms, 400ms, 0ms, 0ms; }
+.cvVisible .cvHeader span {
+  transition-delay: 100ms;
+}
+
+.cvVisible .cvTitle {
+  transition-delay: 200ms;
+}
+
+.cvVisible .cvDescription {
+  transition-delay: 300ms;
+}
+
+.cvVisible .cvLink {
+  transition-delay: 400ms, 400ms, 0ms, 0ms;
+}
 
 /* Image animations */
 
 @keyframes imageReveal {
-  from { transform: scale(1.08); }
-  to { transform: scale(1); }
+  from {
+    transform: scale(1.08);
+  }
+
+  to {
+    transform: scale(1);
+  }
 }
 
 @keyframes burgundyReveal {
-  from { transform: translateY(0); }
-  to { transform: translateY(-101%); }
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-101%);
+  }
 }
 
 /* Responsive */
 
 @media (max-width: 767px) {
-  .about { padding-block: 4rem; }
-  .container { grid-template-columns: 1fr; gap: 3rem; }
-  .title { font-size: clamp(2.2rem, 7vw, 3.5rem); }
-  .portrait { width: min(100%, 280px); }
-  .right { gap: 1.75rem; }
-  .introduction { font-size: 1.5rem; }
-  .description { font-size: 0.95rem; }
-  .cvSection { margin-top: 4rem; }
-  .cvRow { flex-direction: column; gap: 2rem; padding-block: 1.75rem; }
-  .cvContent { max-width: 100%; }
-  .cvTitle { font-size: 1.6rem; }
-  .cvDescription { font-size: 0.9rem; }
+  .about {
+    padding-block: 4rem;
+  }
+
+  .container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .title {
+    font-size: clamp(2.2rem, 7vw, 3.5rem);
+  }
+
+  .portrait {
+    width: min(100%, 280px);
+  }
+
+  .right {
+    gap: 1.75rem;
+  }
+
+  .introduction {
+    font-size: 1.5rem;
+  }
+
+  .description {
+    font-size: 0.95rem;
+  }
+
+  .cvSection {
+    margin-top: 4rem;
+  }
+
+  .cvRow {
+    flex-direction: column;
+    gap: 2rem;
+    padding-block: 1.75rem;
+  }
+
+  .cvContent {
+    max-width: 100%;
+  }
+
+  .cvTitle {
+    font-size: 1.6rem;
+  }
+
+  .cvDescription {
+    font-size: 0.9rem;
+  }
 }
 
 /* Reduced motion */
 
 @media (prefers-reduced-motion: reduce) {
-  .portrait img { animation: none; }
-  .portrait::after { display: none; }
+  .portrait img {
+    animation: none;
+  }
+
+  .portrait::after {
+    display: none;
+  }
 
   .cvHeader span,
   .cvTitle,
@@ -297,6 +365,12 @@
     transition: none;
   }
 
-  .cvHeader::after { transform: scaleX(1); transition: none; }
-  .cvArrow { transition: none; }
+  .cvHeader::after {
+    transform: scaleX(1);
+    transition: none;
+  }
+
+  .cvArrow {
+    transition: none;
+  }
 }

@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import { projects } from "../data/projects";
 import styles from "./WorkPage.module.css";
+import linkStyles from "../styles/links.module.css";
 
 function WorkPage() {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -154,10 +155,9 @@ function WorkPage() {
             <div className={styles.carouselControls}>
               <span className={styles.imageCounter}>
                 {imageCount > 0
-                  ? `${String(imageIndex + 1).padStart(
-                      2,
-                      "0"
-                    )} / ${String(imageCount).padStart(2, "0")}`
+                  ? `${String(imageIndex + 1).padStart(2, "0")} / ${String(
+                      imageCount
+                    ).padStart(2, "0")}`
                   : "00 / 00"}
               </span>
 
@@ -198,13 +198,13 @@ function WorkPage() {
                     href={selectedProject.repository}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={styles.repositoryLink}
+                    className={linkStyles.repositoryLink}
                     aria-label={`View ${selectedProject.name} repository on GitHub`}
                   >
                     <span>{selectedProject.name}</span>
 
                     <span
-                      className={styles.repositoryArrow}
+                      className={linkStyles.repositoryArrow}
                       aria-hidden="true"
                     >
                       ↗
@@ -220,13 +220,11 @@ function WorkPage() {
               </p>
 
               <div className={styles.technologies}>
-                {selectedProject.technologies.map(
-                  (technology) => (
-                    <span key={technology}>
-                      {technology}
-                    </span>
-                  )
-                )}
+                {selectedProject.technologies.map((technology) => (
+                  <span key={technology}>
+                    {technology}
+                  </span>
+                ))}
               </div>
             </div>
           </section>

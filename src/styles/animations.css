@@ -1,0 +1,25 @@
+/* Text reveal */
+
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(var(--reveal-distance, 25px));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Image curtain */
+
+@keyframes imageCurtainReveal {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-101%);
+  }
+}

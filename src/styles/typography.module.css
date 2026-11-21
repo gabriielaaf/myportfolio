@@ -43,20 +43,6 @@
   animation: revealUp 800ms ease-out 350ms both;
 }
 
-/* Entrance animation */
-
-@keyframes revealUp {
-  from {
-    opacity: 0;
-    transform: translateY(var(--reveal-distance, 25px));
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 /* Reduced motion */
 
 @media (prefers-reduced-motion: reduce) {

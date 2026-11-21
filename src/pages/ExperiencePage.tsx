@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 
 import { experiences } from "../data/experiences";
 import styles from "./ExperiencePage.module.css";
+import linkStyles from "../styles/links.module.css";
 import teamPhoto from "../assets/team.jpg";
 
 function ExperiencePage() {
@@ -133,17 +134,22 @@ function ExperiencePage() {
                     </span>
 
                     {/* Title and repository link */}
+
                     <h2 className={styles.experienceTitle}>
                       {experience.repository ? (
                         <a
                           href={experience.repository}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className={styles.repositoryLink}
+                          className={linkStyles.repositoryLink}
                           aria-label={`View ${experience.title} repository on GitHub`}
                         >
                           <span>{experience.title}</span>
-                          <span className={styles.repositoryArrow} aria-hidden="true">
+
+                          <span
+                            className={linkStyles.repositoryArrow}
+                            aria-hidden="true"
+                          >
                             ↗
                           </span>
                         </a>
