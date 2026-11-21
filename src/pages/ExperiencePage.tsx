@@ -142,7 +142,7 @@ function ExperiencePage() {
               <article className={styles.experienceContent}>
                 <div className={styles.experienceHeader}>
                   <div className={styles.experienceHeading}>
-                    <span className={styles.category}>
+                    <span className={`${styles.category} ${typographyStyles.categoryLabel}`} >
                       {experience.category}
                     </span>
 
@@ -242,7 +242,7 @@ function ExperiencePage() {
           {/* Team content */}
 
           <div className={styles.teamContent}>
-            <span className={styles.teamLabel}>
+            <span className={`${styles.teamLabel} ${typographyStyles.categoryLabel}`} >
               THE PEOPLE BEHIND THE ACHIEVEMENTS
             </span>
 

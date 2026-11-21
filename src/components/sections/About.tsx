@@ -121,7 +121,9 @@ function About() {
           }`}
       >
         <div className={styles.cvHeader}>
-          <span>CURRICULUM VITAE</span>
+          <span className={typographyStyles.metaLabel}>
+            CURRICULUM VITAE
+          </span>
         </div>
 
         <div className={styles.cvRow}>

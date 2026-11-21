@@ -8,12 +8,12 @@ import {
 } from "react";
 
 import { Link } from "react-router";
-
 import { conversation } from "../data/beyond";
 
 import styles from "./BeyondPage.module.css";
 import layoutStyles from "../styles/layout.module.css";
 import typographyStyles from "../styles/typography.module.css";
+import linkStyles from "../styles/links.module.css";
 
 type WheelMode = "idle" | "history" | "revealed";
 
@@ -31,8 +31,8 @@ interface TouchGesture {
 function isAtBottom(element: HTMLElement) {
   return (
     element.scrollHeight -
-      element.scrollTop -
-      element.clientHeight <=
+    element.scrollTop -
+    element.clientHeight <=
     4
   );
 }
@@ -325,17 +325,15 @@ function BeyondPage() {
                         ]
                           .filter(Boolean)
                           .join(" ")}
-                        aria-label={`${
-                          isGabi ? "Gabi" : "You"
-                        }: ${message.text}`}
+                        aria-label={`${isGabi ? "Gabi" : "You"
+                          }: ${message.text}`}
                       >
                         {isGabi && (
                           <span
-                            className={`${styles.messageAvatar} ${
-                              message.followUp
+                            className={`${styles.messageAvatar} ${message.followUp
                                 ? styles.hiddenAvatar
                                 : ""
-                            }`}
+                              }`}
                             aria-hidden="true"
                           >
                             g.
@@ -355,7 +353,7 @@ function BeyondPage() {
                   <li className={styles.ending}>
                     <Link
                       to="/contact"
-                      className={styles.contactLink}
+                      className={`${linkStyles.accentLink} ${styles.contactLink}`}
                     >
                       Continue the conversation
                       <span aria-hidden="true">↗</span>

@@ -112,7 +112,9 @@ function WorkPage() {
             className={styles.projectList}
             aria-label="Projects"
           >
-            <div className={styles.listHeader}>
+            <div
+              className={`${styles.listHeader} ${typographyStyles.metaLabel}`}
+            >
               <span>PROJECTS</span>
 
               <span>
@@ -297,7 +299,7 @@ function WorkPage() {
             href="https://github.com/gabriielaaf"
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.githubLink}
+            className={`${linkStyles.accentLink} ${styles.githubLink}`}
           >
             Explore my GitHub
 

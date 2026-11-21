@@ -80,6 +80,27 @@
   max-width: 36rem;
 }
 
+/* Category label */
+
+.categoryLabel {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Metadata label */
+
+.metaLabel {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
 /* Mobile */
 
 @media (max-width: 765px) {

@@ -66,7 +66,7 @@ function ContactPage() {
                     {/* Contact information */}
 
                     <div className={styles.contactInfo}>
-                      <span className={styles.contactLabel}>
+                      <span className={typographyStyles.categoryLabel}>
                         {contact.label}
                       </span>
 
