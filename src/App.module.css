@@ -34,7 +34,7 @@
 
 /* Responsive */
 
-@media (max-width: 767px) {
+@media (max-width: 765px) {
   .home {
     grid-template-columns: 1fr;
     align-content: center;

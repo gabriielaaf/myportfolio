@@ -242,8 +242,7 @@
 
 /* Tablet */
 
-@media (max-width: 900px) {
-
+@media (max-width: 1000px) {
   .experienceItem {
     grid-template-columns: 140px minmax(0, 1fr);
     gap: 2rem;

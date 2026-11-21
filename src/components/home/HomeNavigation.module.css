@@ -41,9 +41,17 @@
   color: var(--accent);
 }
 
-/* Responsive */
+/* Tablet */
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
+  .link {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 765px) {
   .navigation {
     --navigation-align: flex-start;
 
@@ -52,11 +60,9 @@
 
     width: 100%;
   }
-
-  .link {
-    font-size: clamp(1.5rem, 4vw, 2rem);
-  }
 }
+
+/* Small mobile */
 
 @media (max-width: 600px) {
   .navigation {

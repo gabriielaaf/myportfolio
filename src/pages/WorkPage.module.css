@@ -367,7 +367,7 @@
 
 /* Tablet */
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
   .content {
     --grid-columns: 1fr;
     --grid-gap: 3rem;
