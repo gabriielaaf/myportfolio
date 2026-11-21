@@ -1,19 +1,13 @@
 /* Work */
 
 .work {
-  --content-max-width: 1400px;
-  --page-padding: clamp(1.5rem, 4vw, 3.5rem);
+  composes: widePage from "../styles/layout.module.css";
 
-  width: 100%;
-  min-height: 100vh;
   padding-block: 7rem;
-
-  background-color: var(--background);
-  color: var(--foreground);
 }
 
 .container {
-  composes: container from "../styles/shared.module.css";
+  composes: container from "../styles/layout.module.css";
 }
 
 /* Header */
@@ -44,11 +38,11 @@
 /* Layout */
 
 .content {
-  display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.5fr);
-  align-items: start;
+  composes: twoColumns from "../styles/layout.module.css";
 
-  gap: clamp(3.5rem, 6vw, 6.5rem);
+  --grid-columns: minmax(0, 0.9fr) minmax(0, 1.5fr);
+  --grid-align: start;
+  --grid-gap: clamp(3.5rem, 6vw, 6.5rem);
 }
 
 /* Project list */
@@ -463,8 +457,8 @@
 
 @media (max-width: 900px) {
   .content {
-    grid-template-columns: 1fr;
-    gap: 3rem;
+    --grid-columns: 1fr;
+    --grid-gap: 3rem;
   }
 
   .header {

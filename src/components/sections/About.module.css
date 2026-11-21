@@ -1,12 +1,9 @@
 /* About layout */
 
 .container {
-  composes: container from "../../styles/shared.module.css";
+  composes: container twoColumns from "../../styles/layout.module.css";
 
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: clamp(3rem, 6vw, 6rem);
+  --grid-gap: clamp(3rem, 6vw, 6rem);
 }
 
 /* About */
@@ -117,7 +114,7 @@
 /* CV section */
 
 .cvSection {
-  composes: container from "../../styles/shared.module.css";
+  composes: container from "../../styles/layout.module.css";
   margin-top: 7rem;
 }
 
@@ -292,14 +289,14 @@
 
 /* Responsive */
 
-@media (max-width: 767px) {
+@media (max-width: 765px) {
   .about {
     padding-block: 4rem;
   }
 
   .container {
-    grid-template-columns: 1fr;
-    gap: 3rem;
+    --grid-columns: 1fr;
+    --grid-gap: 3rem;
   }
 
   .title {

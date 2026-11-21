@@ -1,31 +1,25 @@
 /* Beyond */
 
 .beyond {
-  --content-max-width: 1400px;
-  --page-padding: clamp(1.5rem, 4vw, 3.5rem);
+  composes: widePage from "../styles/layout.module.css";
 
-  width: 100%;
-  min-height: 100svh;
+  --page-min-height: 100svh;
 
   padding-top: clamp(9rem, 15vh, 12rem);
   padding-bottom: 4rem;
-
-  background-color: var(--background);
-  color: var(--foreground);
 }
 
 .container {
-  composes: container from "../styles/shared.module.css";
+  composes: container from "../styles/layout.module.css";
 }
 
 /* Layout */
 
 .layout {
-  display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  align-items: center;
+  composes: twoColumns from "../styles/layout.module.css";
 
-  gap: clamp(3rem, 5vw, 6rem);
+  --grid-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  --grid-gap: clamp(3rem, 5vw, 6rem);
 }
 
 /* Introduction */
@@ -442,8 +436,8 @@
 
 @media (max-width: 1000px) {
   .layout {
-    grid-template-columns: 1fr;
-    gap: 4rem;
+    --grid-columns: 1fr;
+    --grid-gap: 4rem;
   }
 
   .intro {
@@ -474,7 +468,7 @@
   }
 
   .layout {
-    gap: 3rem;
+    --grid-gap: 3rem;
   }
 
   /* Introduction */
