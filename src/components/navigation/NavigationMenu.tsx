@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
-
 import { navigationLinks } from "../../data/navigation";
+
 import styles from "./NavigationMenu.module.css";
+import linkStyles from "../../styles/links.module.css";
 
 function NavigationMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -113,7 +114,11 @@ function NavigationMenu() {
           <ul className={styles.links}>
             {navigationLinks.map((link) => (
               <li key={link.href}>
-                <Link to={link.href} onClick={closeMenu}>
+                <Link
+                  to={link.href}
+                  onClick={closeMenu}
+                  className={linkStyles.navigationLink}
+                >
                   {link.label}
                 </Link>
               </li>

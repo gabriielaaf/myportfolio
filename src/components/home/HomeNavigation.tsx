@@ -1,7 +1,8 @@
 import { Link } from "react-router";
-
 import { navigationLinks } from "../../data/navigation";
+
 import styles from "./HomeNavigation.module.css";
+import linkStyles from "../../styles/links.module.css";
 
 function HomeNavigation() {
   return (
@@ -20,7 +21,7 @@ function HomeNavigation() {
           >
             <Link
               to={link.href}
-              className={styles.link}
+              className={`${linkStyles.navigationLink} ${styles.link}`}
             >
               {link.label}
             </Link>

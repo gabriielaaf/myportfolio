@@ -42,35 +42,16 @@
 /* Navigation link */
 
 .link {
-  display: inline-block;
+  --navigation-transform-duration: 350ms;
+  --navigation-transform-easing: var(--ease-out-expo);
+  --navigation-focus-offset: 6px;
 
-  font-family: var(--font-heading);
   font-size: clamp(1.5rem, 2.2vw, 2.5rem);
-  font-weight: 500;
-  line-height: 1.2;
   letter-spacing: -0.025em;
-
-  color: var(--foreground);
-  text-decoration: none;
-
-  transition:
-    color 300ms ease,
-    transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
 }
-
-/* Hover */
-
-.link:hover {
-  color: var(--accent);
-  transform: translateX(-8px);
-}
-
-/* Focus */
 
 .link:focus-visible {
   color: var(--accent);
-  outline: 2px solid var(--accent);
-  outline-offset: 6px;
 }
 
 /* Responsive */
@@ -107,13 +88,5 @@
 @media (prefers-reduced-motion: reduce) {
   .item {
     animation: none;
-  }
-
-  .link {
-    transition: none;
-  }
-
-  .link:hover {
-    transform: none;
   }
 }
