@@ -16,54 +16,27 @@
     composes: container from "../styles/shared.module.css";
 }
 
-/* Header */
+/* Header typography */
 
 .header {
     margin-bottom: 6rem;
 }
 
 .label {
-    display: inline-block;
-    margin-bottom: 2.25rem;
-
-    font-family: var(--font-body);
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-
-    color: var(--accent);
-
-    animation: revealUp 700ms ease-out 100ms both;
+  composes: pageLabel from "../styles/typography.module.css";
 }
 
 .title {
-    font-family: var(--font-heading);
-    font-size: clamp(2.5rem, 4.2vw, 4.2rem);
-    font-weight: 600;
-    line-height: 1.1;
-    letter-spacing: -0.035em;
+  composes: pageTitle from "../styles/typography.module.css";
+}
 
-    color: var(--foreground);
-
-    animation: revealUp 800ms ease-out 200ms both;
+.subtitle {
+  composes: pageSubtitle from "../styles/typography.module.css";
+  max-width: 36rem;
 }
 
 .accent {
     composes: accent from "../styles/shared.module.css";
-}
-
-.subtitle {
-    max-width: 38rem;
-    margin-top: 2.25rem;
-
-    font-family: var(--font-body);
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.9;
-
-    color: var(--muted);
-
-    animation: revealUp 800ms ease-out 350ms both;
 }
 
 /* Timeline */

@@ -3,6 +3,7 @@
 .contact {
   --content-max-width: 1400px;
   --page-padding: clamp(1.5rem, 4vw, 3.5rem);
+  --reveal-distance: 20px;
 
   width: 100%;
   min-height: 100vh;
@@ -32,48 +33,30 @@
   max-width: 32rem;
 }
 
+/* Introduction */
+
 .label {
-  display: inline-block;
+  composes: pageLabel from "../styles/typography.module.css";
+
   margin-bottom: 2.5rem;
-
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-
-  color: var(--accent);
-
-  animation: revealUp 700ms ease-out 100ms both;
 }
 
 .title {
-  font-family: var(--font-heading);
+  composes: pageTitle from "../styles/typography.module.css";
+
   font-size: clamp(3.2rem, 5.2vw, 5.5rem);
-  font-weight: 600;
   line-height: 1.05;
   letter-spacing: -0.045em;
+}
 
-  color: var(--foreground);
+.subtitle {
+  composes: pageSubtitle from "../styles/typography.module.css";
 
-  animation: revealUp 800ms ease-out 200ms both;
+  max-width: 27rem;
 }
 
 .accent {
   composes: accent from "../styles/shared.module.css";
-}
-
-.subtitle {
-  max-width: 27rem;
-  margin-top: 2.25rem;
-
-  font-family: var(--font-body);
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.9;
-
-  color: var(--muted);
-
-  animation: revealUp 800ms ease-out 350ms both;
 }
 
 /* Contact section */
