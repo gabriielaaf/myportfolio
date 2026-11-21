@@ -4,7 +4,7 @@
   animation:
     appearUp
     var(--appear-duration, 900ms)
-    cubic-bezier(0.22, 1, 0.36, 1)
+    var(--appear-easing, cubic-bezier(0.22, 1, 0.36, 1))
     var(--appear-delay, 0ms)
     both;
 }

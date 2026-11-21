@@ -1,11 +1,13 @@
 import { contacts } from "../data/contacts";
 
 import styles from "./ContactPage.module.css";
+import layoutStyles from "../styles/layout.module.css";
+import typographyStyles from "../styles/typography.module.css";
 
 function ContactPage() {
   return (
     <main className={styles.contact}>
-      <div className={styles.container}>
+      <div className={layoutStyles.container}>
         <div className={styles.layout}>
 
           {/* Introduction */}
@@ -17,7 +19,7 @@ function ContactPage() {
 
             <h1 className={styles.title}>
               Let's talk
-              <span className={styles.accent}>.</span>
+              <span className={typographyStyles.accent}>.</span>
             </h1>
 
             <p className={styles.subtitle}>
@@ -55,9 +57,13 @@ function ContactPage() {
                     }
                     className={styles.contactLink}
                   >
+                    {/* Number */}
+
                     <span className={styles.number}>
                       {String(index + 1).padStart(2, "0")}
                     </span>
+
+                    {/* Contact information */}
 
                     <div className={styles.contactInfo}>
                       <span className={styles.contactLabel}>
@@ -68,6 +74,8 @@ function ContactPage() {
                         {contact.value}
                       </span>
                     </div>
+
+                    {/* Arrow */}
 
                     <span
                       className={styles.arrow}

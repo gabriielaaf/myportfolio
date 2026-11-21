@@ -6,10 +6,14 @@ import {
   type KeyboardEvent,
   type TouchEvent,
 } from "react";
+
 import { Link } from "react-router";
 
 import { conversation } from "../data/beyond";
+
 import styles from "./BeyondPage.module.css";
+import layoutStyles from "../styles/layout.module.css";
+import typographyStyles from "../styles/typography.module.css";
 
 type WheelMode = "idle" | "history" | "revealed";
 
@@ -86,7 +90,8 @@ function BeyondPage() {
 
       const atBottom = isAtBottom(container);
 
-      // Allow normal page scrolling after the conversation ends.
+      // Allow page scrolling when the conversation ends.
+
       if (
         delta > 0 &&
         atBottom &&
@@ -107,21 +112,23 @@ function BeyondPage() {
         gesture.timer = null;
       }, 300);
 
-      // Scroll upwards through previously revealed messages.
+      // Scroll through previous messages.
+
       if (delta < 0) {
         gesture.mode = "history";
         gesture.amount = 0;
+
         container.scrollTop += delta;
         return;
       }
 
-      // Continue scrolling through the conversation history.
       if (gesture.mode === "history") {
         container.scrollTop += delta;
         return;
       }
 
-      // A single gesture should only reveal one new message.
+      // Reveal only one message per gesture.
+
       if (gesture.mode === "revealed") {
         return;
       }
@@ -233,7 +240,7 @@ function BeyondPage() {
 
   return (
     <main className={styles.beyond}>
-      <div className={styles.container}>
+      <div className={layoutStyles.container}>
         <div className={styles.layout}>
 
           {/* Introduction */}
@@ -245,7 +252,7 @@ function BeyondPage() {
 
             <h1 className={styles.title}>
               Let's chat
-              <span className={styles.accent}>.</span>
+              <span className={typographyStyles.accent}>.</span>
             </h1>
 
             <p className={styles.subtitle}>
@@ -302,8 +309,7 @@ function BeyondPage() {
                 {conversation
                   .slice(0, visibleCount)
                   .map((message) => {
-                    const isGabi =
-                      message.speaker === "gabi";
+                    const isGabi = message.speaker === "gabi";
 
                     return (
                       <li

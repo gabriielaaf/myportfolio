@@ -1,9 +1,12 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef } from "react";
+
 import { experiences } from "../data/experiences";
+import teamPhoto from "../assets/team.jpg";
 
 import styles from "./ExperiencePage.module.css";
+import layoutStyles from "../styles/layout.module.css";
+import typographyStyles from "../styles/typography.module.css";
 import linkStyles from "../styles/links.module.css";
-import teamPhoto from "../assets/team.jpg";
 import techStyles from "../styles/technologies.module.css";
 
 function ExperiencePage() {
@@ -89,18 +92,18 @@ function ExperiencePage() {
 
   return (
     <main className={styles.experience}>
-      <div className={styles.container}>
+      <div className={layoutStyles.container}>
 
         {/* Introduction */}
 
         <header className={styles.header}>
-          <span className={styles.label}>
+          <span className={typographyStyles.pageLabel}>
             EXPERIENCE
           </span>
 
           <h1 className={styles.title}>
             My journey
-            <span className={styles.accent}>.</span>
+            <span className={typographyStyles.accent}>.</span>
           </h1>
 
           <p className={styles.subtitle}>
@@ -229,7 +232,7 @@ function ExperiencePage() {
 
             <h2 className={styles.teamTitle}>
               Better together
-              <span className={styles.accent}>.</span>
+              <span className={typographyStyles.accent}>.</span>
             </h2>
 
             <p className={styles.teamDescription}>

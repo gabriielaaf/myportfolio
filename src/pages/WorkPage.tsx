@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { projects } from "../data/projects";
 
 import styles from "./WorkPage.module.css";
@@ -12,10 +12,14 @@ function WorkPage() {
   const [imageIndex, setImageIndex] = useState(0);
   const [hasChangedProject, setHasChangedProject] = useState(false);
 
+  const githubRef = useRef<HTMLElement>(null);
+
   const selectedProject = projects[selectedIndex];
 
   const imageCount = selectedProject.images.length;
   const currentImage = selectedProject.images[imageIndex];
+
+  /* Project selection */
 
   function selectProject(index: number) {
     if (index === selectedIndex) return;
@@ -25,21 +29,59 @@ function WorkPage() {
     setHasChangedProject(true);
   }
 
+  /* Carousel navigation */
+
   function previousImage() {
     if (imageCount <= 1) return;
 
-    setImageIndex((previous) =>
-      (previous - 1 + imageCount) % imageCount
+    setImageIndex(
+      (previous) => (previous - 1 + imageCount) % imageCount
     );
   }
 
   function nextImage() {
     if (imageCount <= 1) return;
 
-    setImageIndex((previous) =>
-      (previous + 1) % imageCount
+    setImageIndex(
+      (previous) => (previous + 1) % imageCount
     );
   }
+
+  /* GitHub section animation */
+
+  useEffect(() => {
+    const section = githubRef.current;
+
+    if (!section) return;
+
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (reducedMotion || !("IntersectionObserver" in window)) {
+      section.classList.add(styles.githubVisible);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add(styles.githubVisible);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "0px 0px -40px 0px",
+      }
+    );
+
+    observer.observe(section);
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <main className={styles.work}>
@@ -85,7 +127,9 @@ function WorkPage() {
                 <li
                   key={project.id}
                   style={{
-                    animationDelay: `${500 + Math.min(index, 6) * 100}ms`,
+                    animationDelay: `${
+                      500 + Math.min(index, 6) * 100
+                    }ms`,
                   }}
                 >
                   <button
@@ -239,7 +283,10 @@ function WorkPage() {
 
         {/* GitHub */}
 
-        <section className={styles.githubSection}>
+        <section
+          ref={githubRef}
+          className={styles.githubSection}
+        >
           <div className={styles.githubContent}>
             <h2 className={styles.githubHeading}>
               There's more to explore

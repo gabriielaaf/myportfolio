@@ -9,10 +9,6 @@
   padding-bottom: 4rem;
 }
 
-.container {
-  composes: container from "../styles/layout.module.css";
-}
-
 /* Layout */
 
 .layout {
@@ -28,8 +24,6 @@
   max-width: 34rem;
 }
 
-/* Introduction */
-
 .label {
   composes: pageLabel from "../styles/typography.module.css";
 }
@@ -40,14 +34,8 @@
 
 .subtitle {
   composes: pageSubtitle from "../styles/typography.module.css";
-
   max-width: 30rem;
 }
-
-.accent {
-  composes: accent from "../styles/typography.module.css";
-}
-
 
 /* Introduction note */
 
@@ -66,7 +54,7 @@
 
   color: var(--muted);
 
-  animation: revealUp 800ms ease-out 450ms both;
+  animation: global(revealUp) 800ms ease-out 450ms both;
 }
 
 .introNote::before {
@@ -91,13 +79,7 @@
 
   overflow: hidden;
 
-  border: none;
-  border-radius: 0;
-
-  background: transparent;
-  box-shadow: none;
-
-  animation: revealUp 850ms ease-out 550ms both;
+  animation: global(revealUp) 850ms ease-out 550ms both;
 }
 
 /* Chat header */
@@ -107,32 +89,47 @@
   align-items: center;
   gap: 1rem;
 
-  padding: 0 0 1.5rem;
-
+  padding-bottom: 1.5rem;
   border-bottom: 1px solid var(--border);
-
-  background: transparent;
 }
 
-/* Profile avatar */
+/* Avatars */
 
-.profileAvatar {
+.profileAvatar,
+.messageAvatar {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 
+  border-radius: 50%;
+
+  font-family: var(--font-heading);
+  font-weight: 600;
+}
+
+.profileAvatar {
   width: 42px;
   height: 42px;
-
-  border-radius: 50%;
 
   background-color: var(--accent);
   color: #ffffff;
 
-  font-family: var(--font-heading);
   font-size: 1.1rem;
-  font-weight: 600;
+}
+
+.messageAvatar {
+  width: 28px;
+  height: 28px;
+
+  background-color: var(--surface);
+  color: var(--accent);
+
+  font-size: 0.8rem;
+}
+
+.hiddenAvatar {
+  visibility: hidden;
 }
 
 /* Profile information */
@@ -175,11 +172,6 @@
   overscroll-behavior: contain;
   touch-action: pan-y;
 
-  border: none;
-  border-radius: 0;
-
-  background: transparent;
-
   scrollbar-width: thin;
   scrollbar-color: var(--border) transparent;
 }
@@ -205,7 +197,7 @@
 
 /* Keep messages at the bottom */
 
-.messages>.message:first-child {
+.messages > .message:first-child {
   margin-top: auto;
 }
 
@@ -218,35 +210,9 @@
 
   width: fit-content;
   max-width: 80%;
-
   flex-shrink: 0;
 
   animation: messageEnter 550ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-/* Message avatar */
-
-.messageAvatar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-
-  width: 28px;
-  height: 28px;
-
-  border-radius: 50%;
-
-  background-color: var(--surface);
-  color: var(--accent);
-
-  font-family: var(--font-heading);
-  font-size: 0.8rem;
-  font-weight: 600;
-}
-
-.hiddenAvatar {
-  visibility: hidden;
 }
 
 /* Message bubbles */
@@ -275,8 +241,6 @@
 
   background-color: var(--surface);
   color: var(--foreground);
-
-  box-shadow: none;
 }
 
 /* Visitor messages */
@@ -287,13 +251,10 @@
 }
 
 .visitorMessage .bubble {
-  border: none;
   border-radius: 16px 16px 4px 16px;
 
   background-color: var(--accent);
   color: #ffffff;
-
-  box-shadow: none;
 }
 
 /* Consecutive messages */
@@ -302,7 +263,7 @@
   margin-top: -0.75rem;
 }
 
-/* Ending */
+/* Conversation ending */
 
 .ending {
   align-self: flex-start;
@@ -321,7 +282,6 @@
   gap: 0.75rem;
 
   padding-bottom: 0.35rem;
-
   border-bottom: 1px solid var(--accent);
 
   font-family: var(--font-body);
@@ -352,11 +312,9 @@
   justify-content: flex-end;
 
   min-height: 60px;
-  padding: 1.25rem 0 0;
+  padding-top: 1.25rem;
 
   border-top: 1px solid var(--border);
-
-  background: transparent;
 }
 
 /* Continue button */
@@ -394,8 +352,6 @@
   transition: transform 300ms ease;
 }
 
-/* Button hover */
-
 .nextButton:hover {
   color: var(--accent);
 }
@@ -419,6 +375,8 @@
 
   color: var(--muted);
 }
+
+/* Message animation */
 
 @keyframes messageEnter {
   from {
@@ -471,8 +429,6 @@
     --grid-gap: 3rem;
   }
 
-  /* Introduction */
-
   .label {
     margin-bottom: 2rem;
   }
@@ -483,7 +439,6 @@
 
   .subtitle {
     margin-top: 1.75rem;
-
     font-size: 0.95rem;
     line-height: 1.8;
   }
@@ -500,8 +455,6 @@
     min-height: 350px;
   }
 
-  /* Chat header */
-
   .chatHeader {
     gap: 0.85rem;
     padding-bottom: 1.25rem;
@@ -510,7 +463,6 @@
   .profileAvatar {
     width: 38px;
     height: 38px;
-
     font-size: 1rem;
   }
 
@@ -542,13 +494,11 @@
   .messageAvatar {
     width: 25px;
     height: 25px;
-
     font-size: 0.75rem;
   }
 
   .bubble {
     padding: 0.85rem 1rem;
-
     font-size: 0.85rem;
     line-height: 1.7;
   }
@@ -582,7 +532,6 @@
 /* Reduced motion */
 
 @media (prefers-reduced-motion: reduce) {
-
   .label,
   .title,
   .subtitle,

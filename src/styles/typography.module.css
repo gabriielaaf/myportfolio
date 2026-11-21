@@ -14,7 +14,7 @@
   display: inline-block;
   margin-bottom: 2.25rem;
 
-  animation: revealUp 700ms ease-out 100ms both;
+  animation: global(revealUp) 700ms ease-out 100ms both;
 }
 
 /* Headings */
@@ -35,7 +35,7 @@
 
   color: var(--foreground);
 
-  animation: revealUp 800ms ease-out 200ms both;
+  animation: global(revealUp) 800ms ease-out 200ms both;
 }
 
 /* Subtitles */
@@ -50,7 +50,7 @@
 
   color: var(--muted);
 
-  animation: revealUp 800ms ease-out 350ms both;
+  animation: global(revealUp) 800ms ease-out 350ms both;
 }
 
 /* Body copy */
