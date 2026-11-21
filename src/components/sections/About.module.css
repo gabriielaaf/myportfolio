@@ -17,11 +17,9 @@
 }
 
 .container {
-  composes: container from "../../styles/shared.module.css";
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: clamp(3rem, 6vw, 6rem);
+  composes: container twoColumns from "../../styles/layout.module.css";
+
+  --grid-gap: clamp(3rem, 6vw, 6rem);
 }
 
 /* Left column */
@@ -33,7 +31,9 @@
 }
 
 .label {
-  composes: label appearUp from "../../styles/shared.module.css";
+  composes: label from "../../styles/typography.module.css";
+  composes: appearUp from "../../styles/shared.module.css";
+
   --appear-duration: 800ms;
   --appear-delay: 100ms;
   --appear-distance: 60px;
@@ -41,13 +41,15 @@
 }
 
 .title {
-  composes: heading appearUp from "../../styles/shared.module.css";
+  composes: heading from "../../styles/typography.module.css";
+  composes: appearUp from "../../styles/shared.module.css";
+
   --appear-distance: 60px;
   font-size: clamp(2.2rem, 3.5vw, 3.7rem);
 }
 
 .accent {
-  composes: accent from "../../styles/shared.module.css";
+  composes: accent from "../../styles/typography.module.css";
 }
 
 /* Portrait */
@@ -103,7 +105,9 @@
 }
 
 .description {
-  composes: copy appearUp from "../../styles/shared.module.css";
+  composes: copy from "../../styles/typography.module.css";
+  composes: appearUp from "../../styles/shared.module.css";
+
   --appear-delay: 450ms;
   display: flex;
   flex-direction: column;
@@ -176,7 +180,8 @@
 }
 
 .cvDescription {
-  composes: copy from "../../styles/shared.module.css";
+  composes: copy from "../../styles/typography.module.css";
+
   margin-top: 0.5rem;
   line-height: 1.7;
 }

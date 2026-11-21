@@ -7,35 +7,6 @@
   padding-inline: var(--page-padding);
 }
 
-/* Typography */
-
-.label {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  color: var(--accent);
-}
-
-.heading {
-  font-family: var(--font-heading);
-  font-weight: 600;
-  line-height: 1.05;
-  letter-spacing: -0.045em;
-}
-
-.copy {
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  font-weight: 400;
-  line-height: 1.8;
-  color: var(--muted);
-}
-
-.accent {
-  color: var(--accent);
-}
-
 /* Buttons */
 
 .iconButton {

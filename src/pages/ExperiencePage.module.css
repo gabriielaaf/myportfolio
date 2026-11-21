@@ -30,7 +30,7 @@
 }
 
 .accent {
-    composes: accent from "../styles/shared.module.css";
+  composes: accent from "../styles/typography.module.css";
 }
 
 /* Timeline */
@@ -173,10 +173,10 @@
 /* Description */
 
 .description {
-    composes: copy from "../styles/shared.module.css";
+  composes: copy from "../styles/typography.module.css";
 
-    max-width: 42rem;
-    margin-top: 1.75rem;
+  max-width: 42rem;
+  margin-top: 1.75rem;
 }
 
 /* Team */

@@ -51,7 +51,7 @@
 }
 
 .accent {
-  composes: accent from "../styles/shared.module.css";
+  composes: accent from "../styles/typography.module.css";
 }
 
 /* Contact section */

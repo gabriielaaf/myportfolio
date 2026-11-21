@@ -1,20 +1,30 @@
-/* Page labels */
+/* Labels */
 
-.pageLabel {
-  display: inline-block;
-  margin-bottom: 2.25rem;
-
+.label {
   font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.15em;
-
   color: var(--accent);
+}
+
+.pageLabel {
+  composes: label;
+
+  display: inline-block;
+  margin-bottom: 2.25rem;
 
   animation: revealUp 700ms ease-out 100ms both;
 }
 
-/* Page titles */
+/* Headings */
+
+.heading {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+}
 
 .pageTitle {
   font-family: var(--font-heading);
@@ -28,7 +38,7 @@
   animation: revealUp 800ms ease-out 200ms both;
 }
 
-/* Page subtitles */
+/* Subtitles */
 
 .pageSubtitle {
   margin-top: 2.25rem;
@@ -41,6 +51,22 @@
   color: var(--muted);
 
   animation: revealUp 800ms ease-out 350ms both;
+}
+
+/* Body copy */
+
+.copy {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+/* Accent */
+
+.accent {
+  color: var(--accent);
 }
 
 /* Reduced motion */

@@ -16,7 +16,7 @@
 /* Title */
 
 .title {
-  composes: heading from "../../styles/shared.module.css";
+  composes: heading from "../../styles/typography.module.css";
 
   font-size: clamp(3rem, 7vw, 5.5rem);
   line-height: 0.95;
@@ -27,7 +27,7 @@
 /* Description */
 
 .description {
-  composes: copy from "../../styles/shared.module.css";
+  composes: copy from "../../styles/typography.module.css";
 
   margin-top: 1.75rem;
 
@@ -38,7 +38,7 @@
 /* Location */
 
 .location {
-  composes: accent from "../../styles/shared.module.css";
+  composes: accent from "../../styles/typography.module.css";
 
   margin-top: 0.75rem;
 
