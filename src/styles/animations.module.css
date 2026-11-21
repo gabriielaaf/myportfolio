@@ -1,24 +1,54 @@
 /* Appear up */
 
 .appearUp {
+  --reveal-distance: var(--appear-distance, 35px);
+
   animation:
-    appearUp
-    var(--appear-duration, 900ms)
-    var(--appear-easing, cubic-bezier(0.22, 1, 0.36, 1))
-    var(--appear-delay, 0ms)
-    both;
+    global(revealUp) var(--appear-duration, 900ms) var(--appear-easing, var(--ease-out-expo)) var(--appear-delay, 0ms) both;
 }
 
-@keyframes appearUp {
-  from {
-    opacity: 0;
-    transform: translateY(var(--appear-distance, 35px));
-  }
+/* Image reveal */
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.imageReveal {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.imageReveal img {
+  display: block;
+  width: 100%;
+
+  transform: scale(1.05);
+  transition: transform 1100ms var(--ease-out-expo);
+}
+
+/* Burgundy overlay */
+
+.imageReveal::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  background-color: var(--accent);
+  transform: translateY(0);
+}
+
+/* Visible */
+
+.imageReveal.visible {
+  opacity: 1;
+}
+
+.imageReveal.visible img {
+  transform: scale(1);
+}
+
+.imageReveal.visible::after {
+  animation: global(overlayReveal) 900ms var(--ease-out-expo) 100ms forwards;
 }
 
 /* Reduced motion */
@@ -26,5 +56,18 @@
 @media (prefers-reduced-motion: reduce) {
   .appearUp {
     animation: none;
+  }
+
+  .imageReveal {
+    opacity: 1;
+  }
+
+  .imageReveal img {
+    transform: none;
+    transition: none;
+  }
+
+  .imageReveal::after {
+    display: none;
   }
 }

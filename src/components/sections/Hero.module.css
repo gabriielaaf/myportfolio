@@ -52,7 +52,9 @@
 .title,
 .description,
 .location {
-  animation: slideInLeft 700ms ease-out both;
+  --reveal-x: -30px;
+
+  animation: global(revealX) 700ms ease-out both;
 }
 
 .title {
@@ -65,18 +67,6 @@
 
 .location {
   animation-delay: 800ms;
-}
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
 }
 
 /* Responsive */

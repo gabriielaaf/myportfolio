@@ -53,36 +53,14 @@
 /* Portrait */
 
 .portrait {
-  position: relative;
-
   width: min(100%, 320px);
   margin-top: 2.5rem;
-
-  overflow: hidden;
 }
 
 .portrait img {
-  display: block;
-
-  width: 100%;
   aspect-ratio: 4 / 5;
-
   object-fit: cover;
   object-position: center 35%;
-
-  animation: imageReveal 1.2s ease-out 100ms both;
-}
-
-.portrait::after {
-  content: "";
-
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-
-  background-color: var(--accent);
-
-  animation: burgundyReveal 1s cubic-bezier(0.76, 0, 0.24, 1) 100ms both;
 }
 
 /* Right column */
@@ -299,16 +277,6 @@
 
   to {
     transform: scale(1);
-  }
-}
-
-@keyframes burgundyReveal {
-  from {
-    transform: translateY(0);
-  }
-
-  to {
-    transform: translateY(-101%);
   }
 }
 

@@ -4,36 +4,51 @@ import portrait from "../../assets/gabrielaportfolio.jpeg";
 
 import styles from "./About.module.css";
 import typographyStyles from "../../styles/typography.module.css";
+import animationStyles from "../../styles/animations.module.css";
 
 function About() {
   const cvRef = useRef<HTMLDivElement>(null);
+  const portraitRef = useRef<HTMLDivElement>(null);
   const [isCvVisible, setIsCvVisible] = useState(false);
 
   /* CV scroll animation */
 
   useEffect(() => {
-    const section = cvRef.current;
+    const cvSection = cvRef.current;
+    const portrait = portraitRef.current;
 
-    if (!section) return;
+    if (!cvSection || !portrait) return;
+
+    function reveal(element: Element) {
+      if (element === cvSection) {
+        setIsCvVisible(true);
+      }
+
+      if (element === portrait) {
+        portrait?.classList.add(animationStyles.visible);
+      }
+    }
 
     if (!("IntersectionObserver" in window)) {
-      setIsCvVisible(true);
+      reveal(cvSection);
+      reveal(portrait);
       return;
     }
 
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsCvVisible(true);
-          observer.disconnect();
-        }
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            reveal(entry.target);
+            observer.unobserve(entry.target);
+          }
+        });
       },
-      {
-        threshold: 0.2,
-      }
+      { threshold: 0.2 }
     );
 
-    observer.observe(section);
+    observer.observe(cvSection);
+    observer.observe(portrait);
 
     return () => observer.disconnect();
   }, []);
@@ -56,7 +71,10 @@ function About() {
             <span className={typographyStyles.accent}>.</span>
           </h2>
 
-          <div className={styles.portrait}>
+          <div
+            ref={portraitRef}
+            className={`${styles.portrait} ${animationStyles.imageReveal}`}
+          >
             <img
               src={portrait}
               alt="Gabriela Felgueiras"
@@ -99,9 +117,8 @@ function About() {
 
       <div
         ref={cvRef}
-        className={`${styles.cvSection} ${
-          isCvVisible ? styles.cvVisible : ""
-        }`}
+        className={`${styles.cvSection} ${isCvVisible ? styles.cvVisible : ""
+          }`}
       >
         <div className={styles.cvHeader}>
           <span>CURRICULUM VITAE</span>

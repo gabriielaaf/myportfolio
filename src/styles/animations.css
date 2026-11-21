@@ -1,4 +1,4 @@
-/* Text reveal */
+/* Vertical reveal */
 
 @keyframes revealUp {
   from {
@@ -9,5 +9,31 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Horizontal reveal */
+
+@keyframes revealX {
+  from {
+    opacity: 0;
+    transform: translateX(var(--reveal-x, 30px));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Overlay reveal */
+
+@keyframes overlayReveal {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-101%);
   }
 }

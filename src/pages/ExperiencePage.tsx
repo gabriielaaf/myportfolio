@@ -8,10 +8,12 @@ import layoutStyles from "../styles/layout.module.css";
 import typographyStyles from "../styles/typography.module.css";
 import linkStyles from "../styles/links.module.css";
 import techStyles from "../styles/technologies.module.css";
+import animationStyles from "../styles/animations.module.css";
 
 function ExperiencePage() {
   const timelineRef = useRef<HTMLOListElement>(null);
   const teamRef = useRef<HTMLElement>(null);
+  const teamImageRef = useRef<HTMLDivElement>(null);
 
   /* Timeline animation */
 
@@ -61,12 +63,17 @@ function ExperiencePage() {
 
     if (!team) return;
 
+    function revealTeam() {
+      teamRef.current?.classList.add(styles.visible);
+      teamImageRef.current?.classList.add(animationStyles.visible);
+    }
+
     const reducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
     if (reducedMotion || !("IntersectionObserver" in window)) {
-      team.classList.add(styles.visible);
+      revealTeam();
       return;
     }
 
@@ -74,7 +81,7 @@ function ExperiencePage() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add(styles.visible);
+            revealTeam();
             observer.unobserve(entry.target);
           }
         });
@@ -91,8 +98,12 @@ function ExperiencePage() {
   }, []);
 
   return (
-    <main className={`${layoutStyles.standardPage} ${styles.experience}`} >
+    <main
+      className={`${layoutStyles.standardPage} ${styles.experience}`}
+    >
       <div className={layoutStyles.container}>
+
+        {/* Introduction */}
 
         <header className={layoutStyles.standardHeader}>
           <span className={typographyStyles.pageLabel}>
@@ -215,13 +226,20 @@ function ExperiencePage() {
           ref={teamRef}
           className={styles.teamSection}
         >
-          <div className={styles.teamImage}>
+          {/* Team image */}
+
+          <div
+            ref={teamImageRef}
+            className={`${styles.teamImage} ${animationStyles.imageReveal}`}
+          >
             <img
               src={teamPhoto}
               alt="My hackathon team"
               loading="lazy"
             />
           </div>
+
+          {/* Team content */}
 
           <div className={styles.teamContent}>
             <span className={styles.teamLabel}>
