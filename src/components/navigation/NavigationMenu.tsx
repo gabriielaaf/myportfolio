@@ -111,7 +111,7 @@ function NavigationMenu() {
         inert={!isOpen}
       >
         <nav aria-label="Main navigation">
-          <ul className={styles.links}>
+          <ul className={`${styles.links} ${linkStyles.navigationList}`}>
             {navigationLinks.map((link) => (
               <li key={link.href}>
                 <Link

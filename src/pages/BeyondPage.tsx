@@ -260,7 +260,7 @@ function BeyondPage() {
               and a little more about who I am.
             </p>
 
-            <span className={styles.introNote}>
+            <span className={`${styles.introNote} ${typographyStyles.metaLabel}`}>
               GET TO KNOW ME, ONE MESSAGE AT A TIME.
             </span>
           </header>
@@ -367,7 +367,7 @@ function BeyondPage() {
 
             <div className={styles.chatFooter}>
               {isFinished ? (
-                <span className={styles.finishedText}>
+                <span className={`${styles.finishedText} ${typographyStyles.metaLabel}`}>
                   THAT'S ALL FOR NOW
                 </span>
               ) : (

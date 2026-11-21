@@ -46,13 +46,8 @@
 
   margin-top: 3rem;
 
-  font-family: var(--font-body);
   font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
   line-height: 1.6;
-
-  color: var(--muted);
 
   animation: global(revealUp) 800ms ease-out 450ms both;
 }
@@ -143,7 +138,6 @@
 }
 
 .profileName {
-  font-family: var(--font-body);
   font-size: 0.95rem;
   font-weight: 600;
   line-height: 1.4;
@@ -152,9 +146,7 @@
 }
 
 .profileDescription {
-  font-family: var(--font-body);
   font-size: 0.75rem;
-  font-weight: 400;
   line-height: 1.5;
 
   color: var(--muted);
@@ -220,10 +212,7 @@
 .bubble {
   margin: 0;
   padding: 0.95rem 1.2rem;
-
-  font-family: var(--font-body);
   font-size: 0.9rem;
-  font-weight: 400;
   line-height: 1.75;
 
   overflow-wrap: anywhere;
@@ -320,7 +309,6 @@
   background: transparent;
   color: var(--muted);
 
-  font-family: var(--font-body);
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -355,12 +343,7 @@
 /* Finished conversation */
 
 .finishedText {
-  font-family: var(--font-body);
   font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-
-  color: var(--muted);
 }
 
 /* Message animation */

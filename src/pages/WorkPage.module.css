@@ -58,9 +58,7 @@
 }
 
 .projectNumber {
-  font-family: var(--font-body);
   font-size: 0.75rem;
-
   color: var(--muted);
 }
 
@@ -168,7 +166,6 @@
 }
 
 .imagePlaceholder span {
-  font-family: var(--font-body);
   font-size: 0.7rem;
   letter-spacing: 0.12em;
 
@@ -195,7 +192,6 @@
 }
 
 .imageCounter {
-  font-family: var(--font-body);
   font-size: 0.8rem;
 
   color: var(--muted);
@@ -258,7 +254,6 @@
 
   margin-bottom: 1rem;
 
-  font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 500;
 
@@ -327,7 +322,6 @@
   max-width: 30rem;
   margin-top: 1.5rem;
 
-  font-family: var(--font-body);
   font-size: 0.95rem;
   line-height: 1.8;
 

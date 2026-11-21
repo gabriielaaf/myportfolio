@@ -10,7 +10,7 @@ function HomeNavigation() {
       className={styles.navigation}
       aria-label="Main navigation"
     >
-      <ul className={styles.list}>
+      <ul className={linkStyles.navigationList}>
         {navigationLinks.map((link, index) => (
           <li
             key={link.href}

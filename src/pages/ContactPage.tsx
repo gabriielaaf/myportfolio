@@ -34,7 +34,7 @@ function ContactPage() {
             className={styles.contactSection}
             aria-label="Contact information"
           >
-            <span className={styles.sectionLabel}>
+            <span className={`${styles.sectionLabel} ${typographyStyles.metaLabel}`}>
               FIND ME HERE
             </span>
 
