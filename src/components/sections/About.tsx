@@ -1,10 +1,15 @@
 import { useEffect, useRef, useState } from "react";
-import styles from "./About.module.css";
+
 import portrait from "../../assets/gabrielaportfolio.jpeg";
+
+import styles from "./About.module.css";
+import typographyStyles from "../../styles/typography.module.css";
 
 function About() {
   const cvRef = useRef<HTMLDivElement>(null);
   const [isCvVisible, setIsCvVisible] = useState(false);
+
+  /* CV scroll animation */
 
   useEffect(() => {
     const section = cvRef.current;
@@ -38,13 +43,17 @@ function About() {
       <div className={styles.container}>
 
         {/* Left column */}
+
         <div className={styles.left}>
-          <span className={styles.label}>ABOUT ME</span>
+          <span className={styles.label}>
+            ABOUT ME
+          </span>
 
           <h2 className={styles.title}>
             A little more
             <br />
-            about me<span className={styles.accent}>.</span>
+            about me
+            <span className={typographyStyles.accent}>.</span>
           </h2>
 
           <div className={styles.portrait}>
@@ -56,12 +65,14 @@ function About() {
         </div>
 
         {/* Right column */}
+
         <div className={styles.right}>
           <h3 className={styles.introduction}>
             I'm a third-year Informatics and Computing
             Engineering student at{" "}
             <strong>
-              FEUP<span className={styles.accent}>.</span>
+              FEUP
+              <span className={typographyStyles.accent}>.</span>
             </strong>
           </h3>
 
@@ -85,6 +96,7 @@ function About() {
       </div>
 
       {/* CV section */}
+
       <div
         ref={cvRef}
         className={`${styles.cvSection} ${
@@ -113,7 +125,11 @@ function About() {
             className={styles.cvLink}
           >
             Download CV
-            <span className={styles.cvArrow} aria-hidden="true">
+
+            <span
+              className={styles.cvArrow}
+              aria-hidden="true"
+            >
               ↗
             </span>
           </a>
