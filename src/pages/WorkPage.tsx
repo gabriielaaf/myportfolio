@@ -47,6 +47,24 @@ function WorkPage() {
     );
   }
 
+  /* Automatic carousel */
+
+  useEffect(() => {
+    if (imageCount <= 1) return;
+
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (reducedMotion) return;
+
+    const interval = window.setInterval(() => {
+      setImageIndex((previous) => (previous + 1) % imageCount);
+    }, 2000);
+
+    return () => window.clearInterval(interval);
+  }, [selectedIndex, imageCount]);
+
   /* GitHub section animation */
 
   useEffect(() => {
@@ -129,20 +147,18 @@ function WorkPage() {
                 <li
                   key={project.id}
                   style={{
-                    animationDelay: `${
-                      500 + Math.min(index, 6) * 100
-                    }ms`,
+                    animationDelay: `${500 + Math.min(index, 6) * 100
+                      }ms`,
                   }}
                 >
                   <button
                     type="button"
                     onClick={() => selectProject(index)}
                     aria-pressed={selectedIndex === index}
-                    className={`${styles.projectButton} ${
-                      selectedIndex === index
+                    className={`${styles.projectButton} ${selectedIndex === index
                         ? styles.projectActive
                         : ""
-                    }`}
+                      }`}
                   >
                     <span className={styles.projectNumber}>
                       {String(index + 1).padStart(2, "0")}
@@ -168,11 +184,10 @@ function WorkPage() {
 
           <section
             key={selectedProject.id}
-            className={`${styles.details} ${
-              !hasChangedProject
+            className={`${styles.details} ${!hasChangedProject
                 ? styles.detailsInitial
                 : ""
-            }`}
+              }`}
             aria-label={`${selectedProject.name} details`}
           >
 
@@ -183,9 +198,8 @@ function WorkPage() {
                 <img
                   key={currentImage}
                   src={currentImage}
-                  alt={`${selectedProject.name} screenshot ${
-                    imageIndex + 1
-                  }`}
+                  alt={`${selectedProject.name} screenshot ${imageIndex + 1
+                    }`}
                   className={styles.carouselImage}
                 />
               ) : (
@@ -207,8 +221,8 @@ function WorkPage() {
               <span className={styles.imageCounter}>
                 {imageCount > 0
                   ? `${String(imageIndex + 1).padStart(2, "0")} / ${String(
-                      imageCount
-                    ).padStart(2, "0")}`
+                    imageCount
+                  ).padStart(2, "0")}`
                   : "00 / 00"}
               </span>
 

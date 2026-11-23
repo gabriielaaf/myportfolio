@@ -3,9 +3,9 @@
 .content {
   composes: twoColumns from "../styles/layout.module.css";
 
-  --grid-columns: minmax(0, 0.9fr) minmax(0, 1.5fr);
+  --grid-columns: minmax(0, 0.8fr) minmax(0, 1.7fr);
   --grid-align: start;
-  --grid-gap: clamp(3.5rem, 6vw, 6.5rem);
+  --grid-gap: clamp(2.5rem, 4vw, 4.5rem);
 }
 
 /* Project list */

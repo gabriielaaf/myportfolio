@@ -1,3 +1,13 @@
+import powerpitClass from "../assets/powerpit_classes.png";
+import powerpitHomepage from "../assets/powerpit_homepage.png";
+import powerpitWork from "../assets/powerpit_work.png";
+import powerpitPerfil from "../assets/powerpit_perfil.png";
+
+import dcsnapHomepage from "../assets/dcsnap_homepage.png";
+import dcsnapHowToPlay from "../assets/dcsnap_howtoplay.png";
+import dcsnapGame from "../assets/dcsnap_game.png";
+import dcsnapWhoWins from "../assets/dcsnap_whowins.png";
+
 export interface Project {
   id: string;
   name: string;
@@ -56,7 +66,12 @@ export const projects: Project[] = [
     description:
       "Members can book classes and check equipment availability, while trainers manage their schedules and administrators oversee gym operations.",
     technologies: ["PHP", "JavaScript", "SQLite"],
-    images: [],
+    images: [
+      powerpitHomepage,
+      powerpitClass,
+      powerpitWork,
+      powerpitPerfil,
+    ],
     repository: "https://github.com/gabriielaaf/PowerPit",
   },
   {
@@ -80,7 +95,12 @@ export const projects: Project[] = [
     description:
       "Players choose their decks and compete through card-based battles, combining interactive gameplay with object-oriented design and software development principles.",
     technologies: ["Java"],
-    images: [],
+    images: [
+      dcsnapHomepage,
+      dcsnapHowToPlay,
+      dcsnapGame,
+      dcsnapWhoWins,
+    ],
     repository: "https://github.com/gabriielaaf/DCSNAP",
   },
 ];
