@@ -11,8 +11,6 @@ function About() {
   const portraitRef = useRef<HTMLDivElement>(null);
   const [isCvVisible, setIsCvVisible] = useState(false);
 
-  /* CV scroll animation */
-
   useEffect(() => {
     const cvSection = cvRef.current;
     const portrait = portraitRef.current;
@@ -56,7 +54,6 @@ function About() {
   return (
     <main className={styles.about}>
       <div className={styles.container}>
-
         {/* Left column */}
 
         <div className={styles.left}>
@@ -96,18 +93,26 @@ function About() {
 
           <div className={styles.description}>
             <p>
-              Frontend development is where I get to explore
-              my creative side, combining technology and
-              design to turn ideas into intuitive, meaningful
-              digital experiences.
+              I love the creative freedom of frontend development,
+              but I'm equally curious about what happens behind
+              the scenes. Full-stack development brings both
+              worlds together, allowing me to explore everything
+              from designing intuitive interfaces to building
+              the logic that powers them.
             </p>
 
             <p>
-              Beyond academics, I enjoy stepping outside
-              my comfort zone through hackathons and
-              collaborative projects, where I can explore
-              new ideas, tackle challenges and learn
-              from others.
+              I'm always looking for opportunities to challenge
+              myself, learn something new, and work alongside
+              people who share that curiosity. Whether it's a
+              hackathon, a university project, or something I
+              build just for fun, I enjoy bringing ideas to life.
+            </p>
+
+            <p>
+              Above all, I believe the best way to grow is to
+              keep learning, experimenting, and enjoying the
+              process along the way.
             </p>
           </div>
         </div>

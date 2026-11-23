@@ -3,6 +3,7 @@ export interface Project {
   name: string;
   category: string;
   year: string;
+  highlight: string;
   description: string;
   technologies: string[];
   images: string[];
@@ -15,18 +16,21 @@ export const projects: Project[] = [
     name: "SmartCampus",
     category: "IoT & Dashboard",
     year: "October 2026",
+    highlight: "A real-time digital twin of a campus building.",
     description:
-      "An interactive platform for monitoring building conditions in real time and automatically managing lighting, air conditioning and door access based on IoT sensor data.",
-    technologies: ["Python", "Streamlit", "MQTT"],
+      "Developed during SciTeCh Porto 2026 (3rd place), it uses MQTT and Coreflux to monitor six classrooms and control lighting, air conditioning, doors, and alarms through an interactive dashboard.",
+    technologies: ["Python", "Streamlit", "MQTT", "Coreflux"],
     images: [],
+    repository: "https://github.com/gabriielaaf/SmartCampus_SciTeCh",
   },
   {
     id: "weatherprevision",
     name: "WeatherPrevision",
     category: "Machine Learning & Data Science",
     year: "March 2026",
+    highlight: "Turning weather data into predictions.",
     description:
-      "A weather prediction project developed during EBEC Porto 2026, combining data analysis and machine learning to explore meteorological patterns and predict weather conditions.",
+      "Developed during EBEC Porto 2026 (2nd place), this machine learning project tackled rainfall, temperature, snowfall, and next-day weather forecasting, bringing the results together in an interactive Streamlit dashboard.",
     technologies: ["Python", "Machine Learning", "Streamlit"],
     images: [],
     repository: "https://github.com/gabriielaaf/WeatherPrevision_EBEC",
@@ -36,39 +40,47 @@ export const projects: Project[] = [
     name: "CircleUP",
     category: "Mobile Development",
     year: "February - June 2026",
+    highlight: "Making healthy habits a team effort.",
     description:
-      "A mobile application that encourages healthy and sustainable habits through daily challenges, group activities and friendly competition.",
+      "A mobile app where users join groups, complete challenges, and share their achievements. Community validation, points, and leaderboards make personal progress more social and motivating.",
     technologies: ["Flutter", "Dart", "Firebase"],
     images: [],
+    repository: "https://github.com/gabriielaaf/CircleUP",
   },
   {
     id: "powerpit",
     name: "PowerPIT",
     category: "Web Development",
     year: "February - June 2026",
+    highlight: "A complete gym management platform.",
     description:
-      "A gym management website that allows members to book fitness classes, check equipment availability and interact with trainers.",
+      "Members can book classes and check equipment availability, while trainers manage their schedules and administrators oversee gym operations.",
     technologies: ["PHP", "JavaScript", "SQLite"],
     images: [],
+    repository: "https://github.com/gabriielaaf/PowerPit",
   },
   {
     id: "leagueofminix",
     name: "LeagueOfMinix",
     category: "Game Development",
     year: "February - June 2026",
+    highlight: "A 2D multiplayer game built from scratch in C for MINIX.",
     description:
-      "A League of Legends-inspired game developed as a team project for the Computer Laboratory course at FEUP, combining programming, game design and interactive gameplay.",
+      "Inspired by League of Legends, players compete in real-time battles, defeat enemies, upgrade their abilities, and race to destroy the opponent's tower.",
     technologies: ["C", "Minix"],
     images: [],
+    repository: "https://github.com/gabriielaaf/LeagueOfMinix",
   },
   {
     id: "dcsnap",
     name: "DCSNAP",
     category: "Game Development",
     year: "September 2025 - January 2026",
+    highlight: "A strategic Java card game inspired by Marvel Snap.",
     description:
-      "A Java card game inspired by Marvel Snap, developed as a team project for the Software Design and Testing Laboratory course at FEUP.",
+      "Players choose their decks and compete through card-based battles, combining interactive gameplay with object-oriented design and software development principles.",
     technologies: ["Java"],
     images: [],
+    repository: "https://github.com/gabriielaaf/DCSNAP",
   },
 ];

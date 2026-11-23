@@ -87,6 +87,8 @@ function WorkPage() {
     <main className={layoutStyles.standardPage}>
       <div className={layoutStyles.container}>
 
+        {/* Page header */}
+
         <header className={layoutStyles.standardHeader}>
           <span className={typographyStyles.pageLabel}>
             PROJECTS
@@ -98,9 +100,9 @@ function WorkPage() {
           </h1>
 
           <p className={typographyStyles.pageSubtitleStandard}>
-            From web applications to IoT dashboards and games,
-            a selection of projects that reflect the different
-            areas I've explored.
+            A collection of ideas I've brought to life,
+            each one an opportunity to experiment,
+            solve problems, and learn something new.
           </p>
         </header>
 
@@ -127,18 +129,20 @@ function WorkPage() {
                 <li
                   key={project.id}
                   style={{
-                    animationDelay: `${500 + Math.min(index, 6) * 100
-                      }ms`,
+                    animationDelay: `${
+                      500 + Math.min(index, 6) * 100
+                    }ms`,
                   }}
                 >
                   <button
                     type="button"
                     onClick={() => selectProject(index)}
                     aria-pressed={selectedIndex === index}
-                    className={`${styles.projectButton} ${selectedIndex === index
-                      ? styles.projectActive
-                      : ""
-                      }`}
+                    className={`${styles.projectButton} ${
+                      selectedIndex === index
+                        ? styles.projectActive
+                        : ""
+                    }`}
                   >
                     <span className={styles.projectNumber}>
                       {String(index + 1).padStart(2, "0")}
@@ -164,10 +168,11 @@ function WorkPage() {
 
           <section
             key={selectedProject.id}
-            className={`${styles.details} ${!hasChangedProject
-              ? styles.detailsInitial
-              : ""
-              }`}
+            className={`${styles.details} ${
+              !hasChangedProject
+                ? styles.detailsInitial
+                : ""
+            }`}
             aria-label={`${selectedProject.name} details`}
           >
 
@@ -178,8 +183,9 @@ function WorkPage() {
                 <img
                   key={currentImage}
                   src={currentImage}
-                  alt={`${selectedProject.name} screenshot ${imageIndex + 1
-                    }`}
+                  alt={`${selectedProject.name} screenshot ${
+                    imageIndex + 1
+                  }`}
                   className={styles.carouselImage}
                 />
               ) : (
@@ -201,8 +207,8 @@ function WorkPage() {
               <span className={styles.imageCounter}>
                 {imageCount > 0
                   ? `${String(imageIndex + 1).padStart(2, "0")} / ${String(
-                    imageCount
-                  ).padStart(2, "0")}`
+                      imageCount
+                    ).padStart(2, "0")}`
                   : "00 / 00"}
               </span>
 
@@ -260,7 +266,12 @@ function WorkPage() {
                 )}
               </h2>
 
+              {/* Project description */}
+
               <p className={styles.detailsDescription}>
+                {selectedProject.highlight && (
+                  <strong>{selectedProject.highlight} </strong>
+                )}
                 {selectedProject.description}
               </p>
 
@@ -277,7 +288,7 @@ function WorkPage() {
           </section>
         </div>
 
-        {/* GitHub */}
+        {/* GitHub section */}
 
         <section
           ref={githubRef}
