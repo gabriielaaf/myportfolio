@@ -15,9 +15,7 @@ function WorkPage() {
   const githubRef = useRef<HTMLElement>(null);
 
   const selectedProject = projects[selectedIndex];
-
   const imageCount = selectedProject.images.length;
-  const currentImage = selectedProject.images[imageIndex];
 
   /* Project selection */
 
@@ -59,7 +57,9 @@ function WorkPage() {
     if (reducedMotion) return;
 
     const interval = window.setInterval(() => {
-      setImageIndex((previous) => (previous + 1) % imageCount);
+      setImageIndex(
+        (previous) => (previous + 1) % imageCount
+      );
     }, 2000);
 
     return () => window.clearInterval(interval);
@@ -147,18 +147,20 @@ function WorkPage() {
                 <li
                   key={project.id}
                   style={{
-                    animationDelay: `${500 + Math.min(index, 6) * 100
-                      }ms`,
+                    animationDelay: `${
+                      500 + Math.min(index, 6) * 100
+                    }ms`,
                   }}
                 >
                   <button
                     type="button"
                     onClick={() => selectProject(index)}
                     aria-pressed={selectedIndex === index}
-                    className={`${styles.projectButton} ${selectedIndex === index
+                    className={`${styles.projectButton} ${
+                      selectedIndex === index
                         ? styles.projectActive
                         : ""
-                      }`}
+                    }`}
                   >
                     <span className={styles.projectNumber}>
                       {String(index + 1).padStart(2, "0")}
@@ -184,24 +186,35 @@ function WorkPage() {
 
           <section
             key={selectedProject.id}
-            className={`${styles.details} ${!hasChangedProject
+            className={`${styles.details} ${
+              !hasChangedProject
                 ? styles.detailsInitial
                 : ""
-              }`}
+            }`}
             aria-label={`${selectedProject.name} details`}
           >
 
             {/* Carousel */}
 
             <div className={styles.carousel}>
-              {currentImage ? (
-                <img
-                  key={currentImage}
-                  src={currentImage}
-                  alt={`${selectedProject.name} screenshot ${imageIndex + 1
+              {imageCount > 0 ? (
+                selectedProject.images.map((image, index) => (
+                  <img
+                    key={image}
+                    src={image}
+                    alt={
+                      index === imageIndex
+                        ? `${selectedProject.name} screenshot ${index + 1}`
+                        : ""
+                    }
+                    aria-hidden={index !== imageIndex}
+                    className={`${styles.carouselImage} ${
+                      index === imageIndex
+                        ? styles.carouselImageActive
+                        : ""
                     }`}
-                  className={styles.carouselImage}
-                />
+                  />
+                ))
               ) : (
                 <div className={styles.imagePlaceholder}>
                   <span>PROJECT PREVIEW</span>
@@ -221,8 +234,8 @@ function WorkPage() {
               <span className={styles.imageCounter}>
                 {imageCount > 0
                   ? `${String(imageIndex + 1).padStart(2, "0")} / ${String(
-                    imageCount
-                  ).padStart(2, "0")}`
+                      imageCount
+                    ).padStart(2, "0")}`
                   : "00 / 00"}
               </span>
 
@@ -284,8 +297,11 @@ function WorkPage() {
 
               <p className={styles.detailsDescription}>
                 {selectedProject.highlight && (
-                  <strong>{selectedProject.highlight} </strong>
+                  <strong>
+                    {selectedProject.highlight}{" "}
+                  </strong>
                 )}
+
                 {selectedProject.description}
               </p>
 

@@ -8,6 +8,18 @@ import dcsnapHowToPlay from "../assets/dcsnap_howtoplay.png";
 import dcsnapGame from "../assets/dcsnap_game.png";
 import dcsnapWhoWins from "../assets/dcsnap_whowins.png";
 
+import minixBattle from "../assets/minix_battle.png";
+import minixShop from "../assets/leagueofminix_shop.png";
+import minixHomepage from "../assets/leagueofminix_homepage.png";
+
+import weatherHomepage from "../assets/weather_homepage.png";
+import weatherInfo from "../assets/weather_info.png";
+import weatherMoreInfo from "../assets/weather_moreinfo.png";
+
+import smartcampusHomepage from "../assets/smartcampus_homepage.png";
+import smartcampusInfo from "../assets/smartcampus_info.png";
+import smartcampusMoreInfo from "../assets/smartcampus_moreinfo.png";
+
 export interface Project {
   id: string;
   name: string;
@@ -30,7 +42,11 @@ export const projects: Project[] = [
     description:
       "Developed during SciTeCh Porto 2026 (3rd place), it uses MQTT and Coreflux to monitor six classrooms and control lighting, air conditioning, doors, and alarms through an interactive dashboard.",
     technologies: ["Python", "Streamlit", "MQTT", "Coreflux"],
-    images: [],
+    images: [
+      smartcampusHomepage,
+      smartcampusInfo,
+      smartcampusMoreInfo,
+    ],
     repository: "https://github.com/gabriielaaf/SmartCampus_SciTeCh",
   },
   {
@@ -42,7 +58,11 @@ export const projects: Project[] = [
     description:
       "Developed during EBEC Porto 2026 (2nd place), this machine learning project tackled rainfall, temperature, snowfall, and next-day weather forecasting, bringing the results together in an interactive Streamlit dashboard.",
     technologies: ["Python", "Machine Learning", "Streamlit"],
-    images: [],
+    images: [
+      weatherHomepage,
+      weatherInfo,
+      weatherMoreInfo,
+    ],
     repository: "https://github.com/gabriielaaf/WeatherPrevision_EBEC",
   },
   {
@@ -83,7 +103,11 @@ export const projects: Project[] = [
     description:
       "Inspired by League of Legends, players compete in real-time battles, defeat enemies, upgrade their abilities, and race to destroy the opponent's tower.",
     technologies: ["C", "Minix"],
-    images: [],
+    images: [
+      minixHomepage,
+      minixBattle,
+      minixShop,
+    ],
     repository: "https://github.com/gabriielaaf/LeagueOfMinix",
   },
   {

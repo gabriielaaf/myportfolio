@@ -138,6 +138,9 @@
 }
 
 .carouselImage {
+  position: absolute;
+  inset: 0;
+
   display: block;
 
   width: 100%;
@@ -145,7 +148,13 @@
 
   object-fit: contain;
 
-  animation: imageReveal 600ms ease-out both;
+  opacity: 0;
+
+  transition: opacity 700ms ease-in-out;
+}
+
+.carouselImageActive {
+  opacity: 1;
 }
 
 /* Image placeholder */
@@ -351,20 +360,6 @@
   transform: translate(3px, -3px);
 }
 
-/* Image animation */
-
-@keyframes imageReveal {
-  from {
-    opacity: 0;
-    transform: scale(1.03);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
 /* Tablet */
 
 @media (max-width: 1000px) {
@@ -411,13 +406,12 @@
 /* Reduced motion */
 
 @media (prefers-reduced-motion: reduce) {
-
   .listHeader,
-  .projects li,
-  .carouselImage {
+  .projects li {
     animation: none;
   }
 
+  .carouselImage,
   .projectButton,
   .projectName,
   .projectArrow,
