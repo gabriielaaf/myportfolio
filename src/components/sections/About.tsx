@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import portrait from "../../assets/gabrielaportfolio.jpeg";
+import portrait from "../../assets/gabriela.jpg";
 
 import styles from "./About.module.css";
 import typographyStyles from "../../styles/typography.module.css";
